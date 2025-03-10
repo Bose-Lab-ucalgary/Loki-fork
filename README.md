@@ -1,61 +1,66 @@
-OmiCLIP
-===========
-## A visual–omics foundation model to bridge histopathology image with transcriptomics
+# Loki
+Building on OmiCLIP, a visual–omics foundation model designed to bridge omics data and hematoxylin and eosin (H&E) images, we developed the **Loki** platform, which has five key functions: tissue alignment using ST or H&E images, cell type decomposition of ST or H&E images using scRNA-seq as a reference, tissue annotation of ST or H&E images based on bulk RNA-seq or marker genes, ST gene expression prediction from H&E images, and histology image–transcriptomics retrieval.
 
-**Abstract:** Computational pathology has emerged as a powerful tool for revolutionizing routine pathology through artificial intelligence (AI)-driven analysis of pathology images. Recent advancements in omics technologies, such as single-cell RNA sequencing (scRNA-seq), spatial transcriptomics (ST), and proteomics, have enriched the field by providing detailed genomic information alongside tissue histology. However, existing computational models primarily emphasize single modality development, either omics-based analysis or image-based analysis, leaving a gap for jointly supporting genomic and histopathology analysis for computational pathology. To address this gap, we developed OmiCLIP, a visual–omics foundation model to bridge omics and hematoxylin and eosin (H&E) images using tissue patches of Visium data. In the transcriptomics domain, we generated a ‘sentence’ representing the transcriptomics of a tissue patch, which concatenates gene symbols of top highly expressed genes. In total, we collected 2.2 million paired tissue images and transcriptomics data including 32 organ types. We used this large-scale set of histology image–transcriptomics pairs to finetune a CLIP-based foundation model for pathology, incorporating both image and transcriptomics data. We systematically evaluated OmiCLIP on six tasks by 14 independent validation datasets and 8 in-house patient tissues. For zero-shot tissue classification, OmiCLIP achieved F1 scores of 0.96–0.59 in four independent datasets, surpassing OpenAI CLIP’s F1 scores of 0.34–0.03. We also incorporated OmiCLIP and PLIP, a state-of-the-art visual–language foundation model, and largely enhanced the performance of tissue annotation. Next, we applied OmiCLIP to predict patient risk in six cancer types based on whole-slide images (WSIs) and RNA sequencing data of biopsies. Our analysis shows OmiCLIP’s image and transcriptomic embeddings could leverage the survival prediction of cancer patients. For cell type annotation, we evaluated the few-shot performance by training a linear classifier using OmiCLIP embeddings, achieving 0.89–0.77 F1 scores trained on 3% labeled cells. These capabilities represent a fundamental step toward bridging and applying foundation models in genomics for histopathology.
+This README provides a quick overview of how to set up and use Loki.
 
-
-## Installation
-First clone the repo and cd into the directory:
-```shell
-git clone https://github.com/GuangyuWangLab/OmiCLIP.git
-cd OmiCLIP
-```
-Then create a conda env and install the dependencies:
-```shell
-conda create -n omiclip python=3.9 -y
-conda activate omiclip
-pip install --upgrade pip
-pip install -e .
-```
-
-## Preparing and loading the model
-1. Download the model weights from the Huggingface model page (weights will be avaliable from Hugging Face after manuscript accepted). 
-
-First create the `checkpoints` directory inside the root of the repo:
-```shell
-mkdir -p checkpoints/omiclip/
-```
-Then download the pretrained model (`pytorch_model.bin`) and place it in the `OmiCLIP/checkpoints/omiclip/` directory. 
-
-2. Loading the model
-
-```python
-from open_clip import create_model_from_pretrained
-model, preprocess = create_model_from_pretrained("coca_ViT-L-14", checkpoint_path="checkpoints/omiclip/pytorch_model.bin")
-```
-
-## Overview of specific usages
-Refer to the notebooks below for detailed examples.
-
-### Basic usage of the model:
-See [**here**](notebooks/basic_usage.ipynb).
-
-### Zeroshot classification:
-See [**here**](notebooks/zeroshot_classification.ipynb).
-
-### Zeroshot cross-modality retrieval (image-to-text):
-See [**here**](notebooks/zeroshot_retrieval.ipynb).
-
-### Patient cancer risk prediction:
-See [**here**](scripts/cancer_patient_survival_tcga).
-
-### Few-shot single cell annotation:
-See [**here**](scripts/few_shot_single_cell_annotation).
+The pre-train weights, source code, and ST-bank database will be released on GitHub and Hugging Face after the manuscript is accepted.
 
 
-## Acknowledgements
-The project was built on top of the amazing repository [openclip](https://github.com/mlfoundations/open_clip) for model training. We thank the authors and developers for their contribution. 
+## User Manual and Notebooks
+You can view the Loki website and notebooks locally by dobule clicking the `./website/index.html` file. It should show up in your default browser.
 
-## License and Terms of Use
-ⓒ GuangyuWang Lab. This model and associated code are released under the [CC-BY-NC-ND 4.0]((https://creativecommons.org/licenses/by-nc-nd/4.0/deed.en)) license and may only be used for non-commercial, academic research purposes with proper attribution. 
+
+
+## Source Code
+All source code for Loki is contained in the `./src/loki` directory.
+
+The source code will be released in GitHub and Hugging Face after the manuscript is accepted
+
+
+
+## Installation (It takes about 5 mins to finish the installation on MacBook Pro)
+
+1. **Create a Conda environment**:
+   ```bash
+   conda create -n loki_env python=3.9
+   conda activate loki_env
+   ```
+
+2. **Navigate to the Loki source directory and install Loki**:
+   ```bash
+   cd ./src
+   pip install .
+   ```
+
+
+## Usage
+Once Loki is installed, you can import it in your Python scripts or notebooks:
+   ```python
+   import loki.preprocess
+   import loki.utils
+   import loki.plot
+
+   import loki.align
+   import loki.annotate
+   import loki.decompose
+   import loki.retrieve
+   import loki.predex
+   ```
+
+
+
+## STbank
+The ST-bank database are avaliable from [Google Drive link](https://drive.google.com/drive/folders/1J15cO-pXTwkTjRAR-v-_nQkqXNfcCNn3?usp=sharing).
+
+The links_to_raw_data.xlsx file includes the source paper names, doi links, and download links of the raw data.
+The text.csv file includes the gene sentences with paired image patches.
+The image.tar.gz includes the image patches.
+
+The ST-bank database will be released in GitHub and Hugging Face after the manuscript is accepted.
+
+
+## Pretrained weights
+The pretrained weights are avaliable from [Google Drive link](https://drive.google.com/file/d/1UTJKAqoiUT55h9sA1Ee8iJeOclNLBvWD/view?usp=sharing).
+
+The pretrained weights will be released in GitHub and Hugging Face after the manuscript is accepted.
+

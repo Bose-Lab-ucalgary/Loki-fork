@@ -1,0 +1,5 @@
+Pretrained weights
+===========================================================================================
+The pretrained weights are avaliable from `Google Drive link <https://drive.google.com/file/d/1UTJKAqoiUT55h9sA1Ee8iJeOclNLBvWD/view?usp=drive_link>`_.
+
+The pretrained weights will be released in GitHub and Hugging Face after the manuscript is accepted.

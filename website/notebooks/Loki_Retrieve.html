@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loki Retrieve &mdash; Loki  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Loki PredEx" href="Loki_PredEx_case_study.html" />
+    <link rel="prev" title="Loki Decompose - CRC Sample" href="Loki_Decompose_case_study_CRC.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Loki
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">ST-bank database</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ST-bank.html">ST-bank database</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Pretrained weights</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pretrain.html">Pretrained weights</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Loki</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../API.html">API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="basic_usage.html">Basic Usage of OmiCLIP Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Align_case_study_8_small_intestine.html">Loki Align - 8 normal small intestine samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Align_case_study_2_OCS.html">Loki Align - 2 ovarian carcinosarcoma samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Annotate_case_study_bulk_RNAseq.html">Loki Annotate - Bulk RNA-seq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Annotate_case_study_marker_genes.html">Loki Annotate - Marker Genes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Decompose_case_study_TNBC.html">Loki Decompose - TNBC Sample</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Decompose_case_study_CRC.html">Loki Decompose - CRC Sample</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Loki Retrieve</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Loki-Retrieve-on-image-to-ST-retrieval">Loki Retrieve on image-to-ST retrieval</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_PredEx_case_study.html">Loki PredEx</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Loki</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Loki Retrieve</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/notebooks/Loki_Retrieve.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Loki-Retrieve">
+<h1>Loki Retrieve<a class="headerlink" href="#Loki-Retrieve" title="Link to this heading"></a></h1>
+<p>This notebook demonstrates how to run <em>Loki Retrieve</em> on the demo ST-bank dataset. It takes about 10 seconds to run this notebook on MacBook Pro.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">import</span> <span class="nn">loki.retrieve</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+<p>We provide the embeddings generated from the OmiCLIP model. The sample data and embeddings are stored in the directory <code class="docutils literal notranslate"><span class="pre">data/loki_retrieve/</span></code>, which can be donwloaded from <a class="reference external" href="https://drive.google.com/file/d/1aPK1nItsOEPxTihUAKMig-vLY-DMMIce/view?usp=sharing">Google Drive link</a>.</p>
+<p>Here is a list of the files that are needed to run the retrieval on example data:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>├── checkpoint_stbank
+│   ├── demo_image_embeddings.pt
+│   └── demo_text_embeddings.pt
+└── demo_STbank_data
+    ├── ADI-TCGA-ACCKVFLM.tif
+    ├── LYM-TCGA-AFIDYMYA.tif
+    ├── MUS-TCGA-AASRLCCT.tif
+    ├── NORM-TCGA-AIMANAKC.tif
+    ├── TUM-TCGA-YRWIKDYQ.tif
+    ├── AACGATAGAAGGGCCG-1_hires.png
+    ├── AATCGCGCAGAGGACT-1_hires.png
+    ├── ACACAAATATTCCTAG-1_hires.png
+    ├── ACCCTCCCTTGCTATT-1_hires.png
+    ├── ACTGAAACGCCGTTAG-1_hires.png
+    ├── AGGTAACCTCCTATTC-1_hires.png
+    ├── ATTACTTACTGGGCAT-1_hires.png
+    ├── CAACCTGAACCTGCCA-1_hires.png
+    ├── CAGATGTTTGTCCCAA-1_hires.png
+    ├── CCCTCAGATCGAGAAC-1_hires.png
+    ├── CGTTGTAAACGTCAGG-1_hires.png
+    ├── GCACAAACGAGGCGTG-1_hires.png
+    ├── GCCGGTCGTATCTCTC-1_hires.png
+    ├── GCTAGCGATAGGTCTT-1_hires.png
+    ├── GCTTAATGTAACTAAC-1_hires.png
+    ├── GGACACAAGTTTACAC-1_hires.png
+    ├── GGGCTACTATTTCGTG-1_hires.png
+    ├── GGTGTAGGTAAGTAAA-1_hires.png
+    ├── TACCAAATAGCCCAGA-1_hires.png
+    ├── TACCTACTCCCAGTAT-1_hires.png
+    ├── TATCAGTGGCGTAGTC-1_hires.png
+    ├── TATGGCCCGGCCTCGC-1_hires.png
+    ├── TCAGAACCTCCACAGG-1_hires.png
+    ├── TTGCCAAGCAGAACCC-1_hires.png
+    ├── TTGGACCTATAACAGT-1_hires.png
+    └── demo_dataset.csv
+</pre></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;../data/loki_retrieve/&#39;</span>
+<span class="n">image_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;demo_STbank_data/&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataframe</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">image_dir</span><span class="p">,</span> <span class="s1">&#39;demo_dataset.csv&#39;</span><span class="p">),</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">dataframe</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>label</th>
+      <th>img_idx</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>CAGATGTTTGTCCCAA-1</th>
+      <td>COL1A1 COL1A2 COL3A1 S100A6 DCN IGKC FSTL1 C3 ...</td>
+      <td>CAGATGTTTGTCCCAA-1_hires</td>
+    </tr>
+    <tr>
+      <th>GGGCTACTATTTCGTG-1</th>
+      <td>COL1A1 COL3A1 IGKC COL1A2 DCN FABP4 IGFBP7 LUM...</td>
+      <td>GGGCTACTATTTCGTG-1_hires</td>
+    </tr>
+    <tr>
+      <th>TATCAGTGGCGTAGTC-1</th>
+      <td>COL1A1 COL3A1 COL1A2 FBN1 IGKC DCN GSN IGHG2 F...</td>
+      <td>TATCAGTGGCGTAGTC-1_hires</td>
+    </tr>
+    <tr>
+      <th>GCCGGTCGTATCTCTC-1</th>
+      <td>TAGLN MYL6 MYL9 TPM2 EMILIN1 RARRES2 GREM1 SEL...</td>
+      <td>GCCGGTCGTATCTCTC-1_hires</td>
+    </tr>
+    <tr>
+      <th>GGTGTAGGTAAGTAAA-1</th>
+      <td>MYL9 DES RPS12 TPM2 TAGLN ACTA2 TFF1 S100A6 IS...</td>
+      <td>GGTGTAGGTAAGTAAA-1_hires</td>
+    </tr>
+    <tr>
+      <th>TACCAAATAGCCCAGA-1</th>
+      <td>TAGLN DES MYL6 ACTG2 IGFBP7 TPM2 GSN MYL9 SELE...</td>
+      <td>TACCAAATAGCCCAGA-1_hires</td>
+    </tr>
+    <tr>
+      <th>AATCGCGCAGAGGACT-1</th>
+      <td>DEFA5 DEFA6 REG3A PHGR1 FABP6 REG1A RPS12 S100...</td>
+      <td>AATCGCGCAGAGGACT-1_hires</td>
+    </tr>
+    <tr>
+      <th>TCAGAACCTCCACAGG-1</th>
+      <td>DEFA5 PHGR1 REG1A SPINK4 FABP1 DEFA6 MUC2 FABP...</td>
+      <td>TCAGAACCTCCACAGG-1_hires</td>
+    </tr>
+    <tr>
+      <th>AACGATAGAAGGGCCG-1</th>
+      <td>DEFA5 DEFA6 RPS12 RPL37 OLFM4 PHGR1 REG1A REG3...</td>
+      <td>AACGATAGAAGGGCCG-1_hires</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<section id="Loki-Retrieve-on-image-to-ST-retrieval">
+<h2>Loki Retrieve on image-to-ST retrieval<a class="headerlink" href="#Loki-Retrieve-on-image-to-ST-retrieval" title="Link to this heading"></a></h2>
+<p>Use Loki Retrieve to retrieve ST from image.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ADI-TCGA-ACCKVFLM.tif&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;MUS-TCGA-AASRLCCT.tif&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;NORM-TCGA-AIMANAKC.tif&#39;</span>
+<span class="p">]</span>
+<span class="n">all_query_image_embeddings</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;checkpoint_stbank&#39;</span><span class="p">,</span> <span class="s1">&#39;demo_image_embeddings.pt&#39;</span><span class="p">))</span>
+<span class="n">all_text_embeddings</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;checkpoint_stbank&#39;</span><span class="p">,</span> <span class="s1">&#39;demo_text_embeddings.pt&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">i</span><span class="o">=</span><span class="mi">0</span>
+<span class="k">for</span> <span class="n">query_image</span> <span class="ow">in</span> <span class="n">image_list</span><span class="p">:</span>
+    <span class="n">image_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">image_dir</span><span class="p">,</span> <span class="n">query_image</span><span class="p">)</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+    <span class="n">image_embeddings</span> <span class="o">=</span> <span class="n">all_query_image_embeddings</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span><span class="mf">1.5</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Query Image&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="n">matches</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">retrieve</span><span class="o">.</span><span class="n">retrieve_st_by_image</span><span class="p">(</span><span class="n">image_embeddings</span><span class="p">,</span> <span class="n">all_text_embeddings</span><span class="p">,</span> <span class="n">dataframe</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Retrieved ST with paired images:&quot;</span><span class="p">)</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">match</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">matches</span><span class="p">,</span> <span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()):</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">image_dir</span><span class="si">}{</span><span class="n">match</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">+</span><span class="s2">&quot;.png&quot;</span><span class="p">)</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">)</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="n">dataframe</span><span class="p">[</span><span class="n">dataframe</span><span class="p">[</span><span class="s1">&#39;img_idx&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">match</span><span class="p">][</span><span class="s1">&#39;label&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+
+    <span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_Loki_Retrieve_7_0.png" src="../_images/notebooks_Loki_Retrieve_7_0.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Retrieved ST with paired images:
+COL1A1 COL1A2 COL3A1 S100A6 DCN IGKC FSTL1 C3 FBN1 IGFBP5 ITM2B IGHG2 CFD CMTM6 IGFBP7 CXCL14 HSPA8 LRP1 SERF2 TUBB6 IGLC1 DHRS3 C1QB TM2D1 PTPRC CRIM1 DBI HNRNPA3 COPG1 HNRNPDL SELENOP CD14 SPARC ADAMTS2 TNXB TTYH3 CTSB FABP4 GSN DDX21 INS LUM IGHA1 APOE MYL9 TIMP1 TSC22D3 RERE PLA2G2A LAPTM5
+COL1A1 COL3A1 IGKC COL1A2 DCN FABP4 IGFBP7 LUM HBA2 C3 C1QB HNRNPA2B1 CD36 CTSD IGFBP6 IGFBP4 TSC22D3 MAT2A NISCH AQP1 CTSB MYC CCL21 SAR1A LYVE1 TCIRG1 THY1 OAF POSTN EPSTI1 ITM2B RNASE1 RTRAF MAX FOS IGHG2 CNN2 COL6A1 LZTR1 BGN HP1BP3 ECE1 HSPG2 C1QA PITHD1 IFI6 SERBP1 MCL1 S100A6 FCGR3A
+COL1A1 COL3A1 COL1A2 FBN1 IGKC DCN GSN IGHG2 FSTL1 TNXB COL6A1 SPARC IFITM2 RHOB IGFBP5 FBLN2 CLEC3B IGFBP7 PI16 CCN2 IGFBP6 CFD C3 TSC22D3 HSPG2 S100A6 ATRAID TGFBR2 EGR1 ARPC1B PLEC LYVE1 C1R SERPINF1 CMPK1 JUN CCN1 CNN3 CSF1 GUK1 EFEMP1 GCG FN1 CTDSP1 ARPC4 BOC WDR1 SPARCL1 C7 HSPA1A
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/var/folders/f1/0m_1r9dx73dff178jp2t41900000gp/T/ipykernel_27425/2454322593.py:19: FutureWarning: Series.__getitem__ treating keys as positions is deprecated. In a future version, integer keys will always be treated as labels (consistent with DataFrame behavior). To access a value by position, use `ser.iloc[pos]`
+  label = dataframe[dataframe[&#39;img_idx&#39;]==match][&#39;label&#39;][0]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_Loki_Retrieve_7_3.png" src="../_images/notebooks_Loki_Retrieve_7_3.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_Loki_Retrieve_7_4.png" src="../_images/notebooks_Loki_Retrieve_7_4.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Retrieved ST with paired images:
+TAGLN MYL6 MYL9 TPM2 EMILIN1 RARRES2 GREM1 SELENOM S100A6 ACTG2 DES A2M CSRP1 NBL1 LIMS2 RPS13 MALAT1 ACTA2 NUPR1 SPARCL1 TMEM176A MTRNR2L8 FAU EFEMP2 C1S SERF2 TPM1 MTRNR2L1 MIF COL6A2 DDOST SELENOF RPL5 LAMTOR5 OST4 FN1 RAMP1 APEH MTRNR2L12 LPP ABCE1 RPL37 PITX1 DAAM2 COL12A1 BRI3 LAMTOR4 GOLM1 EDF1 IFITM2
+TAGLN DES MYL6 ACTG2 IGFBP7 TPM2 GSN MYL9 SELENOM RPL15 FLNC TMEM176A ACTA2 GREM1 NUPR1 NBL1 HSPG2 S100A6 EMILIN1 EPAS1 COX5B COL3A1 LAMB2 LPP ADH5 UQCRQ UBE2B DCTN4 NHP2 HSPA1A MAN1A1 CTGF MICALL2 AGR2 RCC1L COL1A2 CALD1 ZYX PLAT TGFBR1 FBXW5 PTGDS CD151 MUC6 KDELC2 MSMB ATP5MD TSPAN9 A2M KCTD12
+MYL9 DES RPS12 TPM2 TAGLN ACTA2 TFF1 S100A6 ISY1 IGFBP7 LYZ SERF2 NBL1 IGFBP5 TNS1 P2RY14 PALLD NCOA7 RSPO3 RAMP3 TMEM176A RPL10 TLN1 GSN ENG CWC15 MYL6 ITM2B CRIP2 RPL36 CNN1 KLF2 PPP1R14A SELENOM TFF2 COL18A1 SDF4 VWA1 PARK7 DFFA RCC2 SYF2 RSRP1 FAM110D C1orf122 SERBP1 GNG5 SH3GLB1 SORT1 S100A3
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_Loki_Retrieve_7_6.png" src="../_images/notebooks_Loki_Retrieve_7_6.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_Loki_Retrieve_7_7.png" src="../_images/notebooks_Loki_Retrieve_7_7.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Retrieved ST with paired images:
+DEFA5 DEFA6 REG3A PHGR1 FABP6 REG1A RPS12 S100A6 PLA2G2A RPL37 RPL30 SPINK4 LYZ KRT8 OLFM4 RPL10 FAU TFF3 FABP1 AGR2 MUC2 RPL36 RPL9 IGHA1 MT1G FCGBP PIGR PRSS2 PRAP1 CLCA1 RPL15 RPS13 RPS24 MYL6 SERF2 KRT19 LGALS4 NDUFS5 RPL5 ATP1A1 IGKC ATP5ME RPS4X PYY SNHG25 MAP2K2 GUCA2A EPCAM MZT2B TMA7
+DEFA5 DEFA6 RPS12 RPL37 OLFM4 PHGR1 REG1A REG3A RPL36 IGKC IGHA1 FABP6 RPS13 RPL9 RPL10 RPL30 RPS24 RPS4X FAU PLA2G2A RPL5 LYZ RPL26 KRT8 RPL22 EPCAM TOMM7 SPINK4 ATP5F1E CD52 S100A6 SPINK1 IGHM SNHG25 AGR2 RPS20 MYL6 DBI RPL15 ATP5ME SNHG8 RBM3 TUBA1B SERF2 ELOB KRT19 LGALS4 PIGR CXCR4 TMA7
+DEFA5 PHGR1 REG1A SPINK4 FABP1 DEFA6 MUC2 FABP6 TFF3 RPL37 S100A6 IGHA1 FCGBP RPL10 PIGR AGR2 C15orf48 RPL36 RPL9 RPS13 KRT8 OLFM4 SERF2 ATP1A1 ATP5ME RPS4X RPL30 FAU MYL6 TSPAN8 MT1G RPL22 RPS12 COX5A SNHG25 IGLC2 TSPAN1 MGST3 UQCRQ EDF1 ADIRF ITM2B ANPEP KRT19 UQCR11 IGKC COX5B HSPE1 RPL15 DSP
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_Loki_Retrieve_7_9.png" src="../_images/notebooks_Loki_Retrieve_7_9.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Loki_Decompose_case_study_CRC.html" class="btn btn-neutral float-left" title="Loki Decompose - CRC Sample" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Loki_PredEx_case_study.html" class="btn btn-neutral float-right" title="Loki PredEx" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loki Decompose - CRC Sample &mdash; Loki  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Loki Retrieve" href="Loki_Retrieve.html" />
+    <link rel="prev" title="Loki Decompose - TNBC Sample" href="Loki_Decompose_case_study_TNBC.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Loki
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">ST-bank database</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ST-bank.html">ST-bank database</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Pretrained weights</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pretrain.html">Pretrained weights</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Loki</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../API.html">API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="basic_usage.html">Basic Usage of OmiCLIP Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Align_case_study_8_small_intestine.html">Loki Align - 8 normal small intestine samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Align_case_study_2_OCS.html">Loki Align - 2 ovarian carcinosarcoma samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Annotate_case_study_bulk_RNAseq.html">Loki Annotate - Bulk RNA-seq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Annotate_case_study_marker_genes.html">Loki Annotate - Marker Genes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Decompose_case_study_TNBC.html">Loki Decompose - TNBC Sample</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Loki Decompose - CRC Sample</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Loki-Decompose-on-ST-data">Loki Decompose on ST data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Loki-Decompose-on-image">Loki Decompose on image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Loki-Decompose-on-whole-slide-image-(WSI)">Loki Decompose on whole-slide-image (WSI)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Cell-type-decompoistion-on-WSI">Cell type decompoistion on WSI</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Retrieve.html">Loki Retrieve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_PredEx_case_study.html">Loki PredEx</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Loki</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Loki Decompose - CRC Sample</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/notebooks/Loki_Decompose_case_study_CRC.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Loki-Decompose---CRC-Sample">
+<h1>Loki Decompose - CRC Sample<a class="headerlink" href="#Loki-Decompose---CRC-Sample" title="Link to this heading"></a></h1>
+<p>This notebook demonstrates how to run <em>Loki Decompose</em> on a dataset of colorectal cancer sample. It takes about 2 mins to run this notebook on MacBook Pro.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scanpy</span> <span class="k">as</span> <span class="nn">sc</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+
+<span class="kn">import</span> <span class="nn">loki.decompose</span>
+<span class="c1"># set resolution to 80 dpi for showing in the notebook</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">80</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">set_figure_params</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">120</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">color_map</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>We first finetune OmiCLIP model on the Visium colorectal cancer data.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">script</span> echo &quot;Comment this line to fine-tune the model on the CRC dataset.&quot;
+
+import subprocess
+import open_clip
+
+model_name=&#39;coca_ViT-L-14&#39;
+pretrained_weight_path=&#39;path to the omiclip pretrained weight&#39;
+train_csv = &#39;visium_data/finetune_data.csv&#39;
+name = &#39;finetune_crc&#39;
+
+train_command = [
+    &#39;python&#39;, &#39;-m&#39;, &#39;training.main&#39;,
+    &#39;--name&#39;, name,
+    &#39;--save-frequency&#39;, &#39;5&#39;,
+    &#39;--zeroshot-frequency&#39;, &#39;10&#39;,
+    &#39;--report-to&#39;, &#39;wandb&#39;,
+    &#39;--train-data&#39;, train_csv,
+    &#39;--csv-img-key&#39;, &#39;img_path&#39;,
+    &#39;--csv-caption-key&#39;, &#39;label&#39;,
+    &#39;--warmup&#39;, &#39;10&#39;,
+    &#39;--batch-size&#39;, &#39;64&#39;,
+    &#39;--lr&#39;, &#39;5e-6&#39;,
+    &#39;--wd&#39;, &#39;0.1&#39;,
+    &#39;--epochs&#39;, &#39;5&#39;,
+    &#39;--workers&#39;, &#39;16&#39;,
+    &#39;--model&#39;, model_name,
+    &#39;--csv-separator&#39;, &#39;,&#39;,
+    &#39;--pretrained&#39;, pretrained_weight_path,
+    &#39;--lock-text-freeze-layer-norm&#39;,
+    &#39;--lock-image-freeze-bn-stats&#39;,
+    &#39;--coca-caption-loss-weight&#39;,&#39;0&#39;,
+    &#39;--coca-contrastive-loss-weight&#39;,&#39;1&#39;,
+    &#39;--val-frequency&#39;, &#39;10&#39;,
+    &#39;--aug-cfg&#39;, &#39;color_jitter=(0.32, 0.32, 0.32, 0.08)&#39;, &#39;color_jitter_prob=0.5&#39;, &#39;gray_scale_prob=0&#39;
+]
+
+subprocess.run(train_command)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Comment this line to fine-tune the model on the CRC dataset.
+</pre></div></div>
+</div>
+<p>We provide the embeddings generated from the OmiCLIP model. The sample data and embeddings are stored in the directory <code class="docutils literal notranslate"><span class="pre">data/loki_decompose/CRC_data</span></code>, which can be donwloaded from <a class="reference external" href="https://drive.google.com/file/d/1aPK1nItsOEPxTihUAKMig-vLY-DMMIce/view?usp=sharing">Google Drive link</a>.</p>
+<p>Here is a list of the files that are needed to run the cell type decomposition on the pseudo Visium data:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>.
+├── checkpoint_finetune_crc
+│   ├── sc_text_emb.pt
+│   ├── val_data_all_val_img_emb.pt
+│   ├── val_data_val_img_emb.pt
+│   └── val_data_val_txt_emb.pt
+├── scRNA_data
+│   └── sc_CRC2_labels.csv
+└── pseudo_visium_data
+    ├── val_data_all.csv  (# meta data for embedding extraction from the entire slide)
+    ├── val_data.csv (# meta data for embedding extraction from the Visium capture region)
+    ├── cell_centroids.npy
+    └── Visium_HD_Human_Colon_Cancer_P2_8bin_simulated_100_55_processed.h5ad
+</pre></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_dir</span> <span class="o">=</span> <span class="s2">&quot;../data/loki_decompose/CRC_data/pseudo_visium_data&quot;</span>
+<span class="n">checkpoint_name</span> <span class="o">=</span> <span class="s2">&quot;finetune_crc&quot;</span>
+<span class="n">embedding_dir</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;../data/loki_decompose/CRC_data/checkpoint_</span><span class="si">{</span><span class="n">checkpoint_name</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="n">fig_dir</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">checkpoint_name</span><span class="si">}</span><span class="s2">_figures&quot;</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">fig_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The spatial coordinates and the HE image from the spot data were used to visualize the predcition results.</span>
+<span class="n">spot_adata_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">data_dir</span><span class="si">}</span><span class="s2">/Visium_HD_Human_Colon_Cancer_P2_8bin_simulated_100_55_processed.h5ad&quot;</span>
+<span class="n">spot_adata</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">read_h5ad</span><span class="p">(</span><span class="n">spot_adata_path</span><span class="p">)</span>
+<span class="n">spot_adata</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+AnnData object with n_obs × n_vars = 3593 × 18085
+    obs: &#39;DeconvolutionLabel1&#39;, &#39;nonEmptySpots&#39;, &#39;n_counts&#39;, &#39;leiden&#39;, &#39;B cells&#39;, &#39;Endothelial&#39;, &#39;Fibroblast&#39;, &#39;Intestinal Epithelial&#39;, &#39;Myeloid&#39;, &#39;Neuronal&#39;, &#39;Smooth Muscle&#39;, &#39;T cells&#39;, &#39;Tumor&#39;, &#39;Unknown&#39;
+    var: &#39;highly_variable&#39;, &#39;means&#39;, &#39;dispersions&#39;, &#39;dispersions_norm&#39;
+    uns: &#39;Celltype_colors&#39;, &#39;DeconvolutionLabel1_colors&#39;, &#39;hvg&#39;, &#39;leiden&#39;, &#39;leiden_colors&#39;, &#39;log1p&#39;, &#39;mapping&#39;, &#39;neighbors&#39;, &#39;pca&#39;, &#39;spatial&#39;
+    obsm: &#39;X_pca&#39;, &#39;deconvolution&#39;, &#39;spatial&#39;
+    varm: &#39;PCs&#39;
+    obsp: &#39;connectivities&#39;, &#39;distances&#39;
+</pre></div></div>
+</div>
+<p>Load pre-computed spot image embeddings</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spot_im_embedding_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">embedding_dir</span><span class="si">}</span><span class="s1">/val_data_val_img_emb.pt&#39;</span>
+<span class="n">spot_im_embedding</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">spot_im_embedding_path</span><span class="p">)</span>
+<span class="n">spot_im_embedding</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+torch.Size([3593, 768])
+</pre></div></div>
+</div>
+<p>Load pre-computed spot ST embeddings</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spot_tx_embedding_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">embedding_dir</span><span class="si">}</span><span class="s1">/val_data_val_txt_emb.pt&#39;</span>
+<span class="n">spot_tx_embedding</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">spot_tx_embedding_path</span><span class="p">)</span>
+<span class="n">spot_tx_embedding</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+torch.Size([3593, 768])
+</pre></div></div>
+</div>
+<p>Load pre-computed single-cell RNA-seq embeddings</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cell_embedding_path</span> <span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">embedding_dir</span><span class="si">}</span><span class="s2">/sc_text_emb.pt&quot;</span>
+<span class="n">cell_embedding</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">cell_embedding_path</span><span class="p">)</span>
+<span class="n">cell_embedding</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+torch.Size([35695, 768])
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cell_adata_labels_path</span> <span class="o">=</span> <span class="s2">&quot;../data/loki_decompose/CRC_data/scRNA_data/sc_CRC2_labels.csv&quot;</span>
+<span class="n">cell_adata_labels</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">cell_adata_labels_path</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">cell_adata_em</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">AnnData</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">cell_embedding</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">obs</span><span class="o">=</span><span class="n">cell_adata_labels</span><span class="p">)</span>
+<span class="n">cell_adata_em</span><span class="o">.</span><span class="n">obs</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Level1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>AAACAAGCAACAGCTAACTTTAGG-1</th>
+      <td>B cells</td>
+    </tr>
+    <tr>
+      <th>AAACAAGCAACTGTTCACTTTAGG-1</th>
+      <td>T cells</td>
+    </tr>
+    <tr>
+      <th>AAACAAGCAAGGCCTGACTTTAGG-1</th>
+      <td>Tumor</td>
+    </tr>
+    <tr>
+      <th>AAACAAGCACATAGTGACTTTAGG-1</th>
+      <td>Tumor</td>
+    </tr>
+    <tr>
+      <th>AAACAAGCAGCATTTCACTTTAGG-1</th>
+      <td>Myeloid</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>TTTGGCGGTGGCGTAGACTTTAGG-7</th>
+      <td>B cells</td>
+    </tr>
+    <tr>
+      <th>TTTGGCGGTTAGTGCTACTTTAGG-7</th>
+      <td>Smooth Muscle</td>
+    </tr>
+    <tr>
+      <th>TTTGTGAGTCCGCTAAACTTTAGG-7</th>
+      <td>Tumor</td>
+    </tr>
+    <tr>
+      <th>TTTGTGAGTCCGGGTTACTTTAGG-7</th>
+      <td>Myeloid</td>
+    </tr>
+    <tr>
+      <th>TTTGTGAGTCTTTATCACTTTAGG-7</th>
+      <td>Tumor</td>
+    </tr>
+  </tbody>
+</table>
+<p>35695 rows × 1 columns</p>
+</div></div>
+</div>
+<section id="Loki-Decompose-on-ST-data">
+<h2>Loki Decompose on ST data<a class="headerlink" href="#Loki-Decompose-on-ST-data" title="Link to this heading"></a></h2>
+<p>Run cell type decomposition using the ST data.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">major_types</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Tumor&#39;</span><span class="p">,</span> <span class="s1">&#39;Fibroblast&#39;</span><span class="p">,</span> <span class="s1">&#39;Smooth Muscle&#39;</span><span class="p">,</span> <span class="s1">&#39;Intestinal Epithelial&#39;</span><span class="p">]</span>
+<span class="n">cell_embedding</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">spot_tx_embedding</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">spot_im_embedding</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(torch.Size([35695, 768]), torch.Size([3593, 768]), torch.Size([3593, 768]))
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spot_adata_tx_em</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">AnnData</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">spot_tx_embedding</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+<span class="n">spot_adata_tx_em</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s1">&#39;spatial&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">spot_adata</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s1">&#39;spatial&#39;</span><span class="p">]</span>
+<span class="n">spot_adata_tx_em</span><span class="o">.</span><span class="n">uns</span><span class="p">[</span><span class="s1">&#39;spatial&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">spot_adata</span><span class="o">.</span><span class="n">uns</span><span class="p">[</span><span class="s1">&#39;spatial&#39;</span><span class="p">]</span>
+<span class="n">cell_adata</span> <span class="o">=</span> <span class="n">cell_adata_em</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="n">spot_adata_tx_em</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">decompose</span><span class="o">.</span><span class="n">cell_type_decompose</span><span class="p">(</span><span class="n">cell_adata</span><span class="p">,</span> <span class="n">spot_adata_tx_em</span><span class="p">,</span> <span class="n">cell_type_col</span><span class="o">=</span><span class="s1">&#39;Level1&#39;</span><span class="p">,</span> <span class="n">NMS_mode</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">major_types</span><span class="o">=</span><span class="n">major_types</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">spot_adata_tx_em</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s1">&#39;tangram_ct_pred&#39;</span><span class="p">]</span>
+<span class="n">spot_adata_tx_em</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">spatial</span><span class="p">(</span><span class="n">spot_adata_tx_em</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">major_types</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="s1">&#39;p99&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">alpha_img</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">colorbar_loc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="c1"># ax[0].get_figure().savefig(f&#39;{fig_dir}/all_from_tx_em.png&#39;, dpi=300)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># df.to_csv(f&#39;tangram_ct_pred_tx_{checkpoint_name}.csv&#39;)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_Loki_Decompose_case_study_CRC_20_0.png" class="no-scaled-link" src="../_images/notebooks_Loki_Decompose_case_study_CRC_20_0.png" style="width: 794px; height: 813px;" />
+</div>
+</div>
+</section>
+<section id="Loki-Decompose-on-image">
+<h2>Loki Decompose on image<a class="headerlink" href="#Loki-Decompose-on-image" title="Link to this heading"></a></h2>
+<p>Run cell type decomposition using the image.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spot_adata_im_em</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">AnnData</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">spot_im_embedding</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+<span class="n">spot_adata_im_em</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s1">&#39;spatial&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">spot_adata</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s1">&#39;spatial&#39;</span><span class="p">]</span>
+<span class="n">spot_adata_im_em</span><span class="o">.</span><span class="n">uns</span><span class="p">[</span><span class="s1">&#39;spatial&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">spot_adata</span><span class="o">.</span><span class="n">uns</span><span class="p">[</span><span class="s1">&#39;spatial&#39;</span><span class="p">]</span>
+<span class="n">cell_adata</span> <span class="o">=</span> <span class="n">cell_adata_em</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="n">spot_adata_im_em</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">decompose</span><span class="o">.</span><span class="n">cell_type_decompose</span><span class="p">(</span><span class="n">cell_adata</span><span class="p">,</span> <span class="n">spot_adata_im_em</span><span class="p">,</span> <span class="n">cell_type_col</span><span class="o">=</span><span class="s1">&#39;Level1&#39;</span><span class="p">,</span> <span class="n">NMS_mode</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">major_types</span><span class="o">=</span><span class="n">major_types</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">spot_adata_im_em</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s1">&#39;tangram_ct_pred&#39;</span><span class="p">]</span>
+<span class="n">spot_adata_im_em</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">spatial</span><span class="p">(</span><span class="n">spot_adata_im_em</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">major_types</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="s1">&#39;p99&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">alpha_img</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">colorbar_loc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="c1"># ax[0].get_figure().savefig(f&#39;{fig_dir}/all_from_im_em.png&#39;, dpi=300)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># df.to_csv(f&quot;tangram_ct_pred_im_{checkpoint_name}.csv&quot;)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_Loki_Decompose_case_study_CRC_25_0.png" class="no-scaled-link" src="../_images/notebooks_Loki_Decompose_case_study_CRC_25_0.png" style="width: 794px; height: 813px;" />
+</div>
+</div>
+</section>
+<section id="Loki-Decompose-on-whole-slide-image-(WSI)">
+<h2>Loki Decompose on whole-slide-image (WSI)<a class="headerlink" href="#Loki-Decompose-on-whole-slide-image-(WSI)" title="Link to this heading"></a></h2>
+<p>The image is about 20 mm x 13 mm. We use a sliding window of 0.1 mm x 0.1 mm to decompose the cell types in the entire image.</p>
+<p>To be consistent with the workflow in Loki, we first create image patches (“spots”) and saved the image patches to disk.</p>
+<p>We then encode the image patches using the fine-tuned OmiCLIP model.</p>
+<p>Finally, we use the encoded image patches to decompose the cell types in the entire image.</p>
+<section id="Cell-type-decompoistion-on-WSI">
+<h3>Cell type decompoistion on WSI<a class="headerlink" href="#Cell-type-decompoistion-on-WSI" title="Link to this heading"></a></h3>
+<p>Run cell type decomposition using the WSI.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spot_im_embedding_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">embedding_dir</span><span class="si">}</span><span class="s1">/val_data_all_val_img_emb.pt&#39;</span>
+<span class="n">spot_im_embedding</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">spot_im_embedding_path</span><span class="p">)</span>
+<span class="n">spot_locs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">data_dir</span><span class="si">}</span><span class="s1">/val_data_all.csv&#39;</span><span class="p">,</span> <span class="n">usecols</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">])</span>
+
+<span class="c1"># the coordinates were in pixels of the hires image</span>
+<span class="c1"># notice the patch size is 16x16 and I use the top-left corner of the patch as the location of the cell</span>
+<span class="c1"># use the center of the patch as the location of the spot instead</span>
+<span class="n">spot_locs</span> <span class="o">=</span> <span class="n">spot_locs</span> <span class="o">+</span> <span class="mi">8</span>
+<span class="n">spot_locs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">data_dir</span><span class="si">}</span><span class="s1">/val_data_all.csv&#39;</span><span class="p">,</span> <span class="n">usecols</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">])</span>
+<span class="n">scalf</span> <span class="o">=</span> <span class="n">spot_adata</span><span class="o">.</span><span class="n">uns</span><span class="p">[</span><span class="s1">&#39;spatial&#39;</span><span class="p">][</span><span class="s1">&#39;Visium_HD_Human_Colon_Cancer_P2&#39;</span><span class="p">][</span><span class="s1">&#39;scalefactors&#39;</span><span class="p">][</span><span class="s1">&#39;tissue_hires_scalef&#39;</span><span class="p">]</span>
+<span class="n">ad_all_spot</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">AnnData</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">spot_im_embedding</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+<span class="n">ad_all_spot</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s1">&#39;spatial&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">spot_locs</span><span class="o">.</span><span class="n">values</span> <span class="o">/</span> <span class="n">scalf</span>
+<span class="n">ad_all_spot</span><span class="o">.</span><span class="n">uns</span><span class="p">[</span><span class="s1">&#39;spatial&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">spot_adata</span><span class="o">.</span><span class="n">uns</span><span class="p">[</span><span class="s1">&#39;spatial&#39;</span><span class="p">]</span>
+
+<span class="n">cell_adata</span> <span class="o">=</span> <span class="n">cell_adata_em</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cell_type_fractions</span> <span class="o">=</span> <span class="n">cell_adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;Level1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span> <span class="o">/</span> <span class="n">cell_adata</span><span class="o">.</span><span class="n">n_obs</span>
+<span class="n">cell_coords_file</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">data_dir</span><span class="si">}</span><span class="s2">/cell_centroids.npy&quot;</span>
+<span class="n">cell_coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">cell_coords_file</span><span class="p">)</span>
+<span class="n">cell_to_spot</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">decompose</span><span class="o">.</span><span class="n">assign_cells_to_spots</span><span class="p">(</span><span class="n">cell_coords</span><span class="o">*</span><span class="n">scalf</span><span class="p">,</span> <span class="n">ad_all_spot</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s1">&#39;spatial&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">scalf</span><span class="p">,</span> <span class="n">patch_size</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">n_cells_in_spot</span> <span class="o">=</span> <span class="n">cell_to_spot</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">A1</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="n">ad_all_spot</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">decompose</span><span class="o">.</span><span class="n">cell_type_decompose</span><span class="p">(</span><span class="n">cell_adata</span><span class="p">,</span> <span class="n">ad_all_spot</span><span class="p">,</span> <span class="n">cell_type_col</span><span class="o">=</span><span class="s1">&#39;Level1&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">ad_all_spot</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s1">&#39;tangram_ct_pred&#39;</span><span class="p">]</span>
+<span class="n">ad_all_spot</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span>
+
+<span class="n">fractions</span> <span class="o">=</span> <span class="n">df</span> <span class="o">*</span> <span class="n">cell_type_fractions</span>
+<span class="n">fractions</span> <span class="o">=</span> <span class="n">fractions</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">fractions</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">cell_numbers</span> <span class="o">=</span> <span class="n">fractions</span> <span class="o">*</span> <span class="n">n_cells_in_spot</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">ad_all_spot</span><span class="o">.</span><span class="n">obs</span><span class="p">[[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s1">_cells&#39;</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">]]</span> <span class="o">=</span> <span class="n">cell_numbers</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">types_from_pathology</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Tumor&#39;</span><span class="p">,</span> <span class="s1">&#39;Fibroblast&#39;</span><span class="p">,</span> <span class="s1">&#39;Smooth Muscle&#39;</span><span class="p">,</span> <span class="s1">&#39;Intestinal Epithelial&#39;</span><span class="p">,</span> <span class="s1">&#39;Immune_inflammed&#39;</span><span class="p">]</span>
+<span class="c1"># add immune inflamed cells from the three cell types in the group</span>
+<span class="n">immune_inflamed_group</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;T cells&#39;</span><span class="p">,</span> <span class="s1">&#39;B cells&#39;</span><span class="p">,</span> <span class="s1">&#39;Myeloid&#39;</span><span class="p">]</span>
+<span class="n">ad_all_spot</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;Immune_inflammed_cells&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ad_all_spot</span><span class="o">.</span><span class="n">obs</span><span class="p">[[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s1">_cells&#39;</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">immune_inflamed_group</span><span class="p">]]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">spatial</span><span class="p">(</span><span class="n">ad_all_spot</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="si">}</span><span class="s2">_cells&quot;</span> <span class="k">for</span> <span class="nb">type</span> <span class="ow">in</span> <span class="n">types_from_pathology</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="s1">&#39;p99&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">alpha_img</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">colorbar_loc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
+<span class="c1"># ax[0].get_figure().savefig(f&#39;{fig_dir}/all_from_im_em_entire_image.png&#39;, dpi=300)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_Loki_Decompose_case_study_CRC_32_0.png" class="no-scaled-link" src="../_images/notebooks_Loki_Decompose_case_study_CRC_32_0.png" style="width: 1182px; height: 704px;" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Loki_Decompose_case_study_TNBC.html" class="btn btn-neutral float-left" title="Loki Decompose - TNBC Sample" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Loki_Retrieve.html" class="btn btn-neutral float-right" title="Loki Retrieve" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Basic Usage of OmiCLIP Model &mdash; Loki  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Loki Align - 8 normal small intestine samples" href="Loki_Align_case_study_8_small_intestine.html" />
+    <link rel="prev" title="loki.plot.plot_annotation_heatmap" href="../loki.plot.plot_annotation_heatmap.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Loki
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">ST-bank database</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ST-bank.html">ST-bank database</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Pretrained weights</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pretrain.html">Pretrained weights</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Loki</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../API.html">API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Basic Usage of OmiCLIP Model</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Load-OmiCLIP-Model">Load OmiCLIP Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Encode-Image">Encode Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Encode-Text">Encode Text</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Calculate-Similarity">Calculate Similarity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Examples-of-preprocessing-ST-data,-scRNA-seq-data,-bulk-RNA-seq-data,-and-whole-image">Examples of preprocessing ST data, scRNA-seq data, bulk RNA-seq data, and whole image</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Encode-transcriptome-from-AnnData-object-(ST-data-or-scRNA-seq-data)">Encode transcriptome from AnnData object (ST data or scRNA-seq data)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Encode-transcriptome-from-GCT-object-(bulk-RNA-seq-data)">Encode transcriptome from GCT object (bulk RNA-seq data)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Encode-patches-from-a-whole-image">Encode patches from a whole image</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Align_case_study_8_small_intestine.html">Loki Align - 8 normal small intestine samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Align_case_study_2_OCS.html">Loki Align - 2 ovarian carcinosarcoma samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Annotate_case_study_bulk_RNAseq.html">Loki Annotate - Bulk RNA-seq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Annotate_case_study_marker_genes.html">Loki Annotate - Marker Genes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Decompose_case_study_TNBC.html">Loki Decompose - TNBC Sample</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Decompose_case_study_CRC.html">Loki Decompose - CRC Sample</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Retrieve.html">Loki Retrieve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_PredEx_case_study.html">Loki PredEx</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Loki</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Basic Usage of OmiCLIP Model</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/notebooks/basic_usage.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Basic-Usage-of-OmiCLIP-Model">
+<h1>Basic Usage of OmiCLIP Model<a class="headerlink" href="#Basic-Usage-of-OmiCLIP-Model" title="Link to this heading"></a></h1>
+<p>This notebook demonstrates the basic usage of OmiCLIP model, including loading model, encoding text and image, calculating similairty between image embeddings and text embeddings, and examples of preprocess ST data, scRNA-seq data, bulk RNA-seq data, and whole image. It takes about 30 mins to run this notebook using cpu on MacBook Pro.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scanpy</span> <span class="k">as</span> <span class="nn">sc</span>
+<span class="kn">import</span> <span class="nn">anndata</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+
+<span class="kn">import</span> <span class="nn">loki.utils</span>
+<span class="kn">import</span> <span class="nn">loki.preprocess</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/basic/lib/python3.9/site-packages/tqdm/auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+  from .autonotebook import tqdm as notebook_tqdm
+/opt/anaconda3/envs/basic/lib/python3.9/site-packages/timm/models/layers/__init__.py:48: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f&#34;Importing from {__name__} is deprecated, please import via timm.layers&#34;, FutureWarning)
+</pre></div></div>
+</div>
+<p>The sample data are stored in the directory <code class="docutils literal notranslate"><span class="pre">data/basic_usage</span></code>, which can be donwloaded from <a class="reference external" href="https://drive.google.com/file/d/1aPK1nItsOEPxTihUAKMig-vLY-DMMIce/view?usp=sharing">Google Drive link</a>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_dir</span> <span class="o">=</span> <span class="s1">&#39;../data/basic_usage/&#39;</span>
+</pre></div>
+</div>
+</div>
+<section id="Load-OmiCLIP-Model">
+<h2>Load OmiCLIP Model<a class="headerlink" href="#Load-OmiCLIP-Model" title="Link to this heading"></a></h2>
+<p>We will release the model weights after the manuscript is accepted. Reviewers can access to it from <a class="reference external" href="https://drive.google.com/file/d/1UTJKAqoiUT55h9sA1Ee8iJeOclNLBvWD/view?usp=sharing">Google Drive link</a>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;/path/to/checkpoint/&#39;</span><span class="p">,</span> <span class="s1">&#39;checkpoint.pt&#39;</span><span class="p">)</span>
+<span class="n">device</span> <span class="o">=</span> <span class="s1">&#39;cpu&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="p">,</span> <span class="n">preprocess</span><span class="p">,</span> <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="n">device</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+CoCa(
+  (text): TextTransformer(
+    (token_embedding): Embedding(49408, 768)
+    (transformer): Transformer(
+      (resblocks): ModuleList(
+        (0-11): 12 x ResidualAttentionBlock(
+          (ln_1): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          (attn): MultiheadAttention(
+            (out_proj): NonDynamicallyQuantizableLinear(in_features=768, out_features=768, bias=True)
+          )
+          (ls_1): Identity()
+          (ln_2): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          (mlp): Sequential(
+            (c_fc): Linear(in_features=768, out_features=3072, bias=True)
+            (gelu): GELU(approximate=&#39;none&#39;)
+            (c_proj): Linear(in_features=3072, out_features=768, bias=True)
+          )
+          (ls_2): Identity()
+        )
+      )
+    )
+    (ln_final): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+  )
+  (visual): VisionTransformer(
+    (conv1): Conv2d(3, 1024, kernel_size=(14, 14), stride=(14, 14), bias=False)
+    (patch_dropout): Identity()
+    (ln_pre): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+    (transformer): Transformer(
+      (resblocks): ModuleList(
+        (0-23): 24 x ResidualAttentionBlock(
+          (ln_1): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+          (attn): MultiheadAttention(
+            (out_proj): NonDynamicallyQuantizableLinear(in_features=1024, out_features=1024, bias=True)
+          )
+          (ls_1): Identity()
+          (ln_2): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+          (mlp): Sequential(
+            (c_fc): Linear(in_features=1024, out_features=4096, bias=True)
+            (gelu): GELU(approximate=&#39;none&#39;)
+            (c_proj): Linear(in_features=4096, out_features=1024, bias=True)
+          )
+          (ls_2): Identity()
+        )
+      )
+    )
+    (attn_pool): AttentionalPooler(
+      (attn): MultiheadAttention(
+        (out_proj): NonDynamicallyQuantizableLinear(in_features=768, out_features=768, bias=True)
+      )
+      (ln_q): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+      (ln_k): LayerNorm((1024,), eps=1e-05, elementwise_affine=True)
+    )
+    (ln_post): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+  )
+  (text_decoder): MultimodalTransformer(
+    (resblocks): ModuleList(
+      (0-11): 12 x ResidualAttentionBlock(
+        (ln_1): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+        (attn): MultiheadAttention(
+          (out_proj): NonDynamicallyQuantizableLinear(in_features=768, out_features=768, bias=True)
+        )
+        (ls_1): Identity()
+        (ln_2): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+        (mlp): Sequential(
+          (c_fc): Linear(in_features=768, out_features=3072, bias=True)
+          (gelu): GELU(approximate=&#39;none&#39;)
+          (c_proj): Linear(in_features=3072, out_features=768, bias=True)
+        )
+        (ls_2): Identity()
+      )
+    )
+    (cross_attn): ModuleList(
+      (0-11): 12 x ResidualAttentionBlock(
+        (ln_1): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+        (attn): MultiheadAttention(
+          (out_proj): NonDynamicallyQuantizableLinear(in_features=768, out_features=768, bias=True)
+        )
+        (ls_1): Identity()
+        (ln_1_kv): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+        (ln_2): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+        (mlp): Sequential(
+          (c_fc): Linear(in_features=768, out_features=3072, bias=True)
+          (gelu): GELU(approximate=&#39;none&#39;)
+          (c_proj): Linear(in_features=3072, out_features=768, bias=True)
+        )
+        (ls_2): Identity()
+      )
+    )
+    (ln_final): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+  )
+)
+</pre></div></div>
+</div>
+</section>
+<section id="Encode-Image">
+<h2>Encode Image<a class="headerlink" href="#Encode-Image" title="Link to this heading"></a></h2>
+<p>Use OmiCLIP to encode image.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s1">&#39;demo_data&#39;</span><span class="p">,</span> <span class="s1">&#39;TUM-TCGA-TLSHWGSQ.tif&#39;</span><span class="p">)</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+<span class="n">image</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_basic_usage_9_0.png" src="../_images/notebooks_basic_usage_9_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_embeddings</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">encode_image</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">preprocess</span><span class="p">,</span> <span class="n">image</span><span class="p">)</span>
+<span class="n">image_embeddings</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+torch.Size([1, 768])
+</pre></div></div>
+</div>
+</section>
+<section id="Encode-Text">
+<h2>Encode Text<a class="headerlink" href="#Encode-Text" title="Link to this heading"></a></h2>
+<p>Use OmiCLIP to encode text.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;TP53 EPCAM KRAS EGFR DEFA5 DEFA6 CEACAM5 CEA KRT18 KRT8 KRT19 CDH17 CK20 MYO6 TP53BP2 PLA2G2A CLDN7 TJP1 PKP3 DSP&#39;</span><span class="p">]</span>
+<span class="n">text_embeddings</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">encode_text</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+<span class="n">text_embeddings</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+torch.Size([1, 768])
+</pre></div></div>
+</div>
+</section>
+<section id="Calculate-Similarity">
+<h2>Calculate Similarity<a class="headerlink" href="#Calculate-Similarity" title="Link to this heading"></a></h2>
+<p>Calculate similairty between image embeddings and text embeddings.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dot_similarity</span> <span class="o">=</span> <span class="n">image_embeddings</span> <span class="o">@</span> <span class="n">text_embeddings</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dot_similarity</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+tensor([[0.3926]])
+</pre></div></div>
+</div>
+</section>
+<section id="Examples-of-preprocessing-ST-data,-scRNA-seq-data,-bulk-RNA-seq-data,-and-whole-image">
+<h2>Examples of preprocessing ST data, scRNA-seq data, bulk RNA-seq data, and whole image<a class="headerlink" href="#Examples-of-preprocessing-ST-data,-scRNA-seq-data,-bulk-RNA-seq-data,-and-whole-image" title="Link to this heading"></a></h2>
+<p>Examples of using .h5ad object (ST data or scRNA-seq data) and .gct object (bulk RNA-seq data) to generate text embeddings, and examples of using whole image to generate image patch embeddings.</p>
+<section id="Encode-transcriptome-from-AnnData-object-(ST-data-or-scRNA-seq-data)">
+<h3>Encode transcriptome from AnnData object (ST data or scRNA-seq data)<a class="headerlink" href="#Encode-transcriptome-from-AnnData-object-(ST-data-or-scRNA-seq-data)" title="Link to this heading"></a></h3>
+<p>Example of encoding transcriptome from .h5ad object. House keeping gene list is obtained from the Molecular Signatures Database (MSigDB): <a class="reference external" href="https://www.gsea-msigdb.org/gsea/msigdb/">https://www.gsea-msigdb.org/gsea/msigdb/</a>. It takes about 3 mins to run this section using cpu on MacBook Pro.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ad_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s1">&#39;demo_data&#39;</span><span class="p">,</span> <span class="s1">&#39;RZ_GT_P2.h5ad&#39;</span><span class="p">)</span>
+<span class="n">ad</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">read_h5ad</span><span class="p">(</span><span class="n">ad_path</span><span class="p">)</span>
+<span class="n">ad</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+AnnData object with n_obs × n_vars = 3538 × 14467
+    obs: &#39;n_counts&#39;, &#39;n_genes&#39;, &#39;percent.mt&#39;, &#39;Adipocyte&#39;, &#39;Cardiomyocyte&#39;, &#39;Endothelial&#39;, &#39;Fibroblast&#39;, &#39;Lymphoid&#39;, &#39;Mast&#39;, &#39;Myeloid&#39;, &#39;Neuronal&#39;, &#39;Pericyte&#39;, &#39;Cycling.cells&#39;, &#39;vSMCs&#39;, &#39;cell_type_original&#39;, &#39;assay_ontology_term_id&#39;, &#39;cell_type_ontology_term_id&#39;, &#39;development_stage_ontology_term_id&#39;, &#39;disease_ontology_term_id&#39;, &#39;ethnicity_ontology_term_id&#39;, &#39;is_primary_data&#39;, &#39;organism_ontology_term_id&#39;, &#39;sex_ontology_term_id&#39;, &#39;tissue_ontology_term_id&#39;, &#39;leiden&#39;, &#39;pixel_y&#39;, &#39;pixel_x&#39;, &#39;cell_type&#39;
+    var: &#39;features&#39;
+    uns: &#39;X_approximate_distribution&#39;, &#39;X_normalization&#39;, &#39;default_embedding&#39;, &#39;leiden&#39;, &#39;neighbors&#39;, &#39;schema_version&#39;, &#39;spatial&#39;, &#39;title&#39;
+    obsm: &#39;X_pca&#39;, &#39;X_spatial&#39;, &#39;X_umap&#39;, &#39;spatial&#39;
+    obsp: &#39;connectivities&#39;, &#39;distances&#39;
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">house_keeping_genes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s1">&#39;demo_data&#39;</span><span class="p">,</span> <span class="s1">&#39;housekeeping_genes.csv&#39;</span><span class="p">),</span> <span class="n">index_col</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">top_k_genes_str</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">preprocess</span><span class="o">.</span><span class="n">generate_gene_df</span><span class="p">(</span><span class="n">ad</span><span class="p">,</span> <span class="n">house_keeping_genes</span><span class="p">)</span>
+<span class="n">top_k_genes_str</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>label</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>RZ_GT_P2_AAACAAGTATCTCCCA-1</th>
+      <td>TTN MYH7 MB MALAT1 MTRNR2L12 TPM1 DES CRYAB AP...</td>
+    </tr>
+    <tr>
+      <th>RZ_GT_P2_AAACAATCTACTAGCA-1</th>
+      <td>MYH7 MTRNR2L12 TTN CRYAB MYL2 MB TNNT2 DES TPM...</td>
+    </tr>
+    <tr>
+      <th>RZ_GT_P2_AAACACCAATAACTGC-1</th>
+      <td>TTN MYH7 MTRNR2L12 MB MALAT1 CRYAB TNNI3 DES A...</td>
+    </tr>
+    <tr>
+      <th>RZ_GT_P2_AAACAGAGCGACTCCT-1</th>
+      <td>TTN MYH7 MALAT1 MTRNR2L12 MYL2 MB TPM1 MYL3 CR...</td>
+    </tr>
+    <tr>
+      <th>RZ_GT_P2_AAACAGCTTTCAGAAG-1</th>
+      <td>MB MYH7 TTN CRYAB MTRNR2L12 TNNI3 TPM1 MYL2 DE...</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>RZ_GT_P2_TTGTTGTGTGTCAAGA-1</th>
+      <td>DES MB TCAP MYH7 TPM1 FN1 CMYA5 TNNI3 COL3A1 S...</td>
+    </tr>
+    <tr>
+      <th>RZ_GT_P2_TTGTTTCACATCCAGG-1</th>
+      <td>TTN MYH7 MTRNR2L12 MALAT1 MB CRYAB DES TNNC1 M...</td>
+    </tr>
+    <tr>
+      <th>RZ_GT_P2_TTGTTTCATTAGTCTA-1</th>
+      <td>TTN MALAT1 MYH7 MTRNR2L12 MB DES CRYAB TNNI3 T...</td>
+    </tr>
+    <tr>
+      <th>RZ_GT_P2_TTGTTTCCATACAACT-1</th>
+      <td>MTRNR2L12 MB MYH7 TTN CRYAB IGKC DES MALAT1 TP...</td>
+    </tr>
+    <tr>
+      <th>RZ_GT_P2_TTGTTTGTGTAAATTC-1</th>
+      <td>TTN MTRNR2L12 MYH7 TNNI3 MALAT1 MB DES CRYAB T...</td>
+    </tr>
+  </tbody>
+</table>
+<p>3538 rows × 1 columns</p>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text_embeddings</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">encode_text_df</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">,</span> <span class="n">top_k_genes_str</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">)</span>
+<span class="n">text_embeddings</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/basic/lib/python3.9/site-packages/loki/utils.py:168: FutureWarning: Series.__getitem__ treating keys as positions is deprecated. In a future version, integer keys will always be treated as labels (consistent with DataFrame behavior). To access a value by position, use `ser.iloc[pos]`
+  text = df[df.index == idx][col_name][0]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+torch.Size([3538, 1, 768])
+</pre></div></div>
+</div>
+</section>
+<section id="Encode-transcriptome-from-GCT-object-(bulk-RNA-seq-data)">
+<h3>Encode transcriptome from GCT object (bulk RNA-seq data)<a class="headerlink" href="#Encode-transcriptome-from-GCT-object-(bulk-RNA-seq-data)" title="Link to this heading"></a></h3>
+<p>Example of encoding transcriptome from .gct object.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sc_data_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s1">&#39;demo_data&#39;</span><span class="p">,</span> <span class="s1">&#39;bulk_fibroblasts.gct&#39;</span><span class="p">)</span>
+<span class="n">gct_data</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">preprocess</span><span class="o">.</span><span class="n">read_gct</span><span class="p">(</span><span class="n">sc_data_path</span><span class="p">)</span>
+<span class="n">gct_data</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>GTEX-111VG-0008-SM-5Q5BG</th>
+      <th>GTEX-111YS-0008-SM-5Q5BH</th>
+      <th>GTEX-1122O-0008-SM-5QGR2</th>
+      <th>GTEX-1128S-0008-SM-5Q5DP</th>
+      <th>GTEX-113IC-0008-SM-5QGRF</th>
+      <th>GTEX-113JC-0008-SM-5QGR6</th>
+      <th>GTEX-117XS-0008-SM-5Q5DQ</th>
+      <th>...</th>
+      <th>GTEX-ZVE2-0008-SM-51MRU</th>
+      <th>GTEX-ZVP2-0008-SM-51MSL</th>
+      <th>GTEX-ZVT2-0008-SM-57WC9</th>
+      <th>GTEX-ZVT3-0008-SM-51MRI</th>
+      <th>GTEX-ZVT4-0008-SM-57WCA</th>
+      <th>GTEX-ZVTK-0008-SM-57WDA</th>
+      <th>GTEX-ZVZP-0008-SM-51MSX</th>
+      <th>GTEX-ZVZQ-0008-SM-51MSK</th>
+      <th>GTEX-ZXES-0008-SM-57WCX</th>
+      <th>GTEX-ZXG5-0008-SM-57WDB</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>ENSG00000223972.5</td>
+      <td>DDX11L1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>ENSG00000227232.5</td>
+      <td>WASH7P</td>
+      <td>21</td>
+      <td>31</td>
+      <td>16</td>
+      <td>41</td>
+      <td>57</td>
+      <td>46</td>
+      <td>66</td>
+      <td>...</td>
+      <td>24</td>
+      <td>62</td>
+      <td>40</td>
+      <td>42</td>
+      <td>64</td>
+      <td>58</td>
+      <td>62</td>
+      <td>52</td>
+      <td>20</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>ENSG00000278267.1</td>
+      <td>MIR6859-1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>ENSG00000243485.5</td>
+      <td>MIR1302-2HG</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>ENSG00000237613.2</td>
+      <td>FAM138A</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>56195</th>
+      <td>56195</td>
+      <td>ENSG00000198695.2</td>
+      <td>MT-ND6</td>
+      <td>35691</td>
+      <td>34685</td>
+      <td>50128</td>
+      <td>81334</td>
+      <td>60140</td>
+      <td>81957</td>
+      <td>48581</td>
+      <td>...</td>
+      <td>60506</td>
+      <td>94854</td>
+      <td>76311</td>
+      <td>87410</td>
+      <td>63940</td>
+      <td>108716</td>
+      <td>70445</td>
+      <td>78721</td>
+      <td>68057</td>
+      <td>53557</td>
+    </tr>
+    <tr>
+      <th>56196</th>
+      <td>56196</td>
+      <td>ENSG00000210194.1</td>
+      <td>MT-TE</td>
+      <td>8</td>
+      <td>19</td>
+      <td>28</td>
+      <td>47</td>
+      <td>31</td>
+      <td>40</td>
+      <td>25</td>
+      <td>...</td>
+      <td>35</td>
+      <td>53</td>
+      <td>23</td>
+      <td>34</td>
+      <td>21</td>
+      <td>52</td>
+      <td>29</td>
+      <td>32</td>
+      <td>19</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>56197</th>
+      <td>56197</td>
+      <td>ENSG00000198727.2</td>
+      <td>MT-CYB</td>
+      <td>161038</td>
+      <td>154424</td>
+      <td>138836</td>
+      <td>246421</td>
+      <td>194695</td>
+      <td>225034</td>
+      <td>214565</td>
+      <td>...</td>
+      <td>269451</td>
+      <td>296274</td>
+      <td>335286</td>
+      <td>274560</td>
+      <td>186433</td>
+      <td>312236</td>
+      <td>499192</td>
+      <td>258581</td>
+      <td>241541</td>
+      <td>173705</td>
+    </tr>
+    <tr>
+      <th>56198</th>
+      <td>56198</td>
+      <td>ENSG00000210195.2</td>
+      <td>MT-TT</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>6</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>...</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3</td>
+      <td>3</td>
+      <td>6</td>
+      <td>3</td>
+      <td>3</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>56199</th>
+      <td>56199</td>
+      <td>ENSG00000210196.2</td>
+      <td>MT-TP</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3</td>
+      <td>1</td>
+      <td>0</td>
+      <td>3</td>
+      <td>...</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>7</td>
+      <td>4</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+<p>56200 rows × 507 columns</p>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bulk_ad</span> <span class="o">=</span> <span class="n">anndata</span><span class="o">.</span><span class="n">AnnData</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">gct_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">:]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="n">bulk_ad</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">gct_data</span><span class="p">[</span><span class="s1">&#39;Description&#39;</span><span class="p">]</span>
+<span class="n">bulk_text_feature</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">preprocess</span><span class="o">.</span><span class="n">generate_gene_df</span><span class="p">(</span><span class="n">bulk_ad</span><span class="p">,</span> <span class="n">house_keeping_genes</span><span class="p">,</span> <span class="n">todense</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">bulk_text_feature</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/basic/lib/python3.9/site-packages/anndata/_core/aligned_df.py:68: ImplicitModificationWarning: Transforming to str index.
+  warnings.warn(&#34;Transforming to str index.&#34;, ImplicitModificationWarning)
+/opt/anaconda3/envs/basic/lib/python3.9/site-packages/anndata/_core/aligned_df.py:68: ImplicitModificationWarning: Transforming to str index.
+  warnings.warn(&#34;Transforming to str index.&#34;, ImplicitModificationWarning)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>label</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>FN1 COL1A1 COL1A2 COL6A3 TGFBI THBS1 COL6A2 CO...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text_embeddings</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">encode_text_df</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">,</span> <span class="n">bulk_text_feature</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">)</span>
+<span class="n">text_embeddings</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/basic/lib/python3.9/site-packages/loki/utils.py:168: FutureWarning: Series.__getitem__ treating keys as positions is deprecated. In a future version, integer keys will always be treated as labels (consistent with DataFrame behavior). To access a value by position, use `ser.iloc[pos]`
+  text = df[df.index == idx][col_name][0]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+torch.Size([1, 1, 768])
+</pre></div></div>
+</div>
+</section>
+<section id="Encode-patches-from-a-whole-image">
+<h3>Encode patches from a whole image<a class="headerlink" href="#Encode-patches-from-a-whole-image" title="Link to this heading"></a></h3>
+<p>Example of encoding patches from a whole image. It takes about 28 mins to run this section using cpu on MacBook Pro.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coord</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s1">&#39;demo_data&#39;</span><span class="p">,</span> <span class="s1">&#39;coord.csv&#39;</span><span class="p">),</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">coord</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>pixel_x</th>
+      <th>pixel_y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>GSM5924033_AAACAACGAATAGTTC-1</th>
+      <td>1579.906543</td>
+      <td>152.803738</td>
+    </tr>
+    <tr>
+      <th>GSM5924033_AAACAAGTATCTCCCA-1</th>
+      <td>478.504673</td>
+      <td>1266.355141</td>
+    </tr>
+    <tr>
+      <th>GSM5924033_AAACAATCTACTAGCA-1</th>
+      <td>1234.112151</td>
+      <td>219.626168</td>
+    </tr>
+    <tr>
+      <th>GSM5924033_AAACACCAATAACTGC-1</th>
+      <td>1541.121497</td>
+      <td>1467.289721</td>
+    </tr>
+    <tr>
+      <th>GSM5924033_AAACAGAGCGACTCCT-1</th>
+      <td>581.308412</td>
+      <td>464.485982</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>GSM5924033_TTGTTTCACATCCAGG-1</th>
+      <td>1246.728973</td>
+      <td>1444.859814</td>
+    </tr>
+    <tr>
+      <th>GSM5924033_TTGTTTCATTAGTCTA-1</th>
+      <td>1400.000001</td>
+      <td>1489.252338</td>
+    </tr>
+    <tr>
+      <th>GSM5924033_TTGTTTCCATACAACT-1</th>
+      <td>1438.785048</td>
+      <td>1155.140188</td>
+    </tr>
+    <tr>
+      <th>GSM5924033_TTGTTTGTATTACACG-1</th>
+      <td>1259.345795</td>
+      <td>1778.971964</td>
+    </tr>
+    <tr>
+      <th>GSM5924033_TTGTTTGTGTAAATTC-1</th>
+      <td>1131.775702</td>
+      <td>308.878505</td>
+    </tr>
+  </tbody>
+</table>
+<p>4975 rows × 2 columns</p>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s1">&#39;demo_data&#39;</span><span class="p">,</span> <span class="s1">&#39;whole_img.png&#39;</span><span class="p">))</span>
+<span class="n">img</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_basic_usage_27_0.png" src="../_images/notebooks_basic_usage_27_0.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="n">patch_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s1">&#39;demo_data&#39;</span><span class="p">,</span> <span class="s1">&#39;patch&#39;</span><span class="p">)</span>
+<span class="n">loki</span><span class="o">.</span><span class="n">preprocess</span><span class="o">.</span><span class="n">segment_patches</span><span class="p">(</span><span class="n">img_array</span><span class="p">,</span> <span class="n">coord</span><span class="p">,</span> <span class="n">patch_dir</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img_list</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">patch_dir</span><span class="p">)</span>
+<span class="n">image_embeddings</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">encode_image_patches</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">preprocess</span><span class="p">,</span> <span class="n">data_dir</span><span class="p">,</span> <span class="n">img_list</span><span class="p">)</span>
+<span class="n">image_embeddings</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+torch.Size([4975, 1, 768])
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../loki.plot.plot_annotation_heatmap.html" class="btn btn-neutral float-left" title="loki.plot.plot_annotation_heatmap" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Loki_Align_case_study_8_small_intestine.html" class="btn btn-neutral float-right" title="Loki Align - 8 normal small intestine samples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

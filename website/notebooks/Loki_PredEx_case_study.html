@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loki PredEx &mdash; Loki  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Loki Retrieve" href="Loki_Retrieve.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Loki
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">ST-bank database</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ST-bank.html">ST-bank database</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Pretrained weights</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pretrain.html">Pretrained weights</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Loki</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../API.html">API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="basic_usage.html">Basic Usage of OmiCLIP Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Align_case_study_8_small_intestine.html">Loki Align - 8 normal small intestine samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Align_case_study_2_OCS.html">Loki Align - 2 ovarian carcinosarcoma samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Annotate_case_study_bulk_RNAseq.html">Loki Annotate - Bulk RNA-seq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Annotate_case_study_marker_genes.html">Loki Annotate - Marker Genes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Decompose_case_study_TNBC.html">Loki Decompose - TNBC Sample</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Decompose_case_study_CRC.html">Loki Decompose - CRC Sample</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Retrieve.html">Loki Retrieve</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Loki PredEx</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Loki-PredEx-by-H&amp;E-image">Loki PredEx by H&amp;E image</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Loki</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Loki PredEx</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/notebooks/Loki_PredEx_case_study.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Loki-PredEx">
+<h1>Loki PredEx<a class="headerlink" href="#Loki-PredEx" title="Link to this heading"></a></h1>
+<p>This notebook demonstrates how to run <em>Loki PredEx</em> on the normal human heart dataset. It takes about 1 min to run this notebook on MacBook Pro.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scanpy</span> <span class="k">as</span> <span class="nn">sc</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">import</span> <span class="nn">loki.predex</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">set_figure_params</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>We provide the image-ST similarity matrix generated from the OmiCLIP model. The sample data and embeddings are stored in the directory <code class="docutils literal notranslate"><span class="pre">data/loki_predex/</span></code>, which can be donwloaded from <a class="reference external" href="https://drive.google.com/file/d/1aPK1nItsOEPxTihUAKMig-vLY-DMMIce/view?usp=sharing">Google Drive link</a>.</p>
+<p>Here is a list of the files that are needed to run the ST gene expression prediction on the human heart dataset:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>.
+├── similarity_matrix
+│   └── image_text_similarity.npy
+├── training_data
+│   ├── all_shared_genes.txt
+│   ├── combined_expression_matrix.npy
+│   ├── combined_obs.npy
+│   └── train_df.csv
+└── validation_data
+    ├── HCAHeartST11702009.h5ad
+    ├── top300_gene_list.npy
+    └── val_df.csv
+</pre></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;../data/loki_predex/&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">read_h5ad</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;validation_data&#39;</span><span class="p">,</span> <span class="s1">&#39;HCAHeartST11702009.h5ad&#39;</span><span class="p">))</span>
+<span class="n">genelist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;validation_data&#39;</span><span class="p">,</span> <span class="s1">&#39;top300_gene_list.npy&#39;</span><span class="p">),</span><span class="n">allow_pickle</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="n">ad</span> <span class="o">=</span> <span class="n">adata</span><span class="p">[:,</span> <span class="n">adata</span><span class="o">.</span><span class="n">var_names</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">genelist</span><span class="p">)]</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">spatial</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">img_key</span><span class="o">=</span><span class="s2">&quot;hires&quot;</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">spot_size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="k">del</span> <span class="n">adata</span>
+<span class="n">val_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;validation_data&#39;</span><span class="p">,</span> <span class="s1">&#39;val_df.csv&#39;</span><span class="p">),</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">val_spots</span> <span class="o">=</span> <span class="n">val_df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_Loki_PredEx_case_study_4_0.png" class="no-scaled-link" src="../_images/notebooks_Loki_PredEx_case_study_4_0.png" style="width: 331px; height: 347px;" />
+</div>
+</div>
+<section id="Loki-PredEx-by-H&amp;E-image">
+<h2>Loki PredEx by H&amp;E image<a class="headerlink" href="#Loki-PredEx-by-H&E-image" title="Link to this heading"></a></h2>
+<p>Use Loki PredEx to predict ST gene expression from H&amp;E image.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">combined_expression_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;training_data&#39;</span><span class="p">,</span> <span class="s1">&#39;combined_expression_matrix.npy&#39;</span><span class="p">))</span>
+<span class="n">combined_obs_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span><span class="s1">&#39;training_data&#39;</span><span class="p">,</span> <span class="s1">&#39;combined_obs.npy&#39;</span><span class="p">))</span>
+<span class="n">train_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;training_data&#39;</span><span class="p">,</span> <span class="s1">&#39;train_df.csv&#39;</span><span class="p">),</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">train_spots</span> <span class="o">=</span> <span class="n">train_df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;training_data&#39;</span><span class="p">,</span> <span class="s1">&#39;all_shared_genes.txt&#39;</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">shared_genes</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">]</span>
+
+<span class="n">train_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">combined_obs_array</span><span class="p">,</span> <span class="n">train_spots</span><span class="p">)</span>
+<span class="n">val_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">combined_obs_array</span><span class="p">,</span> <span class="n">val_spots</span><span class="p">)</span>
+
+<span class="n">train_data</span> <span class="o">=</span> <span class="n">combined_expression_array</span><span class="p">[</span><span class="n">train_indices</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">val_data</span> <span class="o">=</span> <span class="n">combined_expression_array</span><span class="p">[</span><span class="n">val_indices</span><span class="p">,</span> <span class="p">:]</span>
+
+<span class="k">del</span> <span class="n">combined_expression_array</span>
+<span class="k">del</span> <span class="n">train_df</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_text_similarity</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;similarity_matrix&#39;</span><span class="p">,</span> <span class="s1">&#39;image_text_similarity.npy&#39;</span><span class="p">))</span>
+<span class="n">predicted_image_text_matrix</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">predex</span><span class="o">.</span><span class="n">predict_st_gene_expr</span><span class="p">(</span><span class="n">image_text_similarity</span><span class="p">,</span> <span class="n">train_data</span><span class="p">)</span>
+<span class="n">prediction</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">predicted_image_text_matrix</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">val_df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="n">shared_genes</span><span class="p">)</span>
+<span class="n">predict_data</span> <span class="o">=</span> <span class="n">prediction</span><span class="p">[</span><span class="n">genelist</span><span class="p">]</span>
+<span class="n">predict_data</span> <span class="o">=</span> <span class="n">predict_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ad</span><span class="o">.</span><span class="n">obs_names</span><span class="p">]</span>
+<span class="n">predict_data</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>APLP2</th>
+      <th>BEX3</th>
+      <th>KIF1C</th>
+      <th>NFKBIA</th>
+      <th>NUCB1</th>
+      <th>JUN</th>
+      <th>PSMD8</th>
+      <th>PTGES3</th>
+      <th>EEF1B2</th>
+      <th>HADHA</th>
+      <th>...</th>
+      <th>TTN</th>
+      <th>CRYAB</th>
+      <th>DES</th>
+      <th>MYH6</th>
+      <th>TNNT2</th>
+      <th>TPM1</th>
+      <th>MYL7</th>
+      <th>ACTC1</th>
+      <th>MB</th>
+      <th>NPPA</th>
+    </tr>
+    <tr>
+      <th>spot_id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>HCAHeartST11702009_AAACAACGAATAGTTC-1</th>
+      <td>0.873993</td>
+      <td>0.570633</td>
+      <td>0.809642</td>
+      <td>0.502104</td>
+      <td>0.748403</td>
+      <td>0.493271</td>
+      <td>0.748796</td>
+      <td>0.549227</td>
+      <td>0.932378</td>
+      <td>1.023527</td>
+      <td>...</td>
+      <td>3.124240</td>
+      <td>3.412881</td>
+      <td>3.790170</td>
+      <td>2.929568</td>
+      <td>3.479691</td>
+      <td>3.594158</td>
+      <td>3.225036</td>
+      <td>3.629994</td>
+      <td>4.128861</td>
+      <td>3.029146</td>
+    </tr>
+    <tr>
+      <th>HCAHeartST11702009_AAACAAGTATCTCCCA-1</th>
+      <td>0.886108</td>
+      <td>0.600569</td>
+      <td>0.823685</td>
+      <td>0.526464</td>
+      <td>0.767610</td>
+      <td>0.504052</td>
+      <td>0.797189</td>
+      <td>0.567454</td>
+      <td>0.975902</td>
+      <td>1.036880</td>
+      <td>...</td>
+      <td>3.118218</td>
+      <td>3.477846</td>
+      <td>3.808141</td>
+      <td>2.917475</td>
+      <td>3.476100</td>
+      <td>3.638908</td>
+      <td>3.224683</td>
+      <td>3.681861</td>
+      <td>4.140285</td>
+      <td>3.016911</td>
+    </tr>
+    <tr>
+      <th>HCAHeartST11702009_AAACACCAATAACTGC-1</th>
+      <td>0.888327</td>
+      <td>0.585750</td>
+      <td>0.832512</td>
+      <td>0.477843</td>
+      <td>0.753783</td>
+      <td>0.492416</td>
+      <td>0.765825</td>
+      <td>0.541675</td>
+      <td>0.917877</td>
+      <td>1.077905</td>
+      <td>...</td>
+      <td>3.162872</td>
+      <td>3.472018</td>
+      <td>3.868768</td>
+      <td>2.871716</td>
+      <td>3.553461</td>
+      <td>3.674515</td>
+      <td>3.118482</td>
+      <td>3.696733</td>
+      <td>4.202581</td>
+      <td>2.791825</td>
+    </tr>
+    <tr>
+      <th>HCAHeartST11702009_AAACAGAGCGACTCCT-1</th>
+      <td>0.856133</td>
+      <td>0.540058</td>
+      <td>0.783130</td>
+      <td>0.480710</td>
+      <td>0.730232</td>
+      <td>0.474532</td>
+      <td>0.718386</td>
+      <td>0.533094</td>
+      <td>0.908748</td>
+      <td>1.009164</td>
+      <td>...</td>
+      <td>3.102248</td>
+      <td>3.388016</td>
+      <td>3.767592</td>
+      <td>2.832028</td>
+      <td>3.452923</td>
+      <td>3.571324</td>
+      <td>3.136117</td>
+      <td>3.597626</td>
+      <td>4.109611</td>
+      <td>2.900072</td>
+    </tr>
+    <tr>
+      <th>HCAHeartST11702009_AAACAGCTTTCAGAAG-1</th>
+      <td>0.874205</td>
+      <td>0.568552</td>
+      <td>0.813926</td>
+      <td>0.492851</td>
+      <td>0.746465</td>
+      <td>0.484543</td>
+      <td>0.756364</td>
+      <td>0.541125</td>
+      <td>0.933277</td>
+      <td>1.039306</td>
+      <td>...</td>
+      <td>3.139337</td>
+      <td>3.427375</td>
+      <td>3.812937</td>
+      <td>2.882198</td>
+      <td>3.484470</td>
+      <td>3.606930</td>
+      <td>3.169055</td>
+      <td>3.631085</td>
+      <td>4.145370</td>
+      <td>2.900765</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>HCAHeartST11702009_TTGTTGTGTGTCAAGA-1</th>
+      <td>0.894089</td>
+      <td>0.579132</td>
+      <td>0.829608</td>
+      <td>0.511592</td>
+      <td>0.768178</td>
+      <td>0.499199</td>
+      <td>0.772891</td>
+      <td>0.574577</td>
+      <td>0.942139</td>
+      <td>1.041307</td>
+      <td>...</td>
+      <td>3.096955</td>
+      <td>3.393776</td>
+      <td>3.846852</td>
+      <td>2.862902</td>
+      <td>3.527897</td>
+      <td>3.593799</td>
+      <td>3.242400</td>
+      <td>3.615206</td>
+      <td>4.115737</td>
+      <td>2.915656</td>
+    </tr>
+    <tr>
+      <th>HCAHeartST11702009_TTGTTTCACATCCAGG-1</th>
+      <td>0.892658</td>
+      <td>0.595588</td>
+      <td>0.840894</td>
+      <td>0.474780</td>
+      <td>0.756744</td>
+      <td>0.500931</td>
+      <td>0.773873</td>
+      <td>0.546936</td>
+      <td>0.911552</td>
+      <td>1.095047</td>
+      <td>...</td>
+      <td>3.193938</td>
+      <td>3.510115</td>
+      <td>3.897340</td>
+      <td>2.844283</td>
+      <td>3.585431</td>
+      <td>3.717606</td>
+      <td>3.070820</td>
+      <td>3.733671</td>
+      <td>4.232878</td>
+      <td>2.710185</td>
+    </tr>
+    <tr>
+      <th>HCAHeartST11702009_TTGTTTCATTAGTCTA-1</th>
+      <td>0.885468</td>
+      <td>0.584947</td>
+      <td>0.826959</td>
+      <td>0.487564</td>
+      <td>0.755719</td>
+      <td>0.489815</td>
+      <td>0.775463</td>
+      <td>0.542257</td>
+      <td>0.937204</td>
+      <td>1.073276</td>
+      <td>...</td>
+      <td>3.143954</td>
+      <td>3.479612</td>
+      <td>3.848481</td>
+      <td>2.857775</td>
+      <td>3.520583</td>
+      <td>3.666855</td>
+      <td>3.107396</td>
+      <td>3.691140</td>
+      <td>4.184914</td>
+      <td>2.785052</td>
+    </tr>
+    <tr>
+      <th>HCAHeartST11702009_TTGTTTCCATACAACT-1</th>
+      <td>0.887217</td>
+      <td>0.581479</td>
+      <td>0.830952</td>
+      <td>0.470430</td>
+      <td>0.749562</td>
+      <td>0.489309</td>
+      <td>0.763408</td>
+      <td>0.535830</td>
+      <td>0.911418</td>
+      <td>1.086841</td>
+      <td>...</td>
+      <td>3.169456</td>
+      <td>3.481936</td>
+      <td>3.877080</td>
+      <td>2.833387</td>
+      <td>3.561459</td>
+      <td>3.688138</td>
+      <td>3.077145</td>
+      <td>3.700656</td>
+      <td>4.210742</td>
+      <td>2.712910</td>
+    </tr>
+    <tr>
+      <th>HCAHeartST11702009_TTGTTTGTATTACACG-1</th>
+      <td>0.880530</td>
+      <td>0.587205</td>
+      <td>0.813241</td>
+      <td>0.511512</td>
+      <td>0.758651</td>
+      <td>0.492912</td>
+      <td>0.782527</td>
+      <td>0.551987</td>
+      <td>0.965851</td>
+      <td>1.043346</td>
+      <td>...</td>
+      <td>3.107597</td>
+      <td>3.463045</td>
+      <td>3.794714</td>
+      <td>2.887498</td>
+      <td>3.463999</td>
+      <td>3.630590</td>
+      <td>3.172147</td>
+      <td>3.669116</td>
+      <td>4.137131</td>
+      <td>2.924880</td>
+    </tr>
+  </tbody>
+</table>
+<p>3982 rows × 300 columns</p>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ad</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="s1">&#39;original&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ad</span><span class="o">.</span><span class="n">X</span>
+<span class="n">ad</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="s1">&#39;loki&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">predict_data</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/var/folders/f1/0m_1r9dx73dff178jp2t41900000gp/T/ipykernel_27402/3605322198.py:1: ImplicitModificationWarning: Setting element `.layers[&#39;original&#39;]` of view, initializing view as actual.
+  ad.layers[&#39;original&#39;] = ad.X
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ad</span><span class="o">.</span><span class="n">X</span><span class="o">=</span><span class="n">ad</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="s1">&#39;original&#39;</span><span class="p">]</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">spatial</span><span class="p">(</span><span class="n">ad</span><span class="p">,</span> <span class="n">img_key</span><span class="o">=</span><span class="s2">&quot;hires&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;MYH7&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="s1">&#39;p90&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="s1">&#39;p10&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_Loki_PredEx_case_study_9_0.png" class="no-scaled-link" src="../_images/notebooks_Loki_PredEx_case_study_9_0.png" style="width: 377px; height: 365px;" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ad</span><span class="o">.</span><span class="n">X</span> <span class="o">=</span> <span class="n">ad</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="s1">&#39;loki&#39;</span><span class="p">]</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">spatial</span><span class="p">(</span><span class="n">ad</span><span class="p">,</span> <span class="n">img_key</span><span class="o">=</span><span class="s2">&quot;hires&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;MYH7&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="s1">&#39;p90&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="s1">&#39;p10&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_Loki_PredEx_case_study_10_0.png" class="no-scaled-link" src="../_images/notebooks_Loki_PredEx_case_study_10_0.png" style="width: 388px; height: 365px;" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Loki_Retrieve.html" class="btn btn-neutral float-left" title="Loki Retrieve" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
