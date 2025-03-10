@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loki Align - 2 ovarian carcinosarcoma samples &mdash; Loki  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Loki Annotate - Bulk RNA-seq" href="Loki_Annotate_case_study_bulk_RNAseq.html" />
+    <link rel="prev" title="Loki Align - 8 normal small intestine samples" href="Loki_Align_case_study_8_small_intestine.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Loki
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">ST-bank database</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ST-bank.html">ST-bank database</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Pretrained weights</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pretrain.html">Pretrained weights</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Loki</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../API.html">API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="basic_usage.html">Basic Usage of OmiCLIP Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Align_case_study_8_small_intestine.html">Loki Align - 8 normal small intestine samples</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Loki Align - 2 ovarian carcinosarcoma samples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Loki-Align-ST-to-ST">Loki Align ST to ST</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Loki-Align-image-to-ST">Loki Align image to ST</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Zero-shot-image-to-ST-alignment">Zero-shot image to ST alignment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Fintuned-image-to-ST-alignment">Fintuned image to ST alignment</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Annotate_case_study_bulk_RNAseq.html">Loki Annotate - Bulk RNA-seq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Annotate_case_study_marker_genes.html">Loki Annotate - Marker Genes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Decompose_case_study_TNBC.html">Loki Decompose - TNBC Sample</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Decompose_case_study_CRC.html">Loki Decompose - CRC Sample</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Retrieve.html">Loki Retrieve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_PredEx_case_study.html">Loki PredEx</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Loki</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Loki Align - 2 ovarian carcinosarcoma samples</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/notebooks/Loki_Align_case_study_2_OCS.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Loki-Align---2-ovarian-carcinosarcoma-samples">
+<h1>Loki Align - 2 ovarian carcinosarcoma samples<a class="headerlink" href="#Loki-Align---2-ovarian-carcinosarcoma-samples" title="Link to this heading"></a></h1>
+<p>This notebook demonstrates how to run <em>Loki Align</em> on 2 adjunction sections of ovarian carcinosarcoma (OCS). It takes about 3 mins to run this notebook.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">rgb2hex</span>
+
+<span class="kn">import</span> <span class="nn">loki.align</span>
+<span class="kn">import</span> <span class="nn">loki.preprocess</span>
+<span class="kn">import</span> <span class="nn">loki.utils</span>
+<span class="kn">import</span> <span class="nn">loki.plot</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/basic/lib/python3.9/site-packages/tqdm/auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+  from .autonotebook import tqdm as notebook_tqdm
+/opt/anaconda3/envs/basic/lib/python3.9/site-packages/timm/models/layers/__init__.py:48: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f&#34;Importing from {__name__} is deprecated, please import via timm.layers&#34;, FutureWarning)
+</pre></div></div>
+</div>
+<p>We first finetune OmiCLIP model on the target OCS sample.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">script</span> echo &quot;Comment this line to fine-tune the model on the OCS data.&quot;
+
+import subprocess
+import open_clip
+
+model_name=&#39;coca_ViT-L-14&#39;
+pretrained_weight_path=&#39;path to the omiclip pretrained weight&#39;
+train_csv = &#39;visium_data/finetune_data.csv&#39;
+name = &#39;finetune_tnbc&#39;
+
+train_command = [
+    &#39;python&#39;, &#39;-m&#39;, &#39;training.main&#39;,
+    &#39;--name&#39;, name,
+    &#39;--save-frequency&#39;, &#39;5&#39;,
+    &#39;--zeroshot-frequency&#39;, &#39;10&#39;,
+    &#39;--report-to&#39;, &#39;wandb&#39;,
+    &#39;--train-data&#39;, train_csv,
+    &#39;--csv-img-key&#39;, &#39;img_path&#39;,
+    &#39;--csv-caption-key&#39;, &#39;label&#39;,
+    &#39;--warmup&#39;, &#39;10&#39;,
+    &#39;--batch-size&#39;, &#39;64&#39;,
+    &#39;--lr&#39;, &#39;5e-6&#39;,
+    &#39;--wd&#39;, &#39;0.1&#39;,
+    &#39;--epochs&#39;, &#39;10&#39;,
+    &#39;--workers&#39;, &#39;16&#39;,
+    &#39;--model&#39;, model_name,
+    &#39;--csv-separator&#39;, &#39;,&#39;,
+    &#39;--pretrained&#39;, pretrained_weight_path,
+    &#39;--lock-text-freeze-layer-norm&#39;,
+    &#39;--lock-image-freeze-bn-stats&#39;,
+    &#39;--coca-caption-loss-weight&#39;,&#39;0&#39;,
+    &#39;--coca-contrastive-loss-weight&#39;,&#39;1&#39;,
+    &#39;--val-frequency&#39;, &#39;10&#39;,
+    &#39;--aug-cfg&#39;, &#39;color_jitter=(0.32, 0.32, 0.32, 0.08)&#39;, &#39;color_jitter_prob=0.5&#39;, &#39;gray_scale_prob=0&#39;
+]
+
+subprocess.run(train_command)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Comment this line to fine-tune the model on the OCS data.
+</pre></div></div>
+</div>
+<p>We provide the embeddings generated from the OmiCLIP model. The sample data and embeddings are stored in the directory <code class="docutils literal notranslate"><span class="pre">data/loki_align/two_osc_samples</span></code>, which can be donwloaded from <a class="reference external" href="https://drive.google.com/file/d/1aPK1nItsOEPxTihUAKMig-vLY-DMMIce/view?usp=sharing">Google Drive link</a>.</p>
+<p>Here is a list of the files that are needed to run the cell type decomposition on the pseudo Visium data:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>.
+├── checkpoint_si
+│   ├── 10X_Visium_gracia2021genome_HGSC_V19T26-103_C1_data_txt_features_finetune.csv
+│   ├── 10X_Visium_gracia2021genome_HGSC_V19T26-103_D1_data_txt_features_zeroshot.csv
+│   ├── 10X_Visium_gracia2021genome_HGSC_V19T26-103_D1_data_img_features_zeroshot.csv
+│   ├── 10X_Visium_gracia2021genome_HGSC_V19T26-103_D1_data_img_features_finetune.csv
+│   ├── 10X_Visium_gracia2021genome_HGSC_V19T26-103_C1_data_txt_features_finetune.csv
+│   └── 10X_Visium_gracia2021genome_HGSC_V19T26-103_C1_data_txt_features_zeroshot.csv
+└── visium_data
+    ├── 10X_Visium_gracia2021genome_HGSC_V19T26-103_D1_data.h5ad
+    └── 10X_Visium_gracia2021genome_HGSC_V19T26-103_C1_data.h5ad
+</pre></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_dir</span> <span class="o">=</span> <span class="s1">&#39;../data/loki_align/two_osc_samples/&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_features</span><span class="p">(</span><span class="n">sample_name</span><span class="p">,</span> <span class="n">feature_type</span><span class="p">,</span> <span class="n">case_name</span><span class="p">):</span>
+    <span class="n">features_path</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s1">&#39;checkpoint_ocs&#39;</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="n">feature_type</span><span class="o">+</span><span class="n">case_name</span><span class="o">+</span><span class="s1">&#39;.csv&#39;</span><span class="p">)</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">features_path</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">features</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tar_sample_name</span> <span class="o">=</span> <span class="s1">&#39;10X_Visium_gracia2021genome_HGSC_V19T26-103_C1_data&#39;</span>
+<span class="n">ad_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s1">&#39;visium_data&#39;</span><span class="p">,</span> <span class="n">tar_sample_name</span><span class="o">+</span><span class="s1">&#39;.h5ad&#39;</span><span class="p">)</span>
+<span class="n">ad_tar</span><span class="p">,</span> <span class="n">ad_tar_coor</span><span class="p">,</span> <span class="n">tar_img</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">preprocess</span><span class="o">.</span><span class="n">prepare_data_for_alignment</span><span class="p">(</span><span class="n">ad_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">src_sample_name</span> <span class="o">=</span> <span class="s1">&#39;10X_Visium_gracia2021genome_HGSC_V19T26-103_D1_data&#39;</span>
+<span class="n">ad_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s1">&#39;visium_data&#39;</span><span class="p">,</span> <span class="n">src_sample_name</span><span class="o">+</span><span class="s1">&#39;.h5ad&#39;</span><span class="p">)</span>
+<span class="n">ad_src</span><span class="p">,</span> <span class="n">ad_src_coor</span><span class="p">,</span> <span class="n">src_img</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">preprocess</span><span class="o">.</span><span class="n">prepare_data_for_alignment</span><span class="p">(</span><span class="n">ad_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<section id="Loki-Align-ST-to-ST">
+<h2>Loki Align ST to ST<a class="headerlink" href="#Loki-Align-ST-to-ST" title="Link to this heading"></a></h2>
+<p>Use Loki Align to align ST to ST.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">case_name</span> <span class="o">=</span> <span class="s1">&#39;_zeroshot&#39;</span>
+<span class="n">feature_type</span> <span class="o">=</span> <span class="s1">&#39;_txt_features&#39;</span>
+<span class="n">tar_features</span> <span class="o">=</span> <span class="n">get_features</span><span class="p">(</span><span class="n">tar_sample_name</span><span class="p">,</span> <span class="n">feature_type</span><span class="p">,</span> <span class="n">case_name</span><span class="p">)</span>
+<span class="n">src_features</span> <span class="o">=</span> <span class="n">get_features</span><span class="p">(</span><span class="n">src_sample_name</span><span class="p">,</span> <span class="n">feature_type</span><span class="p">,</span> <span class="n">case_name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pca_comb_features</span><span class="p">,</span> <span class="n">pca_comb_features_batch</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">get_pca_by_fit</span><span class="p">(</span><span class="n">tar_features</span><span class="p">,</span> <span class="n">src_features</span><span class="p">)</span>
+<span class="n">pca_comb_features</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">pca_comb_features</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">pca_comb_features</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span>  <span class="o">-</span><span class="n">pca_comb_features</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">pca_rgb_comb</span> <span class="o">=</span> <span class="p">(</span><span class="n">pca_comb_features</span><span class="o">-</span><span class="n">pca_comb_features</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">pca_comb_features</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">-</span><span class="n">pca_comb_features</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="n">pca_rgb_comb</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">pca_rgb_comb</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">-</span><span class="n">pca_rgb_comb</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">pca_rgb_comb</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">pca_rgb_comb</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">-</span><span class="n">pca_rgb_comb</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">pca_rgb_comb</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">pca_rgb_comb</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mf">0.8</span>
+<span class="n">pca_hex_comb</span> <span class="o">=</span> <span class="p">[</span> <span class="n">rgb2hex</span><span class="p">(</span><span class="n">pca_rgb_comb</span><span class="p">[</span><span class="n">i</span><span class="p">,:])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">pca_rgb_comb</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">ad_tar_coor</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">ad_tar_coor</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">pca_hex_comb</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">tar_features</span><span class="o">.</span><span class="n">T</span><span class="p">)])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_Loki_Align_case_study_2_OCS_12_0.png" src="../_images/notebooks_Loki_Align_case_study_2_OCS_12_0.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cpd_coor</span><span class="p">,</span> <span class="n">homo_coor</span><span class="p">,</span> <span class="n">aligned_image</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">align</span><span class="o">.</span><span class="n">align_tissue</span><span class="p">(</span><span class="n">ad_tar_coor</span><span class="p">,</span> <span class="n">ad_src_coor</span><span class="p">,</span> <span class="n">pca_comb_features</span><span class="p">,</span> <span class="n">src_img</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># loki.plot.plot_alignment_with_img(ad_tar_coor, ad_src_coor, homo_coor, tar_img, src_img, aligned_image, pca_hex_comb, tar_features)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_alignment</span><span class="p">(</span><span class="n">ad_tar_coor</span><span class="p">,</span> <span class="n">ad_src_coor</span><span class="p">,</span> <span class="n">homo_coor</span><span class="p">,</span> <span class="n">pca_hex_comb</span><span class="p">,</span> <span class="n">tar_features</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_Loki_Align_case_study_2_OCS_15_0.png" src="../_images/notebooks_Loki_Align_case_study_2_OCS_15_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">aligned_image</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_Loki_Align_case_study_2_OCS_16_0.png" src="../_images/notebooks_Loki_Align_case_study_2_OCS_16_0.png" />
+</div>
+</div>
+</section>
+<section id="Loki-Align-image-to-ST">
+<h2>Loki Align image to ST<a class="headerlink" href="#Loki-Align-image-to-ST" title="Link to this heading"></a></h2>
+<section id="Zero-shot-image-to-ST-alignment">
+<h3>Zero-shot image to ST alignment<a class="headerlink" href="#Zero-shot-image-to-ST-alignment" title="Link to this heading"></a></h3>
+<p>Use zero-shot Loki Align to align image to ST.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">case_name</span> <span class="o">=</span> <span class="s1">&#39;_zeroshot&#39;</span>
+<span class="n">tar_features</span> <span class="o">=</span> <span class="n">get_features</span><span class="p">(</span><span class="n">tar_sample_name</span><span class="p">,</span> <span class="s1">&#39;_txt_features&#39;</span><span class="p">,</span> <span class="n">case_name</span><span class="p">)</span>
+<span class="n">src_features</span> <span class="o">=</span> <span class="n">get_features</span><span class="p">(</span><span class="n">src_sample_name</span><span class="p">,</span> <span class="s1">&#39;_img_features&#39;</span><span class="p">,</span> <span class="n">case_name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pca_comb_features</span><span class="p">,</span> <span class="n">pca_comb_features_batch</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">get_pca_by_fit</span><span class="p">(</span><span class="n">tar_features</span><span class="p">,</span> <span class="n">src_features</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cpd_coor</span><span class="p">,</span> <span class="n">homo_coor</span><span class="p">,</span> <span class="n">aligned_image</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">align</span><span class="o">.</span><span class="n">align_tissue</span><span class="p">(</span><span class="n">ad_tar_coor</span><span class="p">,</span> <span class="n">ad_src_coor</span><span class="p">,</span> <span class="n">pca_comb_features</span><span class="p">,</span> <span class="n">src_img</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># loki.plot.plot_alignment_with_img(ad_tar_coor, ad_src_coor, homo_coor, tar_img, src_img, aligned_image, pca_hex_comb, tar_features)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_alignment</span><span class="p">(</span><span class="n">ad_tar_coor</span><span class="p">,</span> <span class="n">ad_src_coor</span><span class="p">,</span> <span class="n">homo_coor</span><span class="p">,</span> <span class="n">pca_hex_comb</span><span class="p">,</span> <span class="n">tar_features</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_Loki_Align_case_study_2_OCS_23_0.png" src="../_images/notebooks_Loki_Align_case_study_2_OCS_23_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">aligned_image</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_Loki_Align_case_study_2_OCS_24_0.png" src="../_images/notebooks_Loki_Align_case_study_2_OCS_24_0.png" />
+</div>
+</div>
+</section>
+<section id="Fintuned-image-to-ST-alignment">
+<h3>Fintuned image to ST alignment<a class="headerlink" href="#Fintuned-image-to-ST-alignment" title="Link to this heading"></a></h3>
+<p>Use Loki Align to align image to ST with finetuning.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">case_name</span> <span class="o">=</span> <span class="s1">&#39;_finetune&#39;</span>
+<span class="n">tar_features</span> <span class="o">=</span> <span class="n">get_features</span><span class="p">(</span><span class="n">tar_sample_name</span><span class="p">,</span> <span class="s1">&#39;_txt_features&#39;</span><span class="p">,</span> <span class="n">case_name</span><span class="p">)</span>
+<span class="n">src_features</span> <span class="o">=</span> <span class="n">get_features</span><span class="p">(</span><span class="n">src_sample_name</span><span class="p">,</span> <span class="s1">&#39;_img_features&#39;</span><span class="p">,</span> <span class="n">case_name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pca_comb_features</span><span class="p">,</span> <span class="n">pca_comb_features_batch</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">get_pca_by_fit</span><span class="p">(</span><span class="n">tar_features</span><span class="p">,</span> <span class="n">src_features</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cpd_coor</span><span class="p">,</span> <span class="n">homo_coor</span><span class="p">,</span> <span class="n">aligned_image</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">align</span><span class="o">.</span><span class="n">align_tissue</span><span class="p">(</span><span class="n">ad_tar_coor</span><span class="p">,</span> <span class="n">ad_src_coor</span><span class="p">,</span> <span class="n">pca_comb_features</span><span class="p">,</span> <span class="n">src_img</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># loki.plot.plot_alignment_with_img(ad_tar_coor, ad_src_coor, homo_coor, tar_img, src_img, aligned_image, pca_hex_comb, tar_features)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_alignment</span><span class="p">(</span><span class="n">ad_tar_coor</span><span class="p">,</span> <span class="n">ad_src_coor</span><span class="p">,</span> <span class="n">homo_coor</span><span class="p">,</span> <span class="n">pca_hex_comb</span><span class="p">,</span> <span class="n">tar_features</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_Loki_Align_case_study_2_OCS_30_0.png" src="../_images/notebooks_Loki_Align_case_study_2_OCS_30_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">aligned_image</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_Loki_Align_case_study_2_OCS_31_0.png" src="../_images/notebooks_Loki_Align_case_study_2_OCS_31_0.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Loki_Align_case_study_8_small_intestine.html" class="btn btn-neutral float-left" title="Loki Align - 8 normal small intestine samples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Loki_Annotate_case_study_bulk_RNAseq.html" class="btn btn-neutral float-right" title="Loki Annotate - Bulk RNA-seq" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

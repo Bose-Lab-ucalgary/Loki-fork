@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API &mdash; Loki  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="loki.preprocess.generate_gene_df" href="loki.preprocess.generate_gene_df.html" />
+    <link rel="prev" title="Pretrained weights" href="pretrain.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Loki
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">ST-bank database</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ST-bank.html">ST-bank database</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Pretrained weights</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pretrain.html">Pretrained weights</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Loki</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#toolkit-functions">Toolkit functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#preprocessing">Preprocessing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="loki.preprocess.generate_gene_df.html">loki.preprocess.generate_gene_df</a></li>
+<li class="toctree-l4"><a class="reference internal" href="loki.preprocess.segment_patches.html">loki.preprocess.segment_patches</a></li>
+<li class="toctree-l4"><a class="reference internal" href="loki.preprocess.get_library_id.html">loki.preprocess.get_library_id</a></li>
+<li class="toctree-l4"><a class="reference internal" href="loki.preprocess.get_scalefactors.html">loki.preprocess.get_scalefactors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="loki.preprocess.get_spot_diameter_in_pixels.html">loki.preprocess.get_spot_diameter_in_pixels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="loki.preprocess.prepare_data_for_alignment.html">loki.preprocess.prepare_data_for_alignment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="loki.preprocess.load_data_for_annotation.html">loki.preprocess.load_data_for_annotation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#utilities">Utilities</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="loki.utils.load_model.html">loki.utils.load_model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="loki.utils.encode_image.html">loki.utils.encode_image</a></li>
+<li class="toctree-l4"><a class="reference internal" href="loki.utils.encode_image_patches.html">loki.utils.encode_image_patches</a></li>
+<li class="toctree-l4"><a class="reference internal" href="loki.utils.encode_text.html">loki.utils.encode_text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="loki.utils.encode_text_df.html">loki.utils.encode_text_df</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#loki-align">Loki Align</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="loki.align.apply_homography.html">loki.align.apply_homography</a></li>
+<li class="toctree-l4"><a class="reference internal" href="loki.align.align_tissue.html">loki.align.align_tissue</a></li>
+<li class="toctree-l4"><a class="reference internal" href="loki.align.find_homography_translation_rotation.html">loki.align.find_homography_translation_rotation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="loki.align.DeformableRegistration.html">loki.align.DeformableRegistration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="loki.align.EMRegistration.html">loki.align.EMRegistration</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#loki-annotate">Loki Annotate</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="loki.annotate.annotate_with_bulk.html">loki.annotate.annotate_with_bulk</a></li>
+<li class="toctree-l4"><a class="reference internal" href="loki.annotate.annotate_with_marker_genes.html">loki.annotate.annotate_with_marker_genes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="loki.annotate.load_image_annotation.html">loki.annotate.load_image_annotation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#loki-decompose">Loki Decompose</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="loki.decompose.generate_feature_ad.html">loki.decompose.generate_feature_ad</a></li>
+<li class="toctree-l4"><a class="reference internal" href="loki.decompose.cell_type_decompose.html">loki.decompose.cell_type_decompose</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#loki-retrieve">Loki Retrieve</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="loki.retrieve.retrieve_st_by_image.html">loki.retrieve.retrieve_st_by_image</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#loki-predex">Loki PredEx</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="loki.predex.predict_st_gene_expr.html">loki.predex.predict_st_gene_expr</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#plotting">Plotting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="loki.plot.plot_alignment.html">loki.plot.plot_alignment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="loki.plot.plot_alignment_with_img.html">loki.plot.plot_alignment_with_img</a></li>
+<li class="toctree-l4"><a class="reference internal" href="loki.plot.plot_img_with_annotation.html">loki.plot.plot_img_with_annotation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="loki.plot.plot_annotation_heatmap.html">loki.plot.plot_annotation_heatmap</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/basic_usage.html">Basic Usage of OmiCLIP Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Loki_Align_case_study_8_small_intestine.html">Loki Align - 8 normal small intestine samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Loki_Align_case_study_2_OCS.html">Loki Align - 2 ovarian carcinosarcoma samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Loki_Annotate_case_study_bulk_RNAseq.html">Loki Annotate - Bulk RNA-seq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Loki_Annotate_case_study_marker_genes.html">Loki Annotate - Marker Genes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Loki_Decompose_case_study_TNBC.html">Loki Decompose - TNBC Sample</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Loki_Decompose_case_study_CRC.html">Loki Decompose - CRC Sample</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Loki_Retrieve.html">Loki Retrieve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Loki_PredEx_case_study.html">Loki PredEx</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Loki</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">API</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/API.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="api">
+<h1>API<a class="headerlink" href="#api" title="Link to this heading"></a></h1>
+<section id="toolkit-functions">
+<h2>Toolkit functions<a class="headerlink" href="#toolkit-functions" title="Link to this heading"></a></h2>
+<section id="preprocessing">
+<h3>Preprocessing<a class="headerlink" href="#preprocessing" title="Link to this heading"></a></h3>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="loki.preprocess.generate_gene_df.html#loki.preprocess.generate_gene_df" title="loki.preprocess.generate_gene_df"><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_gene_df</span></code></a>(ad, house_keeping_genes[, ...])</p></td>
+<td><p>Generates a DataFrame with the top 50 genes for each observation in an AnnData object.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="loki.preprocess.segment_patches.html#loki.preprocess.segment_patches" title="loki.preprocess.segment_patches"><code class="xref py py-obj docutils literal notranslate"><span class="pre">segment_patches</span></code></a>(img_array, coord, patch_dir)</p></td>
+<td><p>Extracts small image patches centered at specified coordinates and saves them as individual PNG files.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="loki.preprocess.get_library_id.html#loki.preprocess.get_library_id" title="loki.preprocess.get_library_id"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_library_id</span></code></a>(adata)</p></td>
+<td><p>Retrieves the library ID from the AnnData object, assuming it contains spatial data.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="loki.preprocess.get_scalefactors.html#loki.preprocess.get_scalefactors" title="loki.preprocess.get_scalefactors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_scalefactors</span></code></a>(adata[, library_id])</p></td>
+<td><p>Retrieves the scalefactors from the AnnData object for a given library ID.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="loki.preprocess.get_spot_diameter_in_pixels.html#loki.preprocess.get_spot_diameter_in_pixels" title="loki.preprocess.get_spot_diameter_in_pixels"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_spot_diameter_in_pixels</span></code></a>(adata[, library_id])</p></td>
+<td><p>Retrieves the spot diameter in pixels from the AnnData object's scalefactors for a given library ID.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="loki.preprocess.prepare_data_for_alignment.html#loki.preprocess.prepare_data_for_alignment" title="loki.preprocess.prepare_data_for_alignment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prepare_data_for_alignment</span></code></a>(data_path[, ...])</p></td>
+<td><p>Prepares data for alignment by reading an AnnData object and preparing the high-resolution tissue image.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="loki.preprocess.load_data_for_annotation.html#loki.preprocess.load_data_for_annotation" title="loki.preprocess.load_data_for_annotation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_data_for_annotation</span></code></a>(st_data_path, json_path)</p></td>
+<td><p>Loads spatial transcriptomics (ST) data from an .h5ad file and prepares it for annotation.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="utilities">
+<h3>Utilities<a class="headerlink" href="#utilities" title="Link to this heading"></a></h3>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="loki.utils.load_model.html#loki.utils.load_model" title="loki.utils.load_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_model</span></code></a>(model_path, device)</p></td>
+<td><p>Loads a pretrained OmiCLIP model, along with its preprocessing function and tokenizer, using the specified model checkpoint.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="loki.utils.encode_image.html#loki.utils.encode_image" title="loki.utils.encode_image"><code class="xref py py-obj docutils literal notranslate"><span class="pre">encode_image</span></code></a>(model, preprocess, image)</p></td>
+<td><p>Encodes an image into a normalized feature embedding using the specified model and preprocessing function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="loki.utils.encode_image_patches.html#loki.utils.encode_image_patches" title="loki.utils.encode_image_patches"><code class="xref py py-obj docutils literal notranslate"><span class="pre">encode_image_patches</span></code></a>(model, preprocess, ...)</p></td>
+<td><p>Encodes multiple image patches into normalized feature embeddings using a specified model and preprocess function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="loki.utils.encode_text.html#loki.utils.encode_text" title="loki.utils.encode_text"><code class="xref py py-obj docutils literal notranslate"><span class="pre">encode_text</span></code></a>(model, tokenizer, text)</p></td>
+<td><p>Encodes text into a normalized feature embedding using a specified model and tokenizer.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="loki.utils.encode_text_df.html#loki.utils.encode_text_df" title="loki.utils.encode_text_df"><code class="xref py py-obj docutils literal notranslate"><span class="pre">encode_text_df</span></code></a>(model, tokenizer, df, col_name)</p></td>
+<td><p>Encodes text from a specified column in a pandas DataFrame using the given model and tokenizer, returning a PyTorch tensor of normalized text embeddings.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="loki-align">
+<h3>Loki Align<a class="headerlink" href="#loki-align" title="Link to this heading"></a></h3>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="loki.align.apply_homography.html#loki.align.apply_homography" title="loki.align.apply_homography"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply_homography</span></code></a>(coordinates, H)</p></td>
+<td><p>Apply a 3x3 homography matrix to 2D coordinates.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="loki.align.align_tissue.html#loki.align.align_tissue" title="loki.align.align_tissue"><code class="xref py py-obj docutils literal notranslate"><span class="pre">align_tissue</span></code></a>(ad_tar_coor, ad_src_coor, ...)</p></td>
+<td><p>Aligns the source coordinates to the target coordinates using Coherent Point Drift (CPD) registration, and applies a homography transformation to warp the source coordinates accordingly.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="loki.align.find_homography_translation_rotation.html#loki.align.find_homography_translation_rotation" title="loki.align.find_homography_translation_rotation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_homography_translation_rotation</span></code></a>(...)</p></td>
+<td><p>Find the homography between two sets of coordinates with only translation and rotation.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Classes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="loki.align.DeformableRegistration.html#loki.align.DeformableRegistration" title="loki.align.DeformableRegistration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DeformableRegistration</span></code></a>([alpha, beta, ...])</p></td>
+<td><p>Deformable registration.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="loki.align.EMRegistration.html#loki.align.EMRegistration" title="loki.align.EMRegistration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EMRegistration</span></code></a>(X, Y[, sigma2, ...])</p></td>
+<td><p>Expectation maximization point cloud registration.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="loki-annotate">
+<h3>Loki Annotate<a class="headerlink" href="#loki-annotate" title="Link to this heading"></a></h3>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="loki.annotate.annotate_with_bulk.html#loki.annotate.annotate_with_bulk" title="loki.annotate.annotate_with_bulk"><code class="xref py py-obj docutils literal notranslate"><span class="pre">annotate_with_bulk</span></code></a>(img_features, bulk_features)</p></td>
+<td><p>Annotates tissue image with similarity scores between image features and bulk RNA-seq features.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="loki.annotate.annotate_with_marker_genes.html#loki.annotate.annotate_with_marker_genes" title="loki.annotate.annotate_with_marker_genes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">annotate_with_marker_genes</span></code></a>(classes, ...)</p></td>
+<td><p>Annotates tissue image with similarity scores between image features and marker gene features.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="loki.annotate.load_image_annotation.html#loki.annotate.load_image_annotation" title="loki.annotate.load_image_annotation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_image_annotation</span></code></a>(image_path)</p></td>
+<td><p>Loads an image with annotation.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="loki-decompose">
+<h3>Loki Decompose<a class="headerlink" href="#loki-decompose" title="Link to this heading"></a></h3>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="loki.decompose.generate_feature_ad.html#loki.decompose.generate_feature_ad" title="loki.decompose.generate_feature_ad"><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_feature_ad</span></code></a>(ad_expr, feature_path[, sc])</p></td>
+<td><p>Generates an AnnData object with OmiCLIP text or image embeddings.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="loki.decompose.cell_type_decompose.html#loki.decompose.cell_type_decompose" title="loki.decompose.cell_type_decompose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cell_type_decompose</span></code></a>(sc_ad, st_ad[, ...])</p></td>
+<td><p>Performs cell type decomposition on spatial data (ST or image) with single-cell data .</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="loki-retrieve">
+<h3>Loki Retrieve<a class="headerlink" href="#loki-retrieve" title="Link to this heading"></a></h3>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="loki.retrieve.retrieve_st_by_image.html#loki.retrieve.retrieve_st_by_image" title="loki.retrieve.retrieve_st_by_image"><code class="xref py py-obj docutils literal notranslate"><span class="pre">retrieve_st_by_image</span></code></a>(image_embeddings, ...)</p></td>
+<td><p>Retrieves the top-k most similar ST based on the similarity between ST embeddings and image embeddings.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="loki-predex">
+<h3>Loki PredEx<a class="headerlink" href="#loki-predex" title="Link to this heading"></a></h3>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="loki.predex.predict_st_gene_expr.html#loki.predex.predict_st_gene_expr" title="loki.predex.predict_st_gene_expr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict_st_gene_expr</span></code></a>(image_text_similarity, ...)</p></td>
+<td><p>Predicts ST gene expression by H&amp;E image.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="plotting">
+<h3>Plotting<a class="headerlink" href="#plotting" title="Link to this heading"></a></h3>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="loki.plot.plot_alignment.html#loki.plot.plot_alignment" title="loki.plot.plot_alignment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_alignment</span></code></a>(ad_tar_coor, ad_src_coor, ...)</p></td>
+<td><p>Plots the target coordinates and alignment of source coordinates.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="loki.plot.plot_alignment_with_img.html#loki.plot.plot_alignment_with_img" title="loki.plot.plot_alignment_with_img"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_alignment_with_img</span></code></a>(ad_tar_coor, ...)</p></td>
+<td><p>Plots the target coordinates and alignment of source coordinates with their respective images in the background.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="loki.plot.plot_img_with_annotation.html#loki.plot.plot_img_with_annotation" title="loki.plot.plot_img_with_annotation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_img_with_annotation</span></code></a>(fullres_img, ...)</p></td>
+<td><p>Plots image with polygons.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="loki.plot.plot_annotation_heatmap.html#loki.plot.plot_annotation_heatmap" title="loki.plot.plot_annotation_heatmap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_annotation_heatmap</span></code></a>(st_ad, roi_polygon, ...)</p></td>
+<td><p>Plots tissue type annotation heatmap.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pretrain.html" class="btn btn-neutral float-left" title="Pretrained weights" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="loki.preprocess.generate_gene_df.html" class="btn btn-neutral float-right" title="loki.preprocess.generate_gene_df" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

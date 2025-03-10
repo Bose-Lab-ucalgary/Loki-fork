@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loki Annotate - Bulk RNA-seq &mdash; Loki  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Loki Annotate - Marker Genes" href="Loki_Annotate_case_study_marker_genes.html" />
+    <link rel="prev" title="Loki Align - 2 ovarian carcinosarcoma samples" href="Loki_Align_case_study_2_OCS.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Loki
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">ST-bank database</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ST-bank.html">ST-bank database</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Pretrained weights</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pretrain.html">Pretrained weights</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Loki</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../API.html">API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="basic_usage.html">Basic Usage of OmiCLIP Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Align_case_study_8_small_intestine.html">Loki Align - 8 normal small intestine samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Align_case_study_2_OCS.html">Loki Align - 2 ovarian carcinosarcoma samples</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Loki Annotate - Bulk RNA-seq</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Loki-Annote-with-bulk-RNA-seq-data-of-tumor">Loki Annote with bulk RNA-seq data of tumor</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#TCGA-data">TCGA data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Loki-Annote-with-bulk-RNA-seq-data-of-fibroblast">Loki Annote with bulk RNA-seq data of fibroblast</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Heart-failure-sample-1">Heart failure sample 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Heart-failure-sample-2">Heart failure sample 2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Heart-failure-sample-3">Heart failure sample 3</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Loki-Annote-with-bulk-RNA-seq-data-of-adipose">Loki Annote with bulk RNA-seq data of adipose</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Breast-sample-1">Breast sample 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Breast-sample-2">Breast sample 2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Breast-sample-3">Breast sample 3</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Annotate_case_study_marker_genes.html">Loki Annotate - Marker Genes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Decompose_case_study_TNBC.html">Loki Decompose - TNBC Sample</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Decompose_case_study_CRC.html">Loki Decompose - CRC Sample</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Retrieve.html">Loki Retrieve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_PredEx_case_study.html">Loki PredEx</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Loki</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Loki Annotate - Bulk RNA-seq</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/notebooks/Loki_Annotate_case_study_bulk_RNAseq.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Loki-Annotate---Bulk-RNA-seq">
+<h1>Loki Annotate - Bulk RNA-seq<a class="headerlink" href="#Loki-Annotate---Bulk-RNA-seq" title="Link to this heading"></a></h1>
+<p>This notebook demonstrates how to run <em>Loki Annotate</em> on the bulk RNA-seq dataset. It takes about 2 mins to run this notebook on MacBook Pro.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="kn">import</span> <span class="nn">loki.annotate</span>
+<span class="kn">import</span> <span class="nn">loki.preprocess</span>
+<span class="kn">import</span> <span class="nn">loki.utils</span>
+<span class="kn">import</span> <span class="nn">loki.plot</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/basic/lib/python3.9/site-packages/tqdm/auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+  from .autonotebook import tqdm as notebook_tqdm
+/opt/anaconda3/envs/basic/lib/python3.9/site-packages/timm/models/layers/__init__.py:48: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f&#34;Importing from {__name__} is deprecated, please import via timm.layers&#34;, FutureWarning)
+</pre></div></div>
+</div>
+<p>We provide the embeddings generated from the OmiCLIP model. The sample data and embeddings are stored in the directory <code class="docutils literal notranslate"><span class="pre">data/loki_annotate/bulk_RNAseq_data</span></code>, which can be donwloaded from <a class="reference external" href="https://drive.google.com/file/d/1aPK1nItsOEPxTihUAKMig-vLY-DMMIce/view?usp=sharing">Google Drive link</a>.</p>
+<p>Here is a list of the files that are needed to run the tissue annotation on example data:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>.
+├── adipose
+│   ├── checkpoints
+│   │   ├── bulk_adipose_txt_features_zeroshot.csv
+│   │   ├── samplev02_img_features_zeroshot.csv
+│   │   ├── samplev03_img_features_zeroshot.csv
+│   │   └── samplev04_img_features_zeroshot.csv
+│   └── image_data
+│       ├── samplev02_coords.json
+│       ├── samplev02_raw.h5ad
+│       ├── samplev03_coords.json
+│       ├── samplev03_raw.h5ad
+│       ├── samplev04_coords.json
+│       └── samplev04_raw.h5ad
+├── fibroblast
+│   ├── checkpoints
+│   │   ├── FZ_P14_img_features_zeroshot.csv
+│   │   ├── FZ_P18_img_features_zeroshot.csv
+│   │   ├── FZ_P20_img_features_zeroshot.csv
+│   │   └── bulk_fibroblast_txt_features_zeroshot.csv
+│   └── image_data
+│       ├── FZ_P14.tif
+│       ├── FZ_P14_coords.json
+│       ├── FZ_P14_raw.h5ad
+│       ├── FZ_P18.tif
+│       ├── FZ_P18_coords.json
+│       ├── FZ_P18_raw.h5ad
+│       ├── FZ_P20.tif
+│       ├── FZ_P20_coords.json
+│       └── FZ_P20_raw.h5ad
+└── tumor
+    ├── checkpoints
+    │   ├── TCGA-A2-A0CL-01_image_embeddings.pt
+    │   ├── TCGA-A2-A0CL-01_text_embeddings.pt
+    │   ├── TCGA-A2-A0CW-01_image_embeddings.pt
+    │   ├── TCGA-A2-A0CW-01_text_embeddings.pt
+    │   ├── TCGA-AO-A0J5-01_image_embeddings.pt
+    │   └── TCGA-AO-A0J5-01_text_embeddings.pt
+    └── image_data
+        ├── TCGA-A2-A0CL-01_coords.pt
+        ├── TCGA-A2-A0CL-01_downsized.jpg
+        ├── TCGA-A2-A0CW-01_coords.pt
+        ├── TCGA-A2-A0CW-01_downsized.jpg
+        ├── TCGA-AO-A0J5-01_coords.pt
+        ├── TCGA-AO-A0J5-01_downsized.jpg
+        └── polygons.json
+</pre></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_dir</span> <span class="o">=</span> <span class="s1">&#39;../data/loki_annotate/bulk_RNAseq_data/&#39;</span>
+</pre></div>
+</div>
+</div>
+<section id="Loki-Annote-with-bulk-RNA-seq-data-of-tumor">
+<h2>Loki Annote with bulk RNA-seq data of tumor<a class="headerlink" href="#Loki-Annote-with-bulk-RNA-seq-data-of-tumor" title="Link to this heading"></a></h2>
+<p>Use Loki Annotate to annotate tumor cell enriched regions in 3 H&amp;E images of breast cancer tissues.</p>
+<section id="TCGA-data">
+<h3>TCGA data<a class="headerlink" href="#TCGA-data" title="Link to this heading"></a></h3>
+<p>The TCGA breast cancer slide files can be downloaded from the GDC data portal. We provide the image files downsized by 32 times for visualization.</p>
+<p>The bulk RNA-seq data can be downloaded from cBioportal.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">case_name</span> <span class="o">=</span> <span class="s1">&#39;_img_features_zeroshot&#39;</span>
+<span class="n">sample_type</span> <span class="o">=</span> <span class="s1">&#39;tumor&#39;</span>
+<span class="n">slide_dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;TCGA-A2-A0CL-01&quot;</span><span class="p">:</span> <span class="s2">&quot;TCGA-A2-A0CL-01Z-00-DX1.5342E971-DCD2-42C4-B4FF-E6942A95829E.svs&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;TCGA-A2-A0CW-01&quot;</span><span class="p">:</span> <span class="s2">&quot;TCGA-A2-A0CW-01Z-00-DX1.8E313A22-B0E8-44CF-ADEA-8BF29BA23FFE.svs&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;TCGA-AO-A0J5-01&quot;</span><span class="p">:</span> <span class="s2">&quot;TCGA-AO-A0J5-01Z-00-DX1.20C14D0C-1A74-4FE9-A5E6-BDDCB8DE7714.svs&quot;</span>
+        <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">case_id</span><span class="p">,</span> <span class="n">slide_path</span> <span class="ow">in</span> <span class="n">slide_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">case_id</span><span class="p">)</span>
+    <span class="n">slide_id</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">slide_path</span><span class="p">)</span><span class="o">.</span><span class="n">stem</span>
+    <span class="n">image_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="s1">&#39;image_data&#39;</span><span class="p">,</span> <span class="n">case_id</span><span class="o">+</span><span class="s1">&#39;_downsized.jpg&#39;</span><span class="p">)</span>
+    <span class="n">coor_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="s1">&#39;image_data&#39;</span><span class="p">,</span> <span class="n">case_id</span><span class="o">+</span><span class="s1">&#39;_coords.pt&#39;</span><span class="p">)</span>
+    <span class="n">image_embedding_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="s1">&#39;checkpoints&#39;</span><span class="p">,</span> <span class="n">case_id</span><span class="o">+</span><span class="s1">&#39;_image_embeddings.pt&#39;</span><span class="p">)</span>
+    <span class="n">omic_embedding_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="s1">&#39;checkpoints&#39;</span><span class="p">,</span> <span class="n">case_id</span><span class="o">+</span><span class="s1">&#39;_text_embeddings.pt&#39;</span><span class="p">)</span>
+
+    <span class="n">coor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">coor_path</span><span class="p">)</span>
+    <span class="n">img_features</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">image_embedding_path</span><span class="p">)</span>  <span class="c1"># Image embeddings (shape: [n, 768])</span>
+    <span class="n">bulk_features</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">omic_embedding_path</span><span class="p">)</span>   <span class="c1"># Omic features (shape: [768])</span>
+    <span class="n">weight</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">annotate</span><span class="o">.</span><span class="n">annotate_with_bulk</span><span class="p">(</span><span class="n">img_features</span><span class="p">,</span> <span class="n">bulk_features</span><span class="p">,</span> <span class="n">tensor</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+    <span class="n">weight</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">cap_quantile</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">cap_max</span><span class="o">=</span><span class="mf">0.99</span><span class="p">,</span> <span class="n">cap_min</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+    <span class="n">polygon_config_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="s1">&#39;image_data&#39;</span><span class="p">,</span> <span class="s1">&#39;polygons.json&#39;</span><span class="p">)</span>
+
+    <span class="n">polygons</span><span class="p">,</span> <span class="n">polygons_color</span><span class="p">,</span> <span class="n">polygons_thickness</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">read_polygons</span><span class="p">(</span><span class="n">polygon_config_path</span><span class="p">,</span> <span class="n">slide_path</span><span class="p">)</span>
+    <span class="n">heatmap</span><span class="p">,</span> <span class="n">image</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_heatmap</span><span class="p">(</span>
+        <span class="n">coor</span><span class="p">,</span>
+        <span class="n">weight</span><span class="p">,</span>
+        <span class="n">image_path</span><span class="o">=</span><span class="n">image_path</span><span class="p">,</span>
+        <span class="n">patch_size</span><span class="o">=</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">),</span>
+        <span class="n">save_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">downsize</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
+        <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;turbo&#39;</span><span class="p">,</span>
+        <span class="n">polygons</span><span class="o">=</span><span class="n">polygons</span><span class="p">,</span>
+        <span class="n">polygons_color</span><span class="o">=</span><span class="n">polygons_color</span><span class="p">,</span>
+        <span class="n">polygons_thickness</span><span class="o">=</span><span class="n">polygons_thickness</span><span class="p">,</span>
+        <span class="n">image_alpha</span><span class="o">=</span><span class="mf">0.5</span>
+    <span class="p">)</span>
+
+    <span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">show_images_side_by_side</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">heatmap</span><span class="p">,</span> <span class="n">title1</span><span class="o">=</span><span class="s1">&#39;Annotated&#39;</span><span class="p">,</span> <span class="n">title2</span><span class="o">=</span><span class="s1">&#39;Similatrity Heatmap&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+TCGA-A2-A0CL-01
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_8_1.png" src="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_8_1.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+TCGA-A2-A0CW-01
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_8_3.png" src="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_8_3.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+TCGA-AO-A0J5-01
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_8_5.png" src="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_8_5.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="Loki-Annote-with-bulk-RNA-seq-data-of-fibroblast">
+<h2>Loki Annote with bulk RNA-seq data of fibroblast<a class="headerlink" href="#Loki-Annote-with-bulk-RNA-seq-data-of-fibroblast" title="Link to this heading"></a></h2>
+<p>Use Loki Annotate to annotate fibroblast cell enriched regions in 3 H&amp;E images of heart failure tissues.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_type</span> <span class="o">=</span> <span class="s1">&#39;fibroblast&#39;</span>
+<span class="n">s</span><span class="o">=</span><span class="mi">35</span>
+<span class="n">linewidth</span><span class="o">=</span><span class="mi">5</span>
+<span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">10000</span><span class="p">]</span>
+<span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">10000</span><span class="p">]</span>
+<span class="n">bulk_text_feature</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="s1">&#39;checkpoints&#39;</span><span class="p">,</span> <span class="s1">&#39;bulk_fibroblast_txt_features_zeroshot.csv&#39;</span><span class="p">),</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<section id="Heart-failure-sample-1">
+<h3>Heart failure sample 1<a class="headerlink" href="#Heart-failure-sample-1" title="Link to this heading"></a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_name</span> <span class="o">=</span> <span class="s1">&#39;FZ_P20&#39;</span>
+<span class="n">st_data_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="s1">&#39;image_data&#39;</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_raw.h5ad&#39;</span><span class="p">)</span>
+<span class="n">json_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="s1">&#39;image_data&#39;</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_coords.json&#39;</span><span class="p">)</span>
+<span class="n">st_ad</span><span class="p">,</span> <span class="n">library_id</span><span class="p">,</span> <span class="n">roi_polygon</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">preprocess</span><span class="o">.</span><span class="n">load_data_for_annotation</span><span class="p">(</span><span class="n">st_data_path</span><span class="p">,</span> <span class="n">json_path</span><span class="p">)</span>
+
+<span class="n">fullres_img_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="s1">&#39;image_data&#39;</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;.tif&#39;</span><span class="p">)</span>
+<span class="n">fullres_img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">fullres_img_path</span><span class="p">)</span>
+<span class="n">img_feature_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="s1">&#39;checkpoints&#39;</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="n">case_name</span><span class="o">+</span><span class="s1">&#39;.csv&#39;</span><span class="p">)</span>
+<span class="n">img_feature</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">img_feature_path</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/basic/lib/python3.9/site-packages/anndata/_core/anndata.py:1756: UserWarning: Variable names are not unique. To make them unique, call `.var_names_make_unique`.
+  utils.warn_names_duplicates(&#34;var&#34;)
+/opt/anaconda3/envs/basic/lib/python3.9/site-packages/loki/preprocess.py:282: ImplicitModificationWarning: Trying to modify attribute `.obs` of view, initializing view as actual.
+  st_ad.obs[[&#34;pixel_y&#34;, &#34;pixel_x&#34;]] = None  # Ensure the columns exist
+/opt/anaconda3/envs/basic/lib/python3.9/site-packages/PIL/Image.py:3368: DecompressionBombWarning: Image size (93006507 pixels) exceeds limit of 89478485 pixels, could be decompression bomb DOS attack.
+  warnings.warn(
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_img_with_annotation</span><span class="p">(</span><span class="n">fullres_img</span><span class="p">,</span> <span class="n">roi_polygon</span><span class="p">,</span> <span class="n">linewidth</span><span class="p">,</span> <span class="n">xlim</span><span class="p">,</span> <span class="n">ylim</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_fullres.jpg&#39;</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st_ad</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;bulk_simi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">annotate</span><span class="o">.</span><span class="n">annotate_with_bulk</span><span class="p">(</span><span class="n">img_feature</span><span class="p">,</span> <span class="n">bulk_text_feature</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_annotation_heatmap</span><span class="p">(</span><span class="n">st_ad</span><span class="p">,</span> <span class="n">roi_polygon</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">linewidth</span><span class="p">,</span> <span class="n">xlim</span><span class="p">,</span> <span class="n">ylim</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_heatmap.jpg&#39;</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_fullres.jpg&#39;</span><span class="p">)</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">annotate</span><span class="o">.</span><span class="n">load_image_annotation</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+
+<span class="n">heatmap_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_heatmap.jpg&#39;</span><span class="p">)</span>
+<span class="n">heatmap</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">annotate</span><span class="o">.</span><span class="n">load_image_annotation</span><span class="p">(</span><span class="n">heatmap_path</span><span class="p">)</span>
+<span class="n">heatmap</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">blend_images</span><span class="p">(</span><span class="n">heatmap</span><span class="p">,</span> <span class="n">image</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">show_images_side_by_side</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">heatmap</span><span class="p">,</span> <span class="n">title1</span><span class="o">=</span><span class="s1">&#39;Annotated&#39;</span><span class="p">,</span> <span class="n">title2</span><span class="o">=</span><span class="s1">&#39;Similatrity Heatmap&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_17_0.png" src="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_17_0.png" />
+</div>
+</div>
+</section>
+<section id="Heart-failure-sample-2">
+<h3>Heart failure sample 2<a class="headerlink" href="#Heart-failure-sample-2" title="Link to this heading"></a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_name</span> <span class="o">=</span> <span class="s1">&#39;FZ_P18&#39;</span>
+<span class="n">st_data_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="s1">&#39;image_data&#39;</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_raw.h5ad&#39;</span><span class="p">)</span>
+<span class="n">json_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="s1">&#39;image_data&#39;</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_coords.json&#39;</span><span class="p">)</span>
+<span class="n">st_ad</span><span class="p">,</span> <span class="n">library_id</span><span class="p">,</span> <span class="n">roi_polygon</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">preprocess</span><span class="o">.</span><span class="n">load_data_for_annotation</span><span class="p">(</span><span class="n">st_data_path</span><span class="p">,</span> <span class="n">json_path</span><span class="p">)</span>
+
+<span class="n">fullres_img_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="s1">&#39;image_data&#39;</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;.tif&#39;</span><span class="p">)</span>
+<span class="n">fullres_img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">fullres_img_path</span><span class="p">)</span>
+<span class="n">img_feature_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="s1">&#39;checkpoints&#39;</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="n">case_name</span><span class="o">+</span><span class="s1">&#39;.csv&#39;</span><span class="p">)</span>
+<span class="n">img_feature</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">img_feature_path</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/basic/lib/python3.9/site-packages/anndata/_core/anndata.py:1756: UserWarning: Variable names are not unique. To make them unique, call `.var_names_make_unique`.
+  utils.warn_names_duplicates(&#34;var&#34;)
+/opt/anaconda3/envs/basic/lib/python3.9/site-packages/loki/preprocess.py:282: ImplicitModificationWarning: Trying to modify attribute `.obs` of view, initializing view as actual.
+  st_ad.obs[[&#34;pixel_y&#34;, &#34;pixel_x&#34;]] = None  # Ensure the columns exist
+/opt/anaconda3/envs/basic/lib/python3.9/site-packages/PIL/Image.py:3368: DecompressionBombWarning: Image size (96294069 pixels) exceeds limit of 89478485 pixels, could be decompression bomb DOS attack.
+  warnings.warn(
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_img_with_annotation</span><span class="p">(</span><span class="n">fullres_img</span><span class="p">,</span> <span class="n">roi_polygon</span><span class="p">,</span> <span class="n">linewidth</span><span class="p">,</span> <span class="n">xlim</span><span class="p">,</span> <span class="n">ylim</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_fullres.jpg&#39;</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st_ad</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;bulk_simi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">annotate</span><span class="o">.</span><span class="n">annotate_with_bulk</span><span class="p">(</span><span class="n">img_feature</span><span class="p">,</span> <span class="n">bulk_text_feature</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_annotation_heatmap</span><span class="p">(</span><span class="n">st_ad</span><span class="p">,</span> <span class="n">roi_polygon</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">linewidth</span><span class="p">,</span> <span class="n">xlim</span><span class="p">,</span> <span class="n">ylim</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_heatmap.jpg&#39;</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_fullres.jpg&#39;</span><span class="p">)</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">annotate</span><span class="o">.</span><span class="n">load_image_annotation</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+
+<span class="n">heatmap_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_heatmap.jpg&#39;</span><span class="p">)</span>
+<span class="n">heatmap</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">annotate</span><span class="o">.</span><span class="n">load_image_annotation</span><span class="p">(</span><span class="n">heatmap_path</span><span class="p">)</span>
+<span class="n">heatmap</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">blend_images</span><span class="p">(</span><span class="n">heatmap</span><span class="p">,</span> <span class="n">image</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">show_images_side_by_side</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">heatmap</span><span class="p">,</span> <span class="n">title1</span><span class="o">=</span><span class="s1">&#39;Annotated&#39;</span><span class="p">,</span> <span class="n">title2</span><span class="o">=</span><span class="s1">&#39;Similatrity Heatmap&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_24_0.png" src="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_24_0.png" />
+</div>
+</div>
+</section>
+<section id="Heart-failure-sample-3">
+<h3>Heart failure sample 3<a class="headerlink" href="#Heart-failure-sample-3" title="Link to this heading"></a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_name</span> <span class="o">=</span> <span class="s1">&#39;FZ_P14&#39;</span>
+<span class="n">st_data_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="s1">&#39;image_data&#39;</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_raw.h5ad&#39;</span><span class="p">)</span>
+<span class="n">json_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="s1">&#39;image_data&#39;</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_coords.json&#39;</span><span class="p">)</span>
+<span class="n">st_ad</span><span class="p">,</span> <span class="n">library_id</span><span class="p">,</span> <span class="n">roi_polygon</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">preprocess</span><span class="o">.</span><span class="n">load_data_for_annotation</span><span class="p">(</span><span class="n">st_data_path</span><span class="p">,</span> <span class="n">json_path</span><span class="p">,</span> <span class="n">in_tissue</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">fullres_img_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="s1">&#39;image_data&#39;</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;.tif&#39;</span><span class="p">)</span>
+<span class="n">fullres_img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">fullres_img_path</span><span class="p">)</span>
+<span class="n">img_feature_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="s1">&#39;checkpoints&#39;</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="n">case_name</span><span class="o">+</span><span class="s1">&#39;.csv&#39;</span><span class="p">)</span>
+<span class="n">img_feature</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">img_feature_path</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/basic/lib/python3.9/site-packages/PIL/Image.py:3368: DecompressionBombWarning: Image size (94551858 pixels) exceeds limit of 89478485 pixels, could be decompression bomb DOS attack.
+  warnings.warn(
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_img_with_annotation</span><span class="p">(</span><span class="n">fullres_img</span><span class="p">,</span> <span class="n">roi_polygon</span><span class="p">,</span> <span class="n">linewidth</span><span class="p">,</span> <span class="n">xlim</span><span class="p">,</span> <span class="n">ylim</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_fullres.jpg&#39;</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st_ad</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;bulk_simi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">annotate</span><span class="o">.</span><span class="n">annotate_with_bulk</span><span class="p">(</span><span class="n">img_feature</span><span class="p">,</span> <span class="n">bulk_text_feature</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_annotation_heatmap</span><span class="p">(</span><span class="n">st_ad</span><span class="p">,</span> <span class="n">roi_polygon</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">linewidth</span><span class="p">,</span> <span class="n">xlim</span><span class="p">,</span> <span class="n">ylim</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_heatmap.jpg&#39;</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_fullres.jpg&#39;</span><span class="p">)</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">annotate</span><span class="o">.</span><span class="n">load_image_annotation</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+
+<span class="n">heatmap_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_heatmap.jpg&#39;</span><span class="p">)</span>
+<span class="n">heatmap</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">annotate</span><span class="o">.</span><span class="n">load_image_annotation</span><span class="p">(</span><span class="n">heatmap_path</span><span class="p">)</span>
+<span class="n">heatmap</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">blend_images</span><span class="p">(</span><span class="n">heatmap</span><span class="p">,</span> <span class="n">image</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">show_images_side_by_side</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">heatmap</span><span class="p">,</span> <span class="n">title1</span><span class="o">=</span><span class="s1">&#39;Annotated&#39;</span><span class="p">,</span> <span class="n">title2</span><span class="o">=</span><span class="s1">&#39;Similatrity Heatmap&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_31_0.png" src="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_31_0.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="Loki-Annote-with-bulk-RNA-seq-data-of-adipose">
+<h2>Loki Annote with bulk RNA-seq data of adipose<a class="headerlink" href="#Loki-Annote-with-bulk-RNA-seq-data-of-adipose" title="Link to this heading"></a></h2>
+<p>Use Loki Annotate to annotate adipose cell enriched regions in 3 H&amp;E images of normal breast tissues.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_type</span> <span class="o">=</span> <span class="s1">&#39;adipose&#39;</span>
+<span class="n">bulk_text_feature</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="s1">&#39;checkpoints&#39;</span><span class="p">,</span> <span class="s1">&#39;bulk_adipose_txt_features_zeroshot.csv&#39;</span><span class="p">),</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<section id="Breast-sample-1">
+<h3>Breast sample 1<a class="headerlink" href="#Breast-sample-1" title="Link to this heading"></a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_name</span> <span class="o">=</span> <span class="s1">&#39;samplev02&#39;</span>
+<span class="n">st_data_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="s1">&#39;image_data&#39;</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_raw.h5ad&#39;</span><span class="p">)</span>
+<span class="n">json_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="s1">&#39;image_data&#39;</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_coords.json&#39;</span><span class="p">)</span>
+<span class="n">st_ad</span><span class="p">,</span> <span class="n">library_id</span><span class="p">,</span> <span class="n">roi_polygon</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">preprocess</span><span class="o">.</span><span class="n">load_data_for_annotation</span><span class="p">(</span><span class="n">st_data_path</span><span class="p">,</span> <span class="n">json_path</span><span class="p">)</span>
+
+<span class="n">fullres_img</span> <span class="o">=</span> <span class="n">st_ad</span><span class="o">.</span><span class="n">uns</span><span class="p">[</span><span class="s1">&#39;spatial&#39;</span><span class="p">][</span><span class="n">library_id</span><span class="p">][</span><span class="s1">&#39;images&#39;</span><span class="p">][</span><span class="s1">&#39;fullres&#39;</span><span class="p">]</span>
+<span class="n">img_feature_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="s1">&#39;checkpoints&#39;</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="n">case_name</span><span class="o">+</span><span class="s1">&#39;.csv&#39;</span><span class="p">)</span>
+<span class="n">img_feature</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">img_feature_path</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/basic/lib/python3.9/site-packages/loki/preprocess.py:282: ImplicitModificationWarning: Trying to modify attribute `.obs` of view, initializing view as actual.
+  st_ad.obs[[&#34;pixel_y&#34;, &#34;pixel_x&#34;]] = None  # Ensure the columns exist
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">=</span><span class="mi">50</span>
+<span class="n">linewidth</span><span class="o">=</span><span class="mi">4</span>
+<span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">4000</span><span class="p">]</span>
+<span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">4000</span><span class="p">]</span>
+<span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_img_with_annotation</span><span class="p">(</span><span class="n">fullres_img</span><span class="p">,</span> <span class="n">roi_polygon</span><span class="p">,</span> <span class="n">linewidth</span><span class="p">,</span> <span class="n">xlim</span><span class="p">,</span> <span class="n">ylim</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_fullres.jpg&#39;</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st_ad</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;bulk_simi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">annotate</span><span class="o">.</span><span class="n">annotate_with_bulk</span><span class="p">(</span><span class="n">img_feature</span><span class="p">,</span> <span class="n">bulk_text_feature</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_annotation_heatmap</span><span class="p">(</span><span class="n">st_ad</span><span class="p">,</span> <span class="n">roi_polygon</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">linewidth</span><span class="p">,</span> <span class="n">xlim</span><span class="p">,</span> <span class="n">ylim</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_heatmap.jpg&#39;</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_fullres.jpg&#39;</span><span class="p">)</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">annotate</span><span class="o">.</span><span class="n">load_image_annotation</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+
+<span class="n">heatmap_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_heatmap.jpg&#39;</span><span class="p">)</span>
+<span class="n">heatmap</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">annotate</span><span class="o">.</span><span class="n">load_image_annotation</span><span class="p">(</span><span class="n">heatmap_path</span><span class="p">)</span>
+<span class="n">heatmap</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">blend_images</span><span class="p">(</span><span class="n">heatmap</span><span class="p">,</span> <span class="n">image</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">show_images_side_by_side</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">heatmap</span><span class="p">,</span> <span class="n">title1</span><span class="o">=</span><span class="s1">&#39;Annotated&#39;</span><span class="p">,</span> <span class="n">title2</span><span class="o">=</span><span class="s1">&#39;Similatrity Heatmap&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_40_0.png" src="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_40_0.png" />
+</div>
+</div>
+</section>
+<section id="Breast-sample-2">
+<h3>Breast sample 2<a class="headerlink" href="#Breast-sample-2" title="Link to this heading"></a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_name</span> <span class="o">=</span> <span class="s1">&#39;samplev03&#39;</span>
+<span class="n">st_data_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="s1">&#39;image_data&#39;</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_raw.h5ad&#39;</span><span class="p">)</span>
+<span class="n">json_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="s1">&#39;image_data&#39;</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_coords.json&#39;</span><span class="p">)</span>
+<span class="n">st_ad</span><span class="p">,</span> <span class="n">library_id</span><span class="p">,</span> <span class="n">roi_polygon</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">preprocess</span><span class="o">.</span><span class="n">load_data_for_annotation</span><span class="p">(</span><span class="n">st_data_path</span><span class="p">,</span> <span class="n">json_path</span><span class="p">)</span>
+
+<span class="n">fullres_img</span> <span class="o">=</span> <span class="n">st_ad</span><span class="o">.</span><span class="n">uns</span><span class="p">[</span><span class="s1">&#39;spatial&#39;</span><span class="p">][</span><span class="n">library_id</span><span class="p">][</span><span class="s1">&#39;images&#39;</span><span class="p">][</span><span class="s1">&#39;fullres&#39;</span><span class="p">]</span>
+<span class="n">img_feature_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="s1">&#39;checkpoints&#39;</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="n">case_name</span><span class="o">+</span><span class="s1">&#39;.csv&#39;</span><span class="p">)</span>
+<span class="n">img_feature</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">img_feature_path</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/basic/lib/python3.9/site-packages/loki/preprocess.py:282: ImplicitModificationWarning: Trying to modify attribute `.obs` of view, initializing view as actual.
+  st_ad.obs[[&#34;pixel_y&#34;, &#34;pixel_x&#34;]] = None  # Ensure the columns exist
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">=</span><span class="mi">55</span>
+<span class="n">linewidth</span><span class="o">=</span><span class="mi">4</span>
+<span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">1500</span><span class="p">,</span><span class="mi">21000</span><span class="p">]</span>
+<span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">1500</span><span class="p">,</span><span class="mi">21000</span><span class="p">]</span>
+<span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_img_with_annotation</span><span class="p">(</span><span class="n">fullres_img</span><span class="p">,</span> <span class="n">roi_polygon</span><span class="p">,</span> <span class="n">linewidth</span><span class="p">,</span> <span class="n">xlim</span><span class="p">,</span> <span class="n">ylim</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_fullres.jpg&#39;</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st_ad</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;bulk_simi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">annotate</span><span class="o">.</span><span class="n">annotate_with_bulk</span><span class="p">(</span><span class="n">img_feature</span><span class="p">,</span> <span class="n">bulk_text_feature</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_annotation_heatmap</span><span class="p">(</span><span class="n">st_ad</span><span class="p">,</span> <span class="n">roi_polygon</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">linewidth</span><span class="p">,</span> <span class="n">xlim</span><span class="p">,</span> <span class="n">ylim</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_heatmap.jpg&#39;</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_fullres.jpg&#39;</span><span class="p">)</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">annotate</span><span class="o">.</span><span class="n">load_image_annotation</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+
+<span class="n">heatmap_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_heatmap.jpg&#39;</span><span class="p">)</span>
+<span class="n">heatmap</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">annotate</span><span class="o">.</span><span class="n">load_image_annotation</span><span class="p">(</span><span class="n">heatmap_path</span><span class="p">)</span>
+<span class="n">heatmap</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">blend_images</span><span class="p">(</span><span class="n">heatmap</span><span class="p">,</span> <span class="n">image</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">show_images_side_by_side</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">heatmap</span><span class="p">,</span> <span class="n">title1</span><span class="o">=</span><span class="s1">&#39;Annotated&#39;</span><span class="p">,</span> <span class="n">title2</span><span class="o">=</span><span class="s1">&#39;Similatrity Heatmap&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_47_0.png" src="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_47_0.png" />
+</div>
+</div>
+</section>
+<section id="Breast-sample-3">
+<h3>Breast sample 3<a class="headerlink" href="#Breast-sample-3" title="Link to this heading"></a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_name</span> <span class="o">=</span> <span class="s1">&#39;samplev04&#39;</span>
+<span class="n">st_data_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="s1">&#39;image_data&#39;</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_raw.h5ad&#39;</span><span class="p">)</span>
+<span class="n">json_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="s1">&#39;image_data&#39;</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_coords.json&#39;</span><span class="p">)</span>
+<span class="n">st_ad</span><span class="p">,</span> <span class="n">library_id</span><span class="p">,</span> <span class="n">roi_polygon</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">preprocess</span><span class="o">.</span><span class="n">load_data_for_annotation</span><span class="p">(</span><span class="n">st_data_path</span><span class="p">,</span> <span class="n">json_path</span><span class="p">)</span>
+
+<span class="n">fullres_img</span> <span class="o">=</span> <span class="n">st_ad</span><span class="o">.</span><span class="n">uns</span><span class="p">[</span><span class="s1">&#39;spatial&#39;</span><span class="p">][</span><span class="n">library_id</span><span class="p">][</span><span class="s1">&#39;images&#39;</span><span class="p">][</span><span class="s1">&#39;fullres&#39;</span><span class="p">]</span>
+<span class="n">img_feature_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="s1">&#39;checkpoints&#39;</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="n">case_name</span><span class="o">+</span><span class="s1">&#39;.csv&#39;</span><span class="p">)</span>
+<span class="n">img_feature</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">img_feature_path</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/basic/lib/python3.9/site-packages/loki/preprocess.py:282: ImplicitModificationWarning: Trying to modify attribute `.obs` of view, initializing view as actual.
+  st_ad.obs[[&#34;pixel_y&#34;, &#34;pixel_x&#34;]] = None  # Ensure the columns exist
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">=</span><span class="mi">55</span>
+<span class="n">linewidth</span><span class="o">=</span><span class="mi">5</span>
+<span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">2000</span><span class="p">,</span><span class="mi">21000</span><span class="p">]</span>
+<span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">2000</span><span class="p">,</span><span class="mi">21000</span><span class="p">]</span>
+<span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_img_with_annotation</span><span class="p">(</span><span class="n">fullres_img</span><span class="p">,</span> <span class="n">roi_polygon</span><span class="p">,</span> <span class="n">linewidth</span><span class="p">,</span> <span class="n">xlim</span><span class="p">,</span> <span class="n">ylim</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_fullres.jpg&#39;</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st_ad</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;bulk_simi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">annotate</span><span class="o">.</span><span class="n">annotate_with_bulk</span><span class="p">(</span><span class="n">img_feature</span><span class="p">,</span> <span class="n">bulk_text_feature</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_annotation_heatmap</span><span class="p">(</span><span class="n">st_ad</span><span class="p">,</span> <span class="n">roi_polygon</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">linewidth</span><span class="p">,</span> <span class="n">xlim</span><span class="p">,</span> <span class="n">ylim</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_heatmap.jpg&#39;</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_fullres.jpg&#39;</span><span class="p">)</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">annotate</span><span class="o">.</span><span class="n">load_image_annotation</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+
+<span class="n">heatmap_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_heatmap.jpg&#39;</span><span class="p">)</span>
+<span class="n">heatmap</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">annotate</span><span class="o">.</span><span class="n">load_image_annotation</span><span class="p">(</span><span class="n">heatmap_path</span><span class="p">)</span>
+<span class="n">heatmap</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">blend_images</span><span class="p">(</span><span class="n">heatmap</span><span class="p">,</span> <span class="n">image</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[42]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">show_images_side_by_side</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">heatmap</span><span class="p">,</span> <span class="n">title1</span><span class="o">=</span><span class="s1">&#39;Annotated&#39;</span><span class="p">,</span> <span class="n">title2</span><span class="o">=</span><span class="s1">&#39;Similatrity Heatmap&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_54_0.png" src="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_54_0.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Loki_Align_case_study_2_OCS.html" class="btn btn-neutral float-left" title="Loki Align - 2 ovarian carcinosarcoma samples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Loki_Annotate_case_study_marker_genes.html" class="btn btn-neutral float-right" title="Loki Annotate - Marker Genes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loki Decompose - TNBC Sample &mdash; Loki  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Loki Decompose - CRC Sample" href="Loki_Decompose_case_study_CRC.html" />
+    <link rel="prev" title="Loki Annotate - Marker Genes" href="Loki_Annotate_case_study_marker_genes.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Loki
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">ST-bank database</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ST-bank.html">ST-bank database</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Pretrained weights</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pretrain.html">Pretrained weights</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Loki</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../API.html">API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="basic_usage.html">Basic Usage of OmiCLIP Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Align_case_study_8_small_intestine.html">Loki Align - 8 normal small intestine samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Align_case_study_2_OCS.html">Loki Align - 2 ovarian carcinosarcoma samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Annotate_case_study_bulk_RNAseq.html">Loki Annotate - Bulk RNA-seq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Annotate_case_study_marker_genes.html">Loki Annotate - Marker Genes</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Loki Decompose - TNBC Sample</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Loki-Decompose-with-fintuning">Loki Decompose with fintuning</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Decompose-ST-data">Decompose ST data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Decompose-image">Decompose image</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Decompose_case_study_CRC.html">Loki Decompose - CRC Sample</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_Retrieve.html">Loki Retrieve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Loki_PredEx_case_study.html">Loki PredEx</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Loki</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Loki Decompose - TNBC Sample</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/notebooks/Loki_Decompose_case_study_TNBC.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Loki-Decompose---TNBC-Sample">
+<h1>Loki Decompose - TNBC Sample<a class="headerlink" href="#Loki-Decompose---TNBC-Sample" title="Link to this heading"></a></h1>
+<p>This notebook demonstrates how to run <em>Loki Decompose</em> on the in-house triple-negative breast cancer (TNBC) sample. It takes about 1 min to run this notebook on MacBook Pro.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">scanpy</span> <span class="k">as</span> <span class="nn">sc</span>
+
+<span class="kn">import</span> <span class="nn">loki.decompose</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">set_figure_params</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>We first finetune OmiCLIP model on the pseudo Visium data in one of four sample region.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">script</span> echo &quot;Comment this line to fine-tune the model on the TNBC data.&quot;
+
+import subprocess
+import open_clip
+
+model_name=&#39;coca_ViT-L-14&#39;
+pretrained_weight_path=&#39;path to the omiclip pretrained weight&#39;
+train_csv = &#39;visium_data/finetune_data.csv&#39;
+name = &#39;finetune_tnbc&#39;
+
+train_command = [
+    &#39;python&#39;, &#39;-m&#39;, &#39;training.main&#39;,
+    &#39;--name&#39;, name,
+    &#39;--save-frequency&#39;, &#39;5&#39;,
+    &#39;--zeroshot-frequency&#39;, &#39;10&#39;,
+    &#39;--report-to&#39;, &#39;wandb&#39;,
+    &#39;--train-data&#39;, train_csv,
+    &#39;--csv-img-key&#39;, &#39;img_path&#39;,
+    &#39;--csv-caption-key&#39;, &#39;label&#39;,
+    &#39;--warmup&#39;, &#39;10&#39;,
+    &#39;--batch-size&#39;, &#39;64&#39;,
+    &#39;--lr&#39;, &#39;5e-6&#39;,
+    &#39;--wd&#39;, &#39;0.1&#39;,
+    &#39;--epochs&#39;, &#39;5&#39;,
+    &#39;--workers&#39;, &#39;16&#39;,
+    &#39;--model&#39;, model_name,
+    &#39;--csv-separator&#39;, &#39;,&#39;,
+    &#39;--pretrained&#39;, pretrained_weight_path,
+    &#39;--lock-text-freeze-layer-norm&#39;,
+    &#39;--lock-image-freeze-bn-stats&#39;,
+    &#39;--coca-caption-loss-weight&#39;,&#39;0&#39;,
+    &#39;--coca-contrastive-loss-weight&#39;,&#39;1&#39;,
+    &#39;--val-frequency&#39;, &#39;10&#39;,
+    &#39;--aug-cfg&#39;, &#39;color_jitter=(0.32, 0.32, 0.32, 0.08)&#39;, &#39;color_jitter_prob=0.5&#39;, &#39;gray_scale_prob=0&#39;
+]
+
+subprocess.run(train_command)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Comment this line to fine-tune the model on the TNBC data.
+</pre></div></div>
+</div>
+<p>We provide the embeddings generated from the OmiCLIP model. The sample data and embeddings are stored in the directory <code class="docutils literal notranslate"><span class="pre">data/loki_decompose/TNBC_data</span></code>, which can be donwloaded from <a class="reference external" href="https://drive.google.com/file/d/1aPK1nItsOEPxTihUAKMig-vLY-DMMIce/view?usp=sharing">Google Drive link</a>.</p>
+<p>Here is a list of the files that are needed to run the cell type decomposition on the pseudo Visium data:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>.
+├── checkpoint_tnbc
+│   ├── TNBC_img_features_finetune.csv
+│   ├── TNBC_txt_features_finetune.csv
+│   └── TNBC_txt_features_sc_finetune.csv
+├── scRNA_data
+│   └── scRNA_data.h5ad
+└── pseudo_visium_data
+    ├── TNBC_pseudo_Visium.h5ad
+    └── TNBC_Xenium_celltype_spot.h5ad
+</pre></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;../data/loki_decompose/TNBC_data/&#39;</span>
+<span class="n">sample_name</span> <span class="o">=</span> <span class="s1">&#39;TNBC&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_deconv_df</span><span class="p">(</span><span class="n">sc_ad</span><span class="p">,</span> <span class="n">st_ad</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">cell_type</span> <span class="ow">in</span> <span class="n">st_ad</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s1">&#39;tangram_ct_pred&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="n">st_ad</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s1">&#39;tangram_ct_pred&#39;</span><span class="p">][</span><span class="n">cell_type</span><span class="p">]</span><span class="o">=</span><span class="n">st_ad</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s1">&#39;tangram_ct_pred&#39;</span><span class="p">][</span><span class="n">cell_type</span><span class="p">]</span><span class="o">*</span><span class="n">sc_ad</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;cell_type&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()[</span><span class="n">cell_type</span><span class="p">]</span>
+
+    <span class="n">st_ad</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s1">&#39;tangram_ct_pred&#39;</span><span class="p">][</span><span class="s1">&#39;Immune&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">st_ad</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s1">&#39;tangram_ct_pred&#39;</span><span class="p">][</span><span class="s1">&#39;Macrophage&#39;</span><span class="p">]</span><span class="o">+</span> \
+                                                <span class="n">st_ad</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s1">&#39;tangram_ct_pred&#39;</span><span class="p">][</span><span class="s1">&#39;B cell&#39;</span><span class="p">]</span> <span class="o">+</span> \
+                                                <span class="n">st_ad</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s1">&#39;tangram_ct_pred&#39;</span><span class="p">][</span><span class="s1">&#39;T cell&#39;</span><span class="p">]</span>
+    <span class="n">st_ad</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s1">&#39;tangram_ct_pred&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;Macrophage&#39;</span><span class="p">,</span><span class="s1">&#39;B cell&#39;</span><span class="p">,</span><span class="s1">&#39;T cell&#39;</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">st_ad</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s1">&#39;tangram_ct_pred&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">st_ad</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s1">&#39;tangram_ct_pred&#39;</span><span class="p">][[</span><span class="s1">&#39;Epithelial&#39;</span><span class="p">,</span> <span class="s1">&#39;Immune&#39;</span><span class="p">,</span> <span class="s1">&#39;Stroma&#39;</span><span class="p">]]</span>
+
+    <span class="n">deconv_df</span> <span class="o">=</span> <span class="n">st_ad</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s1">&#39;tangram_ct_pred&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="o">/</span><span class="n">st_ad</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s1">&#39;tangram_ct_pred&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">deconv_df</span> <span class="o">=</span> <span class="n">deconv_df</span><span class="o">.</span><span class="n">T</span>
+
+    <span class="k">return</span> <span class="n">deconv_df</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sc_data_raw</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">read_h5ad</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;scRNA_data&#39;</span><span class="p">,</span> <span class="s1">&#39;TNBC_SC_preprocess.h5ad&#39;</span><span class="p">))</span>
+<span class="n">ad_vis</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">read_h5ad</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;pseudo_visium_data&#39;</span><span class="p">,</span> <span class="s1">&#39;TNBC_pseudo_Visium.h5ad&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<p>Visualize cell type component defined by Xenium data (ground truth data).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ad_xen_sp</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">read_h5ad</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;pseudo_visium_data&#39;</span><span class="p">,</span> <span class="s1">&#39;TNBC_Xenium_celltype_spot.h5ad&#39;</span><span class="p">))</span>
+<span class="n">raw_deconv</span> <span class="o">=</span> <span class="n">ad_xen_sp</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;spot&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;cell_type&#39;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s1">&#39;size&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">ad_vis</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">index</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+<span class="n">raw_deconv</span> <span class="o">=</span> <span class="n">raw_deconv</span><span class="o">/</span><span class="n">raw_deconv</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">raw_deconv</span> <span class="o">=</span> <span class="n">raw_deconv</span><span class="o">.</span><span class="n">T</span>
+<span class="n">raw_deconv</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>cell_type</th>
+      <th>Epithelial</th>
+      <th>Immune</th>
+      <th>Stroma</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>TNBC_processed_adata_AACACGTGCATCGCAC-1</th>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>TNBC_processed_adata_AACACTTGGCAAGGAA-1</th>
+      <td>0.750000</td>
+      <td>0.250000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>TNBC_processed_adata_AACAGGAAGAGCATAG-1</th>
+      <td>0.772727</td>
+      <td>0.000000</td>
+      <td>0.227273</td>
+    </tr>
+    <tr>
+      <th>TNBC_processed_adata_AACAGGATTCATAGTT-1</th>
+      <td>0.916667</td>
+      <td>0.083333</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>TNBC_processed_adata_AACAGGTTATTGCACC-1</th>
+      <td>0.846154</td>
+      <td>0.153846</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>TNBC_processed_adata_TGTTGGAACCTTCCGC-1</th>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>TNBC_processed_adata_TGTTGGAACGAGGTCA-1</th>
+      <td>0.968750</td>
+      <td>0.000000</td>
+      <td>0.031250</td>
+    </tr>
+    <tr>
+      <th>TNBC_processed_adata_TGTTGGAAGCTCGGTA-1</th>
+      <td>0.793103</td>
+      <td>0.000000</td>
+      <td>0.206897</td>
+    </tr>
+    <tr>
+      <th>TNBC_processed_adata_TGTTGGATGGACTTCT-1</th>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>TNBC_processed_adata_TGTTGGCCTACACGTG-1</th>
+      <td>0.800000</td>
+      <td>0.200000</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+<p>3402 rows × 3 columns</p>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">spatial</span><span class="p">(</span><span class="n">ad_vis</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&lt;Axes: xlabel=&#39;spatial1&#39;, ylabel=&#39;spatial2&#39;&gt;]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_Loki_Decompose_case_study_TNBC_10_1.png" class="no-scaled-link" src="../_images/notebooks_Loki_Decompose_case_study_TNBC_10_1.png" style="width: 177px; height: 169px;" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ad_vis_copy</span> <span class="o">=</span> <span class="n">ad_vis</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">ad_vis_copy</span><span class="o">.</span><span class="n">obs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">ad_vis_copy</span><span class="o">.</span><span class="n">obs</span><span class="p">,</span><span class="n">raw_deconv</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">spatial</span><span class="p">(</span><span class="n">ad_vis_copy</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Epithelial&#39;</span><span class="p">,</span> <span class="s1">&#39;Immune&#39;</span><span class="p">,</span> <span class="s1">&#39;Stroma&#39;</span><span class="p">],</span> <span class="n">alpha_img</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">spot_size</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_Loki_Decompose_case_study_TNBC_12_0.png" class="no-scaled-link" src="../_images/notebooks_Loki_Decompose_case_study_TNBC_12_0.png" style="width: 608px; height: 178px;" />
+</div>
+</div>
+<section id="Loki-Decompose-with-fintuning">
+<h2>Loki Decompose with fintuning<a class="headerlink" href="#Loki-Decompose-with-fintuning" title="Link to this heading"></a></h2>
+<p>Run cell type decomposition using the pseudo Visium data.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">case_name</span> <span class="o">=</span> <span class="s1">&#39;_finetune&#39;</span>
+<span class="n">ad_expr</span> <span class="o">=</span> <span class="n">ad_vis</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">sc_data</span> <span class="o">=</span> <span class="n">sc_data_raw</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<section id="Decompose-ST-data">
+<h3>Decompose ST data<a class="headerlink" href="#Decompose-ST-data" title="Link to this heading"></a></h3>
+<p>Run cell type decomposition using the ST data.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sc_text_feature_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;checkpoint_tnbc&#39;</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_txt_features_sc&#39;</span><span class="o">+</span><span class="n">case_name</span><span class="o">+</span><span class="s1">&#39;.csv&#39;</span><span class="p">)</span>
+<span class="n">text_feature_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;checkpoint_tnbc&#39;</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_txt_features&#39;</span><span class="o">+</span><span class="n">case_name</span><span class="o">+</span><span class="s1">&#39;.csv&#39;</span><span class="p">)</span>
+
+<span class="n">sc_ad</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">decompose</span><span class="o">.</span><span class="n">generate_feature_ad</span><span class="p">(</span><span class="n">sc_data</span><span class="p">,</span> <span class="n">sc_text_feature_path</span><span class="p">,</span> <span class="n">sc</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">txt_ad</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">decompose</span><span class="o">.</span><span class="n">generate_feature_ad</span><span class="p">(</span><span class="n">ad_expr</span><span class="p">,</span> <span class="n">text_feature_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="n">txt_ad</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">decompose</span><span class="o">.</span><span class="n">cell_type_decompose</span><span class="p">(</span><span class="n">sc_ad</span><span class="p">,</span> <span class="n">txt_ad</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">deconv_df</span> <span class="o">=</span> <span class="n">generate_deconv_df</span><span class="p">(</span><span class="n">sc_ad</span><span class="p">,</span> <span class="n">txt_ad</span><span class="p">)</span>
+<span class="n">txt_ad</span><span class="o">.</span><span class="n">obs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">txt_ad</span><span class="o">.</span><span class="n">obs</span><span class="p">,</span> <span class="n">deconv_df</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">spatial</span><span class="p">(</span><span class="n">txt_ad</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Epithelial&#39;</span><span class="p">,</span><span class="s1">&#39;Immune&#39;</span><span class="p">,</span><span class="s1">&#39;Stroma&#39;</span><span class="p">],</span> <span class="n">alpha_img</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">spot_size</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_Loki_Decompose_case_study_TNBC_19_0.png" class="no-scaled-link" src="../_images/notebooks_Loki_Decompose_case_study_TNBC_19_0.png" style="width: 608px; height: 178px;" />
+</div>
+</div>
+</section>
+<section id="Decompose-image">
+<h3>Decompose image<a class="headerlink" href="#Decompose-image" title="Link to this heading"></a></h3>
+<p>Run cell type decomposition using the image.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_feature_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;checkpoint_tnbc&#39;</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_img_features&#39;</span><span class="o">+</span><span class="n">case_name</span><span class="o">+</span><span class="s1">&#39;.csv&#39;</span><span class="p">)</span>
+<span class="n">sc_ad</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">decompose</span><span class="o">.</span><span class="n">generate_feature_ad</span><span class="p">(</span><span class="n">sc_data</span><span class="p">,</span> <span class="n">sc_text_feature_path</span><span class="p">,</span> <span class="n">sc</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">img_ad</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">decompose</span><span class="o">.</span><span class="n">generate_feature_ad</span><span class="p">(</span><span class="n">ad_expr</span><span class="p">,</span> <span class="n">image_feature_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="n">img_ad</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">decompose</span><span class="o">.</span><span class="n">cell_type_decompose</span><span class="p">(</span><span class="n">sc_ad</span><span class="p">,</span> <span class="n">img_ad</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">deconv_df</span> <span class="o">=</span> <span class="n">generate_deconv_df</span><span class="p">(</span><span class="n">sc_ad</span><span class="p">,</span> <span class="n">img_ad</span><span class="p">)</span>
+<span class="n">img_ad</span><span class="o">.</span><span class="n">obs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">img_ad</span><span class="o">.</span><span class="n">obs</span><span class="p">,</span> <span class="n">deconv_df</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">spatial</span><span class="p">(</span><span class="n">img_ad</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Epithelial&#39;</span><span class="p">,</span><span class="s1">&#39;Immune&#39;</span><span class="p">,</span><span class="s1">&#39;Stroma&#39;</span><span class="p">],</span> <span class="n">alpha_img</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">spot_size</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_Loki_Decompose_case_study_TNBC_24_0.png" class="no-scaled-link" src="../_images/notebooks_Loki_Decompose_case_study_TNBC_24_0.png" style="width: 608px; height: 178px;" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Loki_Annotate_case_study_marker_genes.html" class="btn btn-neutral float-left" title="Loki Annotate - Marker Genes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Loki_Decompose_case_study_CRC.html" class="btn btn-neutral float-right" title="Loki Decompose - CRC Sample" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
