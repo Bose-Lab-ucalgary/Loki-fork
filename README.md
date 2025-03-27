@@ -3,18 +3,15 @@ Building on OmiCLIP, a visual–omics foundation model designed to bridge omics 
 
 This README provides a quick overview of how to set up and use Loki.
 
-The pre-train weights, source code, and ST-bank database will be released on GitHub and Hugging Face after the manuscript is accepted.
 
 
 ## User Manual and Notebooks
-You can view the Loki website and notebooks locally by dobule clicking the `./website/index.html` file. It should show up in your default browser.
+You can view the Loki website and notebooks [here](https://guangyuwanglab2021.github.io/Loki/).
 
 
 
 ## Source Code
 All source code for Loki is contained in the `./src/loki` directory.
-
-The source code will be released in GitHub and Hugging Face after the manuscript is accepted
 
 
 
@@ -56,11 +53,9 @@ The links_to_raw_data.xlsx file includes the source paper names, doi links, and 
 The text.csv file includes the gene sentences with paired image patches.
 The image.tar.gz includes the image patches.
 
-The ST-bank database will be released in GitHub and Hugging Face after the manuscript is accepted.
 
 
 ## Pretrained weights
-The pretrained weights are avaliable from [Google Drive link](https://drive.google.com/file/d/1UTJKAqoiUT55h9sA1Ee8iJeOclNLBvWD/view?usp=sharing).
+The pretrained weights are avaliable on [Hugging Face](https://huggingface.co/WangGuangyuLab/Loki).
 
-The pretrained weights will be released in GitHub and Hugging Face after the manuscript is accepted.
 
