@@ -11,175 +11,107 @@ from open_clip import create_model_from_pretrained, get_tokenizer
 
 
 
-def load_model(model_path, device):
-    """
-    Loads a pretrained CoCa (CLIP-like) model, along with its preprocessing function and tokenizer, 
-    using the specified model checkpoint.
+import os
+from typing import List, Tuple, Union
 
-    :param model_path: File path or URL to the pretrained model checkpoint. This is passed to 
-                       `create_model_from_pretrained` as the `pretrained` argument.
-    :type model_path: str
-    :param device: The device on which to load the model (e.g., 'cpu' or 'cuda').
-    :type device: str or torch.device
-    :return: A tuple `(model, preprocess, tokenizer)` where:
-             - model: The loaded CoCa model.
-             - preprocess: A function or transform that preprocesses input data for the model.
-             - tokenizer: A tokenizer appropriate for textual input to the model.
-    :rtype: (nn.Module, callable, callable)
+import torch
+import torch.nn.functional as F
+import numpy as np
+from PIL import Image
+import pandas as pd
+
+# --- Model loading --------------------------------------------------------
+
+def load_model(
+    model_path: str,
+    device: Union[str, torch.device]
+) -> Tuple[torch.nn.Module, callable, callable]:
     """
-    # Create the model and its preprocessing transform from the specified checkpoint
+    Load pretrained OmiCLIP (COCA ViT‑L‑14) model, its image preprocess, and tokenizer.
+    """
     model, preprocess = create_model_from_pretrained(
         "coca_ViT-L-14", device=device, pretrained=model_path
     )
-    
-    # Retrieve a tokenizer compatible with the "coca_ViT-L-14" architecture
-    tokenizer = get_tokenizer('coca_ViT-L-14')
-
+    tokenizer = get_tokenizer("coca_ViT-L-14")
+    model.to(device).eval()
     return model, preprocess, tokenizer
 
+# --- Image encoding -------------------------------------------------------
 
-
-def encode_image(model, preprocess, image):
+def encode_images(
+    model: torch.nn.Module,
+    preprocess: callable,
+    image_paths: List[str],
+    device: Union[str, torch.device]
+) -> torch.Tensor:
     """
-    Encodes an image into a normalized feature embedding using the specified model and preprocessing function.
-
-    :param model: A model object that provides an `encode_image` method (e.g., a CLIP or CoCa model).
-    :type model: torch.nn.Module
-    :param preprocess: A preprocessing function that transforms the input image into a tensor 
-                       suitable for the model. Typically something returning a PyTorch tensor.
-    :type preprocess: callable
-    :param image: The input image (PIL Image, NumPy array, or other format supported by `preprocess`).
-    :type image: PIL.Image.Image or numpy.ndarray
-    :return: A single normalized image embedding as a PyTorch tensor of shape (1, embedding_dim).
-    :rtype: torch.Tensor
+    Batch–encode a list of image file paths into L2‑normalized embeddings.
+    Returns a tensor of shape (N, D).
     """
-    # Preprocess the image, then stack to create a batch of size 1
-    image_input = torch.stack([preprocess(image)])
-
-    # Generate the image features without gradient tracking
-    with torch.no_grad():
-        image_features = model.encode_image(image_input)
-
-    # Normalize embeddings across the feature dimension (L2 normalization)
-    image_embeddings = F.normalize(image_features, p=2, dim=-1)
-
-    return image_embeddings
-
-
-
-def encode_image_patches(model, preprocess, data_dir, img_list):
-    """
-    Encodes multiple image patches into normalized feature embeddings using a specified model and preprocess function.
+    # Load & preprocess all images
+    imgs = [preprocess(Image.open(p)) for p in image_paths]
+    batch = torch.stack(imgs, dim=0).to(device)           # (N, C, H, W)
     
-    :param model: A model object that provides an `encode_image` method (e.g., a CLIP or CoCa model).
-    :type model: torch.nn.Module
-    :param preprocess: A preprocessing function that transforms the input image into a tensor 
-                       suitable for the model. Typically something returning a PyTorch tensor.
-    :type preprocess: callable
-    :param data_dir: The base directory containing image data.
-    :type data_dir: str
-    :param img_list: A list of image filenames (strings). Each filename corresponds to a patch image 
-                     stored in `data_dir/demo_data/patch/`.
-    :type img_list: list[str]
-    :return: A PyTorch tensor of shape (N, 1, embedding_dim), containing the normalized embeddings 
-             for each image in `img_list`.
-    :rtype: torch.Tensor
-    """
-
-    # Prepare a list to hold each image's feature embedding
-    image_embeddings = []
-
-    # Loop through each image name in the provided list
-    for img_name in img_list:
-        # Build the path to the patch image and open it
-        image_path = os.path.join(data_dir, 'demo_data', 'patch', img_name)
-        image = Image.open(image_path)
-
-        # Encode the image using the model & preprocess; returns shape (1, embedding_dim)
-        image_features = encode_image(model, preprocess, image)
-
-        # Accumulate the feature embeddings in the list
-        image_embeddings.append(image_features)
-
-    # Convert the list of embeddings to a NumPy array, then to a PyTorch tensor
-    # Resulting shape will be (N, 1, embedding_dim)
-    image_embeddings = torch.from_numpy(np.array(image_embeddings))
-
-    # Normalize all embeddings across the feature dimension (L2 normalization)
-    image_embeddings = F.normalize(image_embeddings, p=2, dim=-1)
-
-    return image_embeddings
-
-
-
-def encode_text(model, tokenizer, text):
-    """
-    Encodes text into a normalized feature embedding using a specified model and tokenizer.
-
-    :param model: A model object that provides an `encode_text` method (e.g., a CLIP-like or CoCa model).
-    :type model: torch.nn.Module
-    :param tokenizer: A tokenizer function that converts the input text into a format suitable for `model.encode_text`.
-                      Typically returns token IDs, attention masks, etc. as a torch.Tensor or similar structure.
-    :type tokenizer: callable
-    :param text: The input text (string or list of strings) to be encoded.
-    :type text: str or list[str]
-    :return: A PyTorch tensor of shape (batch_size, embedding_dim) containing the L2-normalized text embeddings.
-    :rtype: torch.Tensor
-    """
-
-    # Convert text to the appropriate tokenized representation
-    text_input = tokenizer(text)
-
-    # Run the model in no-grad mode (not tracking gradients, saving memory and compute)
     with torch.no_grad():
-        text_features = model.encode_text(text_input)
-
-    # Normalize embeddings to unit length
-    text_embeddings = F.normalize(text_features, p=2, dim=-1)
-
-    return text_embeddings
+        feats = model.encode_image(batch)                 # (N, D)
+    return F.normalize(feats, p=2, dim=-1)                # (N, D)
 
 
+    # # Loop through each image name in the provided list
+    # for img_name in img_list:
+    #     # Build the path to the patch image and open it
+    #     image_path = os.path.join(data_dir, 'demo_data', 'patch', img_name)
+    #     image = Image.open(image_path)
 
-def encode_text_df(model, tokenizer, df, col_name):
+    #     # Encode the image using the model & preprocess; returns shape (1, embedding_dim)
+    #     image_features = encode_image(model, preprocess, image)
+
+    #     # Accumulate the feature embeddings in the list
+    #     image_embeddings.append(image_features)
+
+    # # Convert the list of embeddings to a NumPy array, then to a PyTorch tensor
+    # # Resulting shape will be (N, 1, embedding_dim)
+    # image_embeddings = torch.from_numpy(np.array(image_embeddings))
+
+    # # Normalize all embeddings across the feature dimension (L2 normalization)
+    # image_embeddings = F.normalize(image_embeddings, p=2, dim=-1)
+
+    # return image_embeddings
+
+
+# --- Text encoding --------------------------------------------------------
+
+def encode_texts(
+    model: torch.nn.Module,
+    tokenizer: callable,
+    texts: List[str],
+    device: Union[str, torch.device]
+) -> torch.Tensor:
     """
-    Encodes text from a specified column in a pandas DataFrame using the given model and tokenizer,
-    returning a PyTorch tensor of normalized text embeddings.
-
-    :param model: A model object that provides an `encode_text` method (e.g., a CLIP-like or CoCa model).
-    :type model: torch.nn.Module
-    :param tokenizer: A tokenizer function that converts the input text into a format suitable for `model.encode_text`.
-    :type tokenizer: callable
-    :param df: A pandas DataFrame from which text will be extracted.
-    :type df: pandas.DataFrame
-    :param col_name: The name of the column in `df` that contains the text to be encoded.
-    :type col_name: str
-    :return: A PyTorch tensor containing the L2-normalized text embeddings, 
-             where the shape is (number_of_rows, embedding_dim).
-    :rtype: torch.Tensor
+    Batch–encode a list of strings into L2‑normalized embeddings.
+    Returns a tensor of shape (N, D).
     """
+    # Tokenizer returns a dict of tensors
+    text_inputs = tokenizer(texts)
+    
+    with torch.no_grad():
+        feats = model.encode_text(text_inputs)             # (N, D)
+    return F.normalize(feats, p=2, dim=-1)                # (N, D)
 
-    # Prepare a list to hold each row's text embedding
-    text_embeddings = []
 
-    # Loop through each index in the DataFrame
-    for idx in df.index:
-        # Retrieve text from the specified column for the current row
-        text = df[df.index == idx][col_name][0]
+def encode_text_df(
+    model: torch.nn.Module,
+    tokenizer: callable,
+    df: pd.DataFrame,
+    col_name: str,
+    device: Union[str, torch.device]
+) -> torch.Tensor:
+    """
+    Encodes an entire DataFrame column into (N, D) embeddings.
+    """
+    texts = df[col_name].astype(str).tolist()
+    return encode_texts(model, tokenizer, texts, device)
 
-        # Encode the text using the provided model and tokenizer
-        text_features = encode_text(model, tokenizer, text)
-
-        # Accumulate the embedding tensor
-        text_embeddings.append(text_features)
-
-    # Convert the list of embeddings (likely shape [N, embedding_dim]) into a NumPy array, then to a torch tensor
-    text_embeddings = torch.from_numpy(np.array(text_embeddings))
-
-    # Normalize embeddings to unit length across the feature dimension
-    text_embeddings = F.normalize(text_embeddings, p=2, dim=-1)
-
-    return text_embeddings
 
 
 

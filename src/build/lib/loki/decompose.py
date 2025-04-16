@@ -77,11 +77,11 @@ def cell_type_decompose(sc_ad, st_ad, cell_type_col='cell_type', NMS_mode=False,
     
     :param sc_ad: AnnData object containing single-cell meta data.
     :param st_ad: AnnData object containing spatial data (ST or image) meta data.
-    :param density_prior: A numpy array providing prior information about cell densities in spatial spots.
     :param cell_type_col: The column name in `sc_ad.obs` that contains cell type annotations. Default is 'cell_type'.
-    :param target_count: If True, sums up the total number of cells in `st_ad.obs['cell_num']`. Can also be set to a specific value.
-    :param pca_mode: Boolean flag to apply PCA for dimensionality reduction. Default is True.
-    :param n_components: Number of PCA components to use if `pca_mode` is True. Default is 300.
+    :param NMS_mode: Boolean flag to apply Non-Maximum Suppression (NMS) mode. Default is False.
+    :param major_types: Major cell types used for NMS mode. Default is None.
+    :param min_percentile: The lower percentile used for clipping (defaults to 5).
+    :param max_percentile: The upper percentile used for clipping (defaults to 95).
     :return: The spatial AnnData object with projected cell type annotations.
     """
     

@@ -8,106 +8,101 @@ import numpy as np
 from tqdm import tqdm
 
 
-
-def plot_alignment(ad_tar_coor, ad_src_coor, homo_coor, pca_hex_comb, tar_features, shift=300, s=0.8, boundary_line=True):
+def plot_alignment(
+    ad_tar_coor: np.ndarray,
+    ad_src_coor: np.ndarray,
+    homo_coor: np.ndarray,
+    pca_hex_comb: np.ndarray,
+    tar_features: np.ndarray,
+    shift: float = 300,
+    s: float = 0.8,
+    boundary_line: bool = True
+) -> None:
     """
-    Plots the target coordinates and alignment of source coordinates.
-
-    :param ad_tar_coor: Numpy array of target coordinates to be plotted in the first subplot.
-    :param ad_src_coor: Numpy array of source coordinates to be plotted in the second subplot.
-    :param homo_coor: Numpy array of alignment of source coordinates to be plotted in the third subplot.
-    :param pca_hex_comb: Color values (e.g., PCA or hex values) for plotting the coordinates.
-    :param tar_features: Feature matrix for the target, used to split color values between target and source data.
-    :param shift: Value used to adjust the plot limits around the coordinates for better visualization. Default is 300.
-    :param s: Marker size for the scatter plot points. Default is 0.8.
-    :param boundary_line: Boolean indicating whether to draw boundary lines (horizontal and vertical lines). Default is True.
-    :return: Displays the alignment plot of target, source, and alignment of source coordinates.
+    Optimized plot: target, source, and aligned coordinates with titles.
     """
-    
-    # Create a figure with three subplots, adjusting size and resolution
-    plt.figure(figsize=(10, 3), dpi=300)
-    
-    # First subplot: Plot target coordinates
-    plt.subplot(1, 3, 1)
-    plt.scatter(ad_tar_coor[:, 0], ad_tar_coor[:, 1], marker='o', s=s, c=pca_hex_comb[:len(tar_features.T)])
-    # Set plot limits based on the minimum and maximum target coordinates, with extra padding from 'shift'
-    plt.xlim([ad_tar_coor.min() - shift, ad_tar_coor.max() + shift])
-    plt.ylim([ad_tar_coor.min() - shift, ad_tar_coor.max() + shift])
-    
-    # Second subplot: Plot source coordinates
-    plt.subplot(1, 3, 2)
-    plt.scatter(ad_src_coor[:, 0], ad_src_coor[:, 1], marker='o', s=s, c=pca_hex_comb[len(tar_features.T):])
-    # Ensure consistent plot limits across subplots by using the same limits as the target coordinates
-    plt.xlim([ad_tar_coor.min() - shift, ad_tar_coor.max() + shift])
-    plt.ylim([ad_tar_coor.min() - shift, ad_tar_coor.max() + shift])
-    
-    # Third subplot: Plot alignment of source coordinates
-    plt.subplot(1, 3, 3)
-    plt.scatter(homo_coor[:, 0], homo_coor[:, 1], marker='o', s=s, c=pca_hex_comb[len(tar_features.T):])
-    # Maintain the same plot limits across all subplots for a uniform comparison
-    plt.xlim([ad_tar_coor.min() - shift, ad_tar_coor.max() + shift])
-    plt.ylim([ad_tar_coor.min() - shift, ad_tar_coor.max() + shift])
-    
-    # Optionally draw boundary lines at the minimum x and y values of the target coordinates
-    if boundary_line:
-        plt.axvline(x=ad_tar_coor[:, 0].min(), color='black')  # Vertical boundary line at the minimum x of target coordinates
-        plt.axhline(y=ad_tar_coor[:, 1].min(), color='black')  # Horizontal boundary line at the minimum y of target coordinates
-    
-    # Remove the axis labels and ticks from all subplots for a cleaner appearance
-    plt.axis('off')
-    
-    # Display the plot
+    # Determine common limits
+    coords = np.vstack([ad_tar_coor, ad_src_coor, homo_coor])
+    x_min, x_max = coords[:,0].min() - shift, coords[:,0].max() + shift
+    y_min, y_max = coords[:,1].min() - shift, coords[:,1].max() + shift
+
+    fig, axes = plt.subplots(1, 3, figsize=(10, 3), dpi=150)
+    titles = ["Target ST", "Source ST", "Aligned Source ST"]
+    splits = [len(ad_tar_coor), len(ad_tar_coor)+len(ad_src_coor)]
+
+    for ax, title, data_slice in zip(
+        axes,
+        titles,
+        [(ad_tar_coor, pca_hex_comb[:splits[0]]),
+         (ad_src_coor, pca_hex_comb[splits[0]:splits[1]]),
+         (homo_coor, pca_hex_comb[splits[0]:splits[1]])]
+    ):
+        coords_arr, colors = data_slice
+        ax.scatter(coords_arr[:,0], coords_arr[:,1], s=s, c=colors, marker='o')
+        ax.set_xlim(x_min, x_max)
+        ax.set_ylim(y_min, y_max)
+        ax.set_aspect('equal')
+        if boundary_line:
+            ax.axvline(x=ad_tar_coor[:,0].min(), color='black', linewidth=1)
+            ax.axhline(y=ad_tar_coor[:,1].min(), color='black', linewidth=1)
+        ax.set_title(title)
+        ax.axis('off')
+    plt.tight_layout()
     plt.show()
 
 
 
-def plot_alignment_with_img(ad_tar_coor, ad_src_coor, homo_coor, tar_img, src_img, aligned_image, pca_hex_comb, tar_features):
+def plot_alignment_with_img(
+    ad_tar_coor: np.ndarray,
+    ad_src_coor: np.ndarray,
+    homo_coor: np.ndarray,
+    tar_img,
+    src_img,
+    aligned_image,
+    pca_hex_comb: np.ndarray,
+    tar_features: np.ndarray,
+    s: float = 1.0
+) -> None:
     """
-    Plots the target coordinates and alignment of source coordinates with their respective images in the background.
+    Optimized plot with images in the background and subplot titles.
+    """
+    fig, axes = plt.subplots(1, 3, figsize=(15, 5), dpi=150)
+    titles = ["Target + Image", "Source + Image", "Aligned + Image"]
+    splits = [len(tar_features.T), len(tar_features.T) * 2]
 
-    :param ad_tar_coor: Numpy array of target coordinates to be plotted in the first and third subplots.
-    :param ad_src_coor: Numpy array of source coordinates to be plotted in the second subplot.
-    :param homo_coor: Numpy array of alignment of source coordinates to be plotted in the third subplot.
-    :param tar_img: Image associated with the target coordinates, used as the background in the first subplot.
-    :param src_img: Image associated with the source coordinates, used as the background in the second subplot.
-    :param aligned_image: Image associated with the aligned coordinates, used as the background in the third subplot.
-    :param pca_hex_comb: Color values (e.g., PCA or hex values) for plotting the coordinates.
-    :param tar_features: Feature matrix for the target, used to split color values between target and source data.
-    :return: Displays the alignment plot of target, source, and alignment of source coordinates with their associated images.
-    """
-    
-    # Create a figure with three subplots and set the size and resolution
-    plt.figure(figsize=(10, 8), dpi=150)
-    
-    # First subplot: Plot target coordinates with the target image as the background
-    plt.subplot(1, 3, 1)
-    # Scatter plot for the target coordinates with transparency and small marker size
-    plt.scatter(ad_tar_coor[:, 0], ad_tar_coor[:, 1], marker='o', alpha=0.8, s=1, c=pca_hex_comb[:len(tar_features.T)])
-    # Overlay the target image with some transparency (alpha = 0.3)
-    plt.imshow(tar_img, origin='lower', alpha=0.3)
-    
-    # Second subplot: Plot source coordinates with the source image as the background
-    plt.subplot(1, 3, 2)
-    # Scatter plot for the source coordinates with transparency and small marker size
-    plt.scatter(ad_src_coor[:, 0], ad_src_coor[:, 1], marker='o', alpha=0.8, s=1, c=pca_hex_comb[len(tar_features.T):])
-    # Overlay the source image with some transparency (alpha = 0.3)
-    plt.imshow(src_img, origin='lower', alpha=0.3)
-    
-    # Third subplot: Plot both target and alignment of source coordinates with the aligned image as the background
-    plt.subplot(1, 3, 3)
-    # Scatter plot for the target coordinates with lower opacity (alpha = 0.2)
-    plt.scatter(ad_tar_coor[:, 0], ad_tar_coor[:, 1], marker='o', alpha=0.2, s=1, c=pca_hex_comb[:len(tar_features.T)])
-    # Scatter plot for the homologous coordinates with a '+' marker and the same color mapping
-    plt.scatter(homo_coor[:, 0], homo_coor[:, 1], marker='+', s=1, c=pca_hex_comb[len(tar_features.T):])
-    # Overlay the aligned image with some transparency (alpha = 0.3)
-    plt.imshow(aligned_image, origin='lower', alpha=0.3)
-    
-    # Turn off the axis for all subplots to give a cleaner visual output
-    plt.axis('off')
-    
-    # Display the plots
+    # Data slices for each subplot
+    data_slices = [
+        (ad_tar_coor, pca_hex_comb[:splits[0]], tar_img),
+        (ad_src_coor, pca_hex_comb[splits[0]:splits[1]], src_img),
+        (np.vstack([ad_tar_coor, homo_coor]), 
+         np.concatenate([pca_hex_comb[:splits[0]], pca_hex_comb[splits[0]:splits[1]]]),
+         aligned_image)
+    ]
+
+    for ax, title, (coords_arr, colors, img) in zip(axes, titles, data_slices):
+        ax.imshow(img, origin='lower', alpha=0.3)
+        ax.scatter(coords_arr[:,0], coords_arr[:,1], s=s, c=colors, marker='o')
+        ax.set_aspect('equal')
+        ax.set_title(title)
+        ax.axis('off')
+
+    plt.tight_layout()
     plt.show()
 
+
+def show_image(img, title: str = "Aligned Source Image", origin: str = "lower", cmap=None):
+    """
+    Display a single image with no axes and a title.
+
+    :param img: The image to display (NumPy array, PIL Image, etc.).
+    :param title: Title to show above the image.
+    :param origin: Origin parameter passed to plt.imshow (e.g. 'lower' or 'upper').
+    :param cmap: Optional colormap for grayscale or other single‑channel data.
+    """
+    plt.imshow(img, origin=origin, cmap=cmap)
+    plt.title(title)
+    plt.axis('off')
+    plt.show()
 
 
 def draw_polygon(image, polygon, color='k', thickness=2):
@@ -228,6 +223,9 @@ def plot_heatmap(
     coor,
     similairty,
     image_path=None,
+    polygons=None,
+    polygons_color='k',
+    polygons_thickness=2,
     patch_size=(256, 256),
     save_path=None,
     downsize=32,
@@ -236,9 +234,6 @@ def plot_heatmap(
     boxes=None,
     box_color='k',
     box_thickness=2,
-    polygons=None,
-    polygons_color='k',
-    polygons_thickness=2,
     image_alpha=0.5
 ):
     """
@@ -316,7 +311,7 @@ def plot_heatmap(
 
 
 
-def show_images_side_by_side(image1, image2, title1=None, title2=None):
+def show_images_side_by_side(image1, image2, title1='Annotated H&E Image', title2='Similatrity Heatmap'):
     """
     Displays two images side by side in a single figure.
 
@@ -328,7 +323,7 @@ def show_images_side_by_side(image1, image2, title1=None, title2=None):
     """
     
     # Create a figure with 2 subplots (1 row, 2 columns), and set the figure size
-    fig, ax = plt.subplots(1, 2, figsize=(15,8))
+    fig, ax = plt.subplots(1, 2, figsize=(8,6), dpi=150)
     
     # Display the first image on the first subplot
     ax[0].imshow(image1)
@@ -364,7 +359,7 @@ def plot_img_with_annotation(fullres_img, roi_polygon, linewidth, xlim, ylim):
     """
     
     # Create a new figure with a fixed size for displaying the image and annotations
-    plt.figure(figsize=(10, 10))
+    plt.figure(figsize=(12, 12), dpi=150)
     
     # Display the full-resolution image
     plt.imshow(fullres_img)
@@ -403,7 +398,7 @@ def plot_annotation_heatmap(st_ad, roi_polygon, s, linewidth, xlim, ylim):
     """
     
     # Create a new figure with a fixed size for displaying the heatmap and annotations
-    plt.figure(figsize=(10, 10))
+    plt.figure(figsize=(12, 12), dpi=150)
     
     # Scatter plot for the spatial transcriptomics data.
     # The 'spatial' coordinates are plotted with color intensity based on 'bulk_simi' values.

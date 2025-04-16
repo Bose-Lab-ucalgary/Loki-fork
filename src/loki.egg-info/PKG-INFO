@@ -1,13 +1,14 @@
 Metadata-Version: 2.1
 Name: loki
 Version: 0.0.1
-Summary: The Loki platform offers 5 core functions: tissue alignment, cell type decomposition, tissue annotation, image-transcriptomics retrieval, and ST gene expression prediction
+Summary: The Loki platform offers 5 core functions: tissue alignment, tissue annotation, cell type decomposition, image-transcriptomics retrieval, and ST gene expression prediction
 Author: Weiqing Chen
 Author-email: wec4005@med.cornell.edu
 Classifier: Programming Language :: Python :: 3
-Classifier: License :: OSI Approved :: MIT License
+Classifier: License :: BSD 3-Clause License
 Classifier: Operating System :: OS Independent
 Requires-Python: >=3.9
+License-File: LICENSE
 Requires-Dist: anndata==0.10.9
 Requires-Dist: matplotlib==3.9.2
 Requires-Dist: numpy==1.25.0

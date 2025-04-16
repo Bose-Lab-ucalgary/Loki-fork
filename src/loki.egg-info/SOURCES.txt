@@ -1,4 +1,4 @@
-README.md
+LICENSE
 setup.py
 loki/__init__.py
 loki/align.py
