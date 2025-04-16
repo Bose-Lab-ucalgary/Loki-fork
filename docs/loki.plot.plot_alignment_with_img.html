@@ -118,25 +118,8 @@
 <h1>loki.plot.plot_alignment_with_img<a class="headerlink" href="#loki-plot-plot-alignment-with-img" title="Link to this heading"></a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="loki.plot.plot_alignment_with_img">
-<span class="sig-prename descclassname"><span class="pre">loki.plot.</span></span><span class="sig-name descname"><span class="pre">plot_alignment_with_img</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ad_tar_coor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ad_src_coor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">homo_coor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tar_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aligned_image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pca_hex_comb</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tar_features</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#loki.plot.plot_alignment_with_img" title="Link to this definition"></a></dt>
-<dd><p>Plots the target coordinates and alignment of source coordinates with their respective images in the background.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>ad_tar_coor</strong> – Numpy array of target coordinates to be plotted in the first and third subplots.</p></li>
-<li><p><strong>ad_src_coor</strong> – Numpy array of source coordinates to be plotted in the second subplot.</p></li>
-<li><p><strong>homo_coor</strong> – Numpy array of alignment of source coordinates to be plotted in the third subplot.</p></li>
-<li><p><strong>tar_img</strong> – Image associated with the target coordinates, used as the background in the first subplot.</p></li>
-<li><p><strong>src_img</strong> – Image associated with the source coordinates, used as the background in the second subplot.</p></li>
-<li><p><strong>aligned_image</strong> – Image associated with the aligned coordinates, used as the background in the third subplot.</p></li>
-<li><p><strong>pca_hex_comb</strong> – Color values (e.g., PCA or hex values) for plotting the coordinates.</p></li>
-<li><p><strong>tar_features</strong> – Feature matrix for the target, used to split color values between target and source data.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Displays the alignment plot of target, source, and alignment of source coordinates with their associated images.</p>
-</dd>
-</dl>
+<span class="sig-prename descclassname"><span class="pre">loki.plot.</span></span><span class="sig-name descname"><span class="pre">plot_alignment_with_img</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ad_tar_coor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ad_src_coor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">homo_coor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tar_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aligned_image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pca_hex_comb</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tar_features</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#loki.plot.plot_alignment_with_img" title="Link to this definition"></a></dt>
+<dd><p>Optimized plot with images in the background and subplot titles.</p>
 </dd></dl>
 
 </section>

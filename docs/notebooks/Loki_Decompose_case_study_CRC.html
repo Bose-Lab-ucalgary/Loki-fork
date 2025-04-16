@@ -122,8 +122,8 @@
 
 <span class="kn">import</span> <span class="nn">loki.decompose</span>
 <span class="c1"># set resolution to 80 dpi for showing in the notebook</span>
-<span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">80</span>
-<span class="n">sc</span><span class="o">.</span><span class="n">set_figure_params</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">120</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">color_map</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+<span class="c1"># matplotlib.rcParams[&#39;figure.dpi&#39;] = 80</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">set_figure_params</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">color_map</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -201,9 +201,10 @@ Comment this line to fine-tune the model on the CRC dataset.
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_dir</span> <span class="o">=</span> <span class="s2">&quot;../data/loki_decompose/CRC_data/pseudo_visium_data&quot;</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_dir</span> <span class="o">=</span> <span class="s2">&quot;./data/loki_decompose/CRC_data/pseudo_visium_data&quot;</span>
 <span class="n">checkpoint_name</span> <span class="o">=</span> <span class="s2">&quot;finetune_crc&quot;</span>
-<span class="n">embedding_dir</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;../data/loki_decompose/CRC_data/checkpoint_</span><span class="si">{</span><span class="n">checkpoint_name</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="n">embedding_dir</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;./data/loki_decompose/CRC_data/checkpoint_</span><span class="si">{</span><span class="n">checkpoint_name</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="n">cell_adata_labels_path</span> <span class="o">=</span> <span class="s2">&quot;./data/loki_decompose/CRC_data/scRNA_data/sc_CRC2_labels.csv&quot;</span>
 
 <span class="n">fig_dir</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">checkpoint_name</span><span class="si">}</span><span class="s2">_figures&quot;</span>
 <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">fig_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -300,8 +301,7 @@ torch.Size([35695, 768])
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cell_adata_labels_path</span> <span class="o">=</span> <span class="s2">&quot;../data/loki_decompose/CRC_data/scRNA_data/sc_CRC2_labels.csv&quot;</span>
-<span class="n">cell_adata_labels</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">cell_adata_labels_path</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cell_adata_labels</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">cell_adata_labels_path</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">cell_adata_em</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">AnnData</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">cell_embedding</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">obs</span><span class="o">=</span><span class="n">cell_adata_labels</span><span class="p">)</span>
 <span class="n">cell_adata_em</span><span class="o">.</span><span class="n">obs</span>
 </pre></div>
@@ -437,11 +437,8 @@ torch.Size([35695, 768])
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">spatial</span><span class="p">(</span><span class="n">spot_adata_tx_em</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">major_types</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="s1">&#39;p99&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">alpha_img</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">colorbar_loc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
-<span class="c1"># ax[0].get_figure().savefig(f&#39;{fig_dir}/all_from_tx_em.png&#39;, dpi=300)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">spatial</span><span class="p">(</span><span class="n">spot_adata_tx_em</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">major_types</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="s1">&#39;p99&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">alpha_img</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">colorbar_loc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-
-<span class="c1"># df.to_csv(f&#39;tangram_ct_pred_tx_{checkpoint_name}.csv&#39;)</span>
 </pre></div>
 </div>
 </div>
@@ -449,7 +446,7 @@ torch.Size([35695, 768])
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Loki_Decompose_case_study_CRC_20_0.png" class="no-scaled-link" src="../_images/notebooks_Loki_Decompose_case_study_CRC_20_0.png" style="width: 794px; height: 813px;" />
+<img alt="../_images/notebooks_Loki_Decompose_case_study_CRC_20_0.png" class="no-scaled-link" src="../_images/notebooks_Loki_Decompose_case_study_CRC_20_0.png" style="width: 529px; height: 542px;" />
 </div>
 </div>
 </section>
@@ -489,11 +486,8 @@ torch.Size([35695, 768])
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">spatial</span><span class="p">(</span><span class="n">spot_adata_im_em</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">major_types</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="s1">&#39;p99&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">alpha_img</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">colorbar_loc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
-<span class="c1"># ax[0].get_figure().savefig(f&#39;{fig_dir}/all_from_im_em.png&#39;, dpi=300)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">spatial</span><span class="p">(</span><span class="n">spot_adata_im_em</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">major_types</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="s1">&#39;p99&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">alpha_img</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">colorbar_loc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-
-<span class="c1"># df.to_csv(f&quot;tangram_ct_pred_im_{checkpoint_name}.csv&quot;)</span>
 </pre></div>
 </div>
 </div>
@@ -501,7 +495,7 @@ torch.Size([35695, 768])
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Loki_Decompose_case_study_CRC_25_0.png" class="no-scaled-link" src="../_images/notebooks_Loki_Decompose_case_study_CRC_25_0.png" style="width: 794px; height: 813px;" />
+<img alt="../_images/notebooks_Loki_Decompose_case_study_CRC_25_0.png" class="no-scaled-link" src="../_images/notebooks_Loki_Decompose_case_study_CRC_25_0.png" style="width: 529px; height: 542px;" />
 </div>
 </div>
 </section>
@@ -580,8 +574,7 @@ torch.Size([35695, 768])
 <span class="n">immune_inflamed_group</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;T cells&#39;</span><span class="p">,</span> <span class="s1">&#39;B cells&#39;</span><span class="p">,</span> <span class="s1">&#39;Myeloid&#39;</span><span class="p">]</span>
 <span class="n">ad_all_spot</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;Immune_inflammed_cells&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ad_all_spot</span><span class="o">.</span><span class="n">obs</span><span class="p">[[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s1">_cells&#39;</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">immune_inflamed_group</span><span class="p">]]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="n">ax</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">spatial</span><span class="p">(</span><span class="n">ad_all_spot</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="si">}</span><span class="s2">_cells&quot;</span> <span class="k">for</span> <span class="nb">type</span> <span class="ow">in</span> <span class="n">types_from_pathology</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="s1">&#39;p99&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">alpha_img</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">colorbar_loc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
-<span class="c1"># ax[0].get_figure().savefig(f&#39;{fig_dir}/all_from_im_em_entire_image.png&#39;, dpi=300)</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">spatial</span><span class="p">(</span><span class="n">ad_all_spot</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="si">}</span><span class="s2">_cells&quot;</span> <span class="k">for</span> <span class="nb">type</span> <span class="ow">in</span> <span class="n">types_from_pathology</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="s1">&#39;p99&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">alpha_img</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">colorbar_loc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -590,7 +583,7 @@ torch.Size([35695, 768])
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Loki_Decompose_case_study_CRC_32_0.png" class="no-scaled-link" src="../_images/notebooks_Loki_Decompose_case_study_CRC_32_0.png" style="width: 1182px; height: 704px;" />
+<img alt="../_images/notebooks_Loki_Decompose_case_study_CRC_32_0.png" class="no-scaled-link" src="../_images/notebooks_Loki_Decompose_case_study_CRC_32_0.png" style="width: 788px; height: 469px;" />
 </div>
 </div>
 <div class="nbinput nblast docutils container">

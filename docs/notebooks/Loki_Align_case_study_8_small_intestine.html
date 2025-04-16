@@ -161,9 +161,7 @@
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/basic/lib/python3.9/site-packages/tqdm/auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
-  from .autonotebook import tqdm as notebook_tqdm
-/opt/anaconda3/envs/basic/lib/python3.9/site-packages/timm/models/layers/__init__.py:48: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+/opt/anaconda3/envs/loki/lib/python3.9/site-packages/timm/models/layers/__init__.py:48: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
   warnings.warn(f&#34;Importing from {__name__} is deprecated, please import via timm.layers&#34;, FutureWarning)
 </pre></div></div>
 </div>
@@ -256,7 +254,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_dir</span> <span class="o">=</span> <span class="s1">&#39;../data/loki_align/eight_small_intestine_samples/&#39;</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_dir</span> <span class="o">=</span> <span class="s1">&#39;./data/loki_align/eight_small_intestine_samples/&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -287,7 +285,13 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/basic/lib/python3.9/site-packages/anndata/_core/anndata.py:1756: UserWarning: Variable names are not unique. To make them unique, call `.var_names_make_unique`.
+Future exception was never retrieved
+future: &lt;Future finished exception=BrokenPipeError(32, &#39;Broken pipe&#39;)&gt;
+Traceback (most recent call last):
+  File &#34;/opt/anaconda3/envs/loki/lib/python3.9/asyncio/unix_events.py&#34;, line 665, in write
+    n = os.write(self._fileno, data)
+BrokenPipeError: [Errno 32] Broken pipe
+/opt/anaconda3/envs/loki/lib/python3.9/site-packages/anndata/_core/anndata.py:1756: UserWarning: Variable names are not unique. To make them unique, call `.var_names_make_unique`.
   utils.warn_names_duplicates(&#34;var&#34;)
 </pre></div></div>
 </div>
@@ -311,7 +315,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/basic/lib/python3.9/site-packages/anndata/_core/anndata.py:1756: UserWarning: Variable names are not unique. To make them unique, call `.var_names_make_unique`.
+/opt/anaconda3/envs/loki/lib/python3.9/site-packages/anndata/_core/anndata.py:1756: UserWarning: Variable names are not unique. To make them unique, call `.var_names_make_unique`.
   utils.warn_names_duplicates(&#34;var&#34;)
 </pre></div></div>
 </div>
@@ -344,6 +348,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">ad_tar_coor</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">ad_tar_coor</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">pca_hex_comb</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">tar_features</span><span class="o">.</span><span class="n">T</span><span class="p">)])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Target ST&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -364,8 +369,25 @@ Comment this line to fine-tune the model on the target small intestine data.
 </pre></div>
 </div>
 </div>
-<div class="nbinput nblast docutils container">
+<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">pca_hex_comb</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+6760
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># loki.plot.plot_alignment_with_img(ad_tar_coor, ad_src_coor, homo_coor, tar_img, src_img, aligned_image, pca_hex_comb, tar_features)</span>
@@ -373,27 +395,10 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_alignment</span><span class="p">(</span><span class="n">ad_tar_coor</span><span class="p">,</span> <span class="n">ad_src_coor</span><span class="p">,</span> <span class="n">homo_coor</span><span class="p">,</span> <span class="n">pca_hex_comb</span><span class="p">,</span> <span class="n">tar_features</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_17_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_17_0.png" />
-</div>
-</div>
-<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">aligned_image</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_alignment</span><span class="p">(</span><span class="n">ad_tar_coor</span><span class="p">,</span> <span class="n">ad_src_coor</span><span class="p">,</span> <span class="n">homo_coor</span><span class="p">,</span> <span class="n">pca_hex_comb</span><span class="p">,</span> <span class="n">tar_features</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -404,12 +409,27 @@ Comment this line to fine-tune the model on the target small intestine data.
 <img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_18_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_18_0.png" />
 </div>
 </div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">show_image</span><span class="p">(</span><span class="n">aligned_image</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_19_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_19_0.png" />
+</div>
+</div>
 </section>
 <section id="Loki-Align-on-image-to-ST-Alignment">
 <h4>Loki Align on image to ST Alignment<a class="headerlink" href="#Loki-Align-on-image-to-ST-Alignment" title="Link to this heading"></a></h4>
 <p>Use Loki Align to align image to ST.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tar_features</span> <span class="o">=</span> <span class="n">get_features</span><span class="p">(</span><span class="n">tar_sample_name</span><span class="p">,</span> <span class="s1">&#39;_txt_features&#39;</span><span class="p">)</span>
@@ -418,7 +438,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pca_comb_features</span><span class="p">,</span> <span class="n">pca_comb_features_batch</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">get_pca_by_fit</span><span class="p">(</span><span class="n">tar_features</span><span class="p">,</span> <span class="n">src_features</span><span class="p">)</span>
@@ -427,7 +447,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_alignment</span><span class="p">(</span><span class="n">ad_tar_coor</span><span class="p">,</span> <span class="n">ad_src_coor</span><span class="p">,</span> <span class="n">homo_coor</span><span class="p">,</span> <span class="n">pca_hex_comb</span><span class="p">,</span> <span class="n">tar_features</span><span class="p">)</span>
@@ -438,16 +458,14 @@ Comment this line to fine-tune the model on the target small intestine data.
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_22_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_22_0.png" />
+<img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_23_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_23_0.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">aligned_image</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">show_image</span><span class="p">(</span><span class="n">aligned_image</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -455,7 +473,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_23_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_23_0.png" />
+<img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_24_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_24_0.png" />
 </div>
 </div>
 </section>
@@ -463,7 +481,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 <section id="Source2">
 <h3>Source2<a class="headerlink" href="#Source2" title="Link to this heading"></a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">src_sample_name</span> <span class="o">=</span> <span class="s1">&#39;V10F24-050_C1&#39;</span>
@@ -477,7 +495,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/basic/lib/python3.9/site-packages/anndata/_core/anndata.py:1756: UserWarning: Variable names are not unique. To make them unique, call `.var_names_make_unique`.
+/opt/anaconda3/envs/loki/lib/python3.9/site-packages/anndata/_core/anndata.py:1756: UserWarning: Variable names are not unique. To make them unique, call `.var_names_make_unique`.
   utils.warn_names_duplicates(&#34;var&#34;)
 </pre></div></div>
 </div>
@@ -485,7 +503,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 <h4>Loki Align on ST to ST alignment<a class="headerlink" href="#id1" title="Link to this heading"></a></h4>
 <p>Use Loki Align to align ST to ST.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tar_features</span> <span class="o">=</span> <span class="n">get_features</span><span class="p">(</span><span class="n">tar_sample_name</span><span class="p">,</span> <span class="s1">&#39;_txt_features_zs&#39;</span><span class="p">)</span>
@@ -494,7 +512,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pca_comb_features</span><span class="p">,</span> <span class="n">pca_comb_features_batch</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">get_pca_by_fit</span><span class="p">(</span><span class="n">tar_features</span><span class="p">,</span> <span class="n">src_features</span><span class="p">)</span>
@@ -505,7 +523,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cpd_coor</span><span class="p">,</span> <span class="n">homo_coor</span><span class="p">,</span> <span class="n">aligned_image</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">align</span><span class="o">.</span><span class="n">align_tissue</span><span class="p">(</span><span class="n">ad_tar_coor</span><span class="p">,</span> <span class="n">ad_src_coor</span><span class="p">,</span> <span class="n">pca_comb_features</span><span class="p">,</span> <span class="n">src_img</span><span class="p">)</span>
@@ -513,7 +531,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># loki.plot.plot_alignment_with_img(ad_tar_coor, ad_src_coor, homo_coor, tar_img, src_img, aligned_image, pca_hex_comb, tar_features)</span>
@@ -521,27 +539,10 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_alignment</span><span class="p">(</span><span class="n">ad_tar_coor</span><span class="p">,</span> <span class="n">ad_src_coor</span><span class="p">,</span> <span class="n">homo_coor</span><span class="p">,</span> <span class="n">pca_hex_comb</span><span class="p">,</span> <span class="n">tar_features</span><span class="p">,</span> <span class="n">boundary_line</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_31_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_31_0.png" />
-</div>
-</div>
-<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">aligned_image</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_alignment</span><span class="p">(</span><span class="n">ad_tar_coor</span><span class="p">,</span> <span class="n">ad_src_coor</span><span class="p">,</span> <span class="n">homo_coor</span><span class="p">,</span> <span class="n">pca_hex_comb</span><span class="p">,</span> <span class="n">tar_features</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -552,12 +553,27 @@ Comment this line to fine-tune the model on the target small intestine data.
 <img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_32_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_32_0.png" />
 </div>
 </div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">show_image</span><span class="p">(</span><span class="n">aligned_image</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_33_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_33_0.png" />
+</div>
+</div>
 </section>
 <section id="id2">
 <h4>Loki Align on image to ST Alignment<a class="headerlink" href="#id2" title="Link to this heading"></a></h4>
 <p>Use Loki Align to align image to ST.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tar_features</span> <span class="o">=</span> <span class="n">get_features</span><span class="p">(</span><span class="n">tar_sample_name</span><span class="p">,</span> <span class="s1">&#39;_txt_features&#39;</span><span class="p">)</span>
@@ -566,7 +582,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pca_comb_features</span><span class="p">,</span> <span class="n">pca_comb_features_batch</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">get_pca_by_fit</span><span class="p">(</span><span class="n">tar_features</span><span class="p">,</span> <span class="n">src_features</span><span class="p">)</span>
@@ -575,7 +591,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># loki.plot.plot_alignment_with_img(ad_tar_coor, ad_src_coor, homo_coor, tar_img, src_img, aligned_image, pca_hex_comb, tar_features)</span>
@@ -583,7 +599,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_alignment</span><span class="p">(</span><span class="n">ad_tar_coor</span><span class="p">,</span> <span class="n">ad_src_coor</span><span class="p">,</span> <span class="n">homo_coor</span><span class="p">,</span> <span class="n">pca_hex_comb</span><span class="p">,</span> <span class="n">tar_features</span><span class="p">,</span> <span class="n">boundary_line</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -594,16 +610,14 @@ Comment this line to fine-tune the model on the target small intestine data.
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_37_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_37_0.png" />
+<img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_38_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_38_0.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">aligned_image</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">show_image</span><span class="p">(</span><span class="n">aligned_image</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -611,7 +625,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_38_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_38_0.png" />
+<img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_39_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_39_0.png" />
 </div>
 </div>
 </section>
@@ -619,7 +633,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 <section id="Source3">
 <h3>Source3<a class="headerlink" href="#Source3" title="Link to this heading"></a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">src_sample_name</span> <span class="o">=</span> <span class="s1">&#39;V10F24-050_D1&#39;</span>
@@ -633,7 +647,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/basic/lib/python3.9/site-packages/anndata/_core/anndata.py:1756: UserWarning: Variable names are not unique. To make them unique, call `.var_names_make_unique`.
+/opt/anaconda3/envs/loki/lib/python3.9/site-packages/anndata/_core/anndata.py:1756: UserWarning: Variable names are not unique. To make them unique, call `.var_names_make_unique`.
   utils.warn_names_duplicates(&#34;var&#34;)
 </pre></div></div>
 </div>
@@ -641,7 +655,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 <h4>Loki Align on ST to ST alignment<a class="headerlink" href="#id3" title="Link to this heading"></a></h4>
 <p>Use Loki Align to align ST to ST.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tar_features</span> <span class="o">=</span> <span class="n">get_features</span><span class="p">(</span><span class="n">tar_sample_name</span><span class="p">,</span> <span class="s1">&#39;_txt_features_zs&#39;</span><span class="p">)</span>
@@ -650,7 +664,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pca_comb_features</span><span class="p">,</span> <span class="n">pca_comb_features_batch</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">get_pca_by_fit</span><span class="p">(</span><span class="n">tar_features</span><span class="p">,</span> <span class="n">src_features</span><span class="p">)</span>
@@ -661,7 +675,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cpd_coor</span><span class="p">,</span> <span class="n">homo_coor</span><span class="p">,</span> <span class="n">aligned_image</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">align</span><span class="o">.</span><span class="n">align_tissue</span><span class="p">(</span><span class="n">ad_tar_coor</span><span class="p">,</span> <span class="n">ad_src_coor</span><span class="p">,</span> <span class="n">pca_comb_features</span><span class="p">,</span> <span class="n">src_img</span><span class="p">)</span>
@@ -669,7 +683,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># loki.plot.plot_alignment_with_img(ad_tar_coor, ad_src_coor, homo_coor, tar_img, src_img, aligned_image, pca_hex_comb, tar_features)</span>
@@ -677,27 +691,10 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_alignment</span><span class="p">(</span><span class="n">ad_tar_coor</span><span class="p">,</span> <span class="n">ad_src_coor</span><span class="p">,</span> <span class="n">homo_coor</span><span class="p">,</span> <span class="n">pca_hex_comb</span><span class="p">,</span> <span class="n">tar_features</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_46_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_46_0.png" />
-</div>
-</div>
-<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">aligned_image</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_alignment</span><span class="p">(</span><span class="n">ad_tar_coor</span><span class="p">,</span> <span class="n">ad_src_coor</span><span class="p">,</span> <span class="n">homo_coor</span><span class="p">,</span> <span class="n">pca_hex_comb</span><span class="p">,</span> <span class="n">tar_features</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -708,12 +705,27 @@ Comment this line to fine-tune the model on the target small intestine data.
 <img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_47_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_47_0.png" />
 </div>
 </div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">show_image</span><span class="p">(</span><span class="n">aligned_image</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_48_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_48_0.png" />
+</div>
+</div>
 </section>
 <section id="id4">
 <h4>Loki Align on image to ST Alignment<a class="headerlink" href="#id4" title="Link to this heading"></a></h4>
 <p>Use Loki Align to align image to ST.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tar_features</span> <span class="o">=</span> <span class="n">get_features</span><span class="p">(</span><span class="n">tar_sample_name</span><span class="p">,</span> <span class="s1">&#39;_txt_features&#39;</span><span class="p">)</span>
@@ -722,7 +734,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pca_comb_features</span><span class="p">,</span> <span class="n">pca_comb_features_batch</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">get_pca_by_fit</span><span class="p">(</span><span class="n">tar_features</span><span class="p">,</span> <span class="n">src_features</span><span class="p">)</span>
@@ -731,7 +743,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># loki.plot.plot_alignment_with_img(ad_tar_coor, ad_src_coor, homo_coor, tar_img, src_img, aligned_image, pca_hex_comb, tar_features)</span>
@@ -739,7 +751,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_alignment</span><span class="p">(</span><span class="n">ad_tar_coor</span><span class="p">,</span> <span class="n">ad_src_coor</span><span class="p">,</span> <span class="n">homo_coor</span><span class="p">,</span> <span class="n">pca_hex_comb</span><span class="p">,</span> <span class="n">tar_features</span><span class="p">)</span>
@@ -750,16 +762,14 @@ Comment this line to fine-tune the model on the target small intestine data.
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_52_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_52_0.png" />
+<img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_53_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_53_0.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[42]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">aligned_image</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">show_image</span><span class="p">(</span><span class="n">aligned_image</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -767,7 +777,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_53_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_53_0.png" />
+<img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_54_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_54_0.png" />
 </div>
 </div>
 </section>
@@ -775,7 +785,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 <section id="Source4">
 <h3>Source4<a class="headerlink" href="#Source4" title="Link to this heading"></a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[42]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[43]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">src_sample_name</span> <span class="o">=</span> <span class="s1">&#39;V10F24-048_C1&#39;</span>
@@ -789,7 +799,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/basic/lib/python3.9/site-packages/anndata/_core/anndata.py:1756: UserWarning: Variable names are not unique. To make them unique, call `.var_names_make_unique`.
+/opt/anaconda3/envs/loki/lib/python3.9/site-packages/anndata/_core/anndata.py:1756: UserWarning: Variable names are not unique. To make them unique, call `.var_names_make_unique`.
   utils.warn_names_duplicates(&#34;var&#34;)
 </pre></div></div>
 </div>
@@ -797,7 +807,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 <h4>Loki Align on ST to ST Alignment<a class="headerlink" href="#Loki-Align-on-ST-to-ST-Alignment" title="Link to this heading"></a></h4>
 <p>Use Loki Align to align ST to ST.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[43]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tar_features</span> <span class="o">=</span> <span class="n">get_features</span><span class="p">(</span><span class="n">tar_sample_name</span><span class="p">,</span> <span class="s1">&#39;_txt_features_zs&#39;</span><span class="p">)</span>
@@ -806,7 +816,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[45]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pca_comb_features</span><span class="p">,</span> <span class="n">pca_comb_features_batch</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">get_pca_by_fit</span><span class="p">(</span><span class="n">tar_features</span><span class="p">,</span> <span class="n">src_features</span><span class="p">)</span>
@@ -817,7 +827,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[45]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[46]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cpd_coor</span><span class="p">,</span> <span class="n">homo_coor</span><span class="p">,</span> <span class="n">aligned_image</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">align</span><span class="o">.</span><span class="n">align_tissue</span><span class="p">(</span><span class="n">ad_tar_coor</span><span class="p">,</span> <span class="n">ad_src_coor</span><span class="p">,</span> <span class="n">pca_comb_features</span><span class="p">,</span> <span class="n">src_img</span><span class="p">)</span>
@@ -825,7 +835,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[46]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[47]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># loki.plot.plot_alignment_with_img(ad_tar_coor, ad_src_coor, homo_coor, tar_img, src_img, aligned_image, pca_hex_comb, tar_features)</span>
@@ -833,27 +843,10 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[47]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_alignment</span><span class="p">(</span><span class="n">ad_tar_coor</span><span class="p">,</span> <span class="n">ad_src_coor</span><span class="p">,</span> <span class="n">homo_coor</span><span class="p">,</span> <span class="n">pca_hex_comb</span><span class="p">,</span> <span class="n">tar_features</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_61_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_61_0.png" />
-</div>
-</div>
-<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[48]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">aligned_image</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_alignment</span><span class="p">(</span><span class="n">ad_tar_coor</span><span class="p">,</span> <span class="n">ad_src_coor</span><span class="p">,</span> <span class="n">homo_coor</span><span class="p">,</span> <span class="n">pca_hex_comb</span><span class="p">,</span> <span class="n">tar_features</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -864,12 +857,27 @@ Comment this line to fine-tune the model on the target small intestine data.
 <img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_62_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_62_0.png" />
 </div>
 </div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[49]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">show_image</span><span class="p">(</span><span class="n">aligned_image</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_63_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_63_0.png" />
+</div>
+</div>
 </section>
 <section id="id6">
 <h4>Loki Align on image to ST Alignment<a class="headerlink" href="#id6" title="Link to this heading"></a></h4>
 <p>Use Loki Align to align image to ST.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[49]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[50]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tar_features</span> <span class="o">=</span> <span class="n">get_features</span><span class="p">(</span><span class="n">tar_sample_name</span><span class="p">,</span> <span class="s1">&#39;_txt_features&#39;</span><span class="p">)</span>
@@ -878,7 +886,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[50]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[51]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pca_comb_features</span><span class="p">,</span> <span class="n">pca_comb_features_batch</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">get_pca_by_fit</span><span class="p">(</span><span class="n">tar_features</span><span class="p">,</span> <span class="n">src_features</span><span class="p">)</span>
@@ -887,7 +895,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[51]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[52]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># loki.plot.plot_alignment_with_img(ad_tar_coor, ad_src_coor, homo_coor, tar_img, src_img, aligned_image, pca_hex_comb, tar_features)</span>
@@ -895,7 +903,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[52]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[53]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_alignment</span><span class="p">(</span><span class="n">ad_tar_coor</span><span class="p">,</span> <span class="n">ad_src_coor</span><span class="p">,</span> <span class="n">homo_coor</span><span class="p">,</span> <span class="n">pca_hex_comb</span><span class="p">,</span> <span class="n">tar_features</span><span class="p">)</span>
@@ -906,16 +914,14 @@ Comment this line to fine-tune the model on the target small intestine data.
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_67_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_67_0.png" />
+<img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_68_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_68_0.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[53]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[54]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">aligned_image</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">show_image</span><span class="p">(</span><span class="n">aligned_image</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -923,7 +929,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_68_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_68_0.png" />
+<img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_69_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_69_0.png" />
 </div>
 </div>
 </section>
@@ -931,7 +937,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 <section id="Source5">
 <h3>Source5<a class="headerlink" href="#Source5" title="Link to this heading"></a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[54]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[55]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">src_sample_name</span> <span class="o">=</span> <span class="s1">&#39;V10F24-048_D1&#39;</span>
@@ -945,7 +951,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/basic/lib/python3.9/site-packages/anndata/_core/anndata.py:1756: UserWarning: Variable names are not unique. To make them unique, call `.var_names_make_unique`.
+/opt/anaconda3/envs/loki/lib/python3.9/site-packages/anndata/_core/anndata.py:1756: UserWarning: Variable names are not unique. To make them unique, call `.var_names_make_unique`.
   utils.warn_names_duplicates(&#34;var&#34;)
 </pre></div></div>
 </div>
@@ -953,7 +959,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 <h4>Loki Align on ST to ST alignment<a class="headerlink" href="#id7" title="Link to this heading"></a></h4>
 <p>Use Loki Align to align ST to ST.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[55]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[56]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tar_features</span> <span class="o">=</span> <span class="n">get_features</span><span class="p">(</span><span class="n">tar_sample_name</span><span class="p">,</span> <span class="s1">&#39;_txt_features_zs&#39;</span><span class="p">)</span>
@@ -962,7 +968,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[56]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[57]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pca_comb_features</span><span class="p">,</span> <span class="n">pca_comb_features_batch</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">get_pca_by_fit</span><span class="p">(</span><span class="n">tar_features</span><span class="p">,</span> <span class="n">src_features</span><span class="p">)</span>
@@ -973,7 +979,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[57]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[58]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cpd_coor</span><span class="p">,</span> <span class="n">homo_coor</span><span class="p">,</span> <span class="n">aligned_image</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">align</span><span class="o">.</span><span class="n">align_tissue</span><span class="p">(</span><span class="n">ad_tar_coor</span><span class="p">,</span> <span class="n">ad_src_coor</span><span class="p">,</span> <span class="n">pca_comb_features</span><span class="p">,</span> <span class="n">src_img</span><span class="p">)</span>
@@ -981,27 +987,10 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[58]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_alignment</span><span class="p">(</span><span class="n">ad_tar_coor</span><span class="p">,</span> <span class="n">ad_src_coor</span><span class="p">,</span> <span class="n">homo_coor</span><span class="p">,</span> <span class="n">pca_hex_comb</span><span class="p">,</span> <span class="n">tar_features</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_75_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_75_0.png" />
-</div>
-</div>
-<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[59]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">aligned_image</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_alignment</span><span class="p">(</span><span class="n">ad_tar_coor</span><span class="p">,</span> <span class="n">ad_src_coor</span><span class="p">,</span> <span class="n">homo_coor</span><span class="p">,</span> <span class="n">pca_hex_comb</span><span class="p">,</span> <span class="n">tar_features</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1012,12 +1001,27 @@ Comment this line to fine-tune the model on the target small intestine data.
 <img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_76_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_76_0.png" />
 </div>
 </div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[60]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">show_image</span><span class="p">(</span><span class="n">aligned_image</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_77_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_77_0.png" />
+</div>
+</div>
 </section>
 <section id="id8">
 <h4>Loki Align on image to ST Alignment<a class="headerlink" href="#id8" title="Link to this heading"></a></h4>
 <p>Use Loki Align to align image to ST.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[60]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[61]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tar_features</span> <span class="o">=</span> <span class="n">get_features</span><span class="p">(</span><span class="n">tar_sample_name</span><span class="p">,</span> <span class="s1">&#39;_txt_features&#39;</span><span class="p">)</span>
@@ -1026,7 +1030,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[61]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[62]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pca_comb_features</span><span class="p">,</span> <span class="n">pca_comb_features_batch</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">get_pca_by_fit</span><span class="p">(</span><span class="n">tar_features</span><span class="p">,</span> <span class="n">src_features</span><span class="p">)</span>
@@ -1035,7 +1039,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[62]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[63]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># loki.plot.plot_alignment_with_img(ad_tar_coor, ad_src_coor, homo_coor, tar_img, src_img, aligned_image, pca_hex_comb, tar_features)</span>
@@ -1043,7 +1047,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[63]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[64]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_alignment</span><span class="p">(</span><span class="n">ad_tar_coor</span><span class="p">,</span> <span class="n">ad_src_coor</span><span class="p">,</span> <span class="n">homo_coor</span><span class="p">,</span> <span class="n">pca_hex_comb</span><span class="p">,</span> <span class="n">tar_features</span><span class="p">)</span>
@@ -1054,16 +1058,14 @@ Comment this line to fine-tune the model on the target small intestine data.
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_81_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_81_0.png" />
+<img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_82_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_82_0.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[64]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[65]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">aligned_image</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">show_image</span><span class="p">(</span><span class="n">aligned_image</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1071,7 +1073,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_82_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_82_0.png" />
+<img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_83_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_83_0.png" />
 </div>
 </div>
 </section>
@@ -1079,7 +1081,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 <section id="Source6">
 <h3>Source6<a class="headerlink" href="#Source6" title="Link to this heading"></a></h3>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[65]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[66]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">src_sample_name</span> <span class="o">=</span> <span class="s1">&#39;V10F24-048_B1&#39;</span>
@@ -1092,7 +1094,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 <h4>Loki Align on ST to ST alignment<a class="headerlink" href="#id9" title="Link to this heading"></a></h4>
 <p>Use Loki Align to align ST to ST.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[66]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[67]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tar_features</span> <span class="o">=</span> <span class="n">get_features</span><span class="p">(</span><span class="n">tar_sample_name</span><span class="p">,</span> <span class="s1">&#39;_txt_features_zs&#39;</span><span class="p">)</span>
@@ -1101,7 +1103,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[67]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[68]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pca_comb_features</span><span class="p">,</span> <span class="n">pca_comb_features_batch</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">get_pca_by_fit</span><span class="p">(</span><span class="n">tar_features</span><span class="p">,</span> <span class="n">src_features</span><span class="p">)</span>
@@ -1112,7 +1114,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[68]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[69]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cpd_coor</span><span class="p">,</span> <span class="n">homo_coor</span><span class="p">,</span> <span class="n">aligned_image</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">align</span><span class="o">.</span><span class="n">align_tissue</span><span class="p">(</span><span class="n">ad_tar_coor</span><span class="p">,</span> <span class="n">ad_src_coor</span><span class="p">,</span> <span class="n">pca_comb_features</span><span class="p">,</span> <span class="n">src_img</span><span class="p">)</span>
@@ -1120,7 +1122,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[69]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[70]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># loki.plot.plot_alignment_with_img(ad_tar_coor, ad_src_coor, homo_coor, tar_img, src_img, aligned_image, pca_hex_comb, tar_features)</span>
@@ -1128,27 +1130,10 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[70]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_alignment</span><span class="p">(</span><span class="n">ad_tar_coor</span><span class="p">,</span> <span class="n">ad_src_coor</span><span class="p">,</span> <span class="n">homo_coor</span><span class="p">,</span> <span class="n">pca_hex_comb</span><span class="p">,</span> <span class="n">tar_features</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_90_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_90_0.png" />
-</div>
-</div>
-<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[71]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">aligned_image</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_alignment</span><span class="p">(</span><span class="n">ad_tar_coor</span><span class="p">,</span> <span class="n">ad_src_coor</span><span class="p">,</span> <span class="n">homo_coor</span><span class="p">,</span> <span class="n">pca_hex_comb</span><span class="p">,</span> <span class="n">tar_features</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1159,12 +1144,27 @@ Comment this line to fine-tune the model on the target small intestine data.
 <img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_91_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_91_0.png" />
 </div>
 </div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[72]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">show_image</span><span class="p">(</span><span class="n">aligned_image</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_92_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_92_0.png" />
+</div>
+</div>
 </section>
 <section id="id10">
 <h4>Loki Align on image to ST Alignment<a class="headerlink" href="#id10" title="Link to this heading"></a></h4>
 <p>Use Loki Align to align image to ST.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[72]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[73]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tar_features</span> <span class="o">=</span> <span class="n">get_features</span><span class="p">(</span><span class="n">tar_sample_name</span><span class="p">,</span> <span class="s1">&#39;_txt_features_zs&#39;</span><span class="p">)</span>
@@ -1173,7 +1173,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[73]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[74]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pca_comb_features</span><span class="p">,</span> <span class="n">pca_comb_features_batch</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">get_pca_by_fit</span><span class="p">(</span><span class="n">tar_features</span><span class="p">,</span> <span class="n">src_features</span><span class="p">)</span>
@@ -1182,7 +1182,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[74]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[75]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># loki.plot.plot_alignment_with_img(ad_tar_coor, ad_src_coor, homo_coor, tar_img, src_img, aligned_image, pca_hex_comb, tar_features)</span>
@@ -1190,7 +1190,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[75]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[76]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_alignment</span><span class="p">(</span><span class="n">ad_tar_coor</span><span class="p">,</span> <span class="n">ad_src_coor</span><span class="p">,</span> <span class="n">homo_coor</span><span class="p">,</span> <span class="n">pca_hex_comb</span><span class="p">,</span> <span class="n">tar_features</span><span class="p">)</span>
@@ -1201,16 +1201,14 @@ Comment this line to fine-tune the model on the target small intestine data.
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_96_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_96_0.png" />
+<img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_97_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_97_0.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[76]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[77]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">aligned_image</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">show_image</span><span class="p">(</span><span class="n">aligned_image</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1218,7 +1216,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_97_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_97_0.png" />
+<img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_98_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_98_0.png" />
 </div>
 </div>
 </section>
@@ -1226,7 +1224,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 <section id="Source7">
 <h3>Source7<a class="headerlink" href="#Source7" title="Link to this heading"></a></h3>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[77]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[78]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">src_sample_name</span> <span class="o">=</span> <span class="s1">&#39;V10F24-048_A1&#39;</span>
@@ -1239,7 +1237,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 <h4>Loki Align on ST to ST alignment<a class="headerlink" href="#id11" title="Link to this heading"></a></h4>
 <p>Use Loki Align to align ST to ST.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[78]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[79]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tar_features</span> <span class="o">=</span> <span class="n">get_features</span><span class="p">(</span><span class="n">tar_sample_name</span><span class="p">,</span> <span class="s1">&#39;_txt_features_zs&#39;</span><span class="p">)</span>
@@ -1248,7 +1246,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[79]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[80]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pca_comb_features</span><span class="p">,</span> <span class="n">pca_comb_features_batch</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">get_pca_by_fit</span><span class="p">(</span><span class="n">tar_features</span><span class="p">,</span> <span class="n">src_features</span><span class="p">)</span>
@@ -1259,7 +1257,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[80]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[81]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cpd_coor</span><span class="p">,</span> <span class="n">homo_coor</span><span class="p">,</span> <span class="n">aligned_image</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">align</span><span class="o">.</span><span class="n">align_tissue</span><span class="p">(</span><span class="n">ad_tar_coor</span><span class="p">,</span> <span class="n">ad_src_coor</span><span class="p">,</span> <span class="n">pca_comb_features</span><span class="p">,</span> <span class="n">src_img</span><span class="p">)</span>
@@ -1267,7 +1265,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[81]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[82]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># loki.plot.plot_alignment_with_img(ad_tar_coor, ad_src_coor, homo_coor, tar_img, src_img, aligned_image, pca_hex_comb, tar_features)</span>
@@ -1275,27 +1273,10 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[82]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_alignment</span><span class="p">(</span><span class="n">ad_tar_coor</span><span class="p">,</span> <span class="n">ad_src_coor</span><span class="p">,</span> <span class="n">homo_coor</span><span class="p">,</span> <span class="n">pca_hex_comb</span><span class="p">,</span> <span class="n">tar_features</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_105_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_105_0.png" />
-</div>
-</div>
-<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[83]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">aligned_image</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_alignment</span><span class="p">(</span><span class="n">ad_tar_coor</span><span class="p">,</span> <span class="n">ad_src_coor</span><span class="p">,</span> <span class="n">homo_coor</span><span class="p">,</span> <span class="n">pca_hex_comb</span><span class="p">,</span> <span class="n">tar_features</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1306,12 +1287,27 @@ Comment this line to fine-tune the model on the target small intestine data.
 <img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_106_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_106_0.png" />
 </div>
 </div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[84]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">show_image</span><span class="p">(</span><span class="n">aligned_image</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_107_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_107_0.png" />
+</div>
+</div>
 </section>
 <section id="id12">
 <h4>Loki Align on image to ST Alignment<a class="headerlink" href="#id12" title="Link to this heading"></a></h4>
 <p>Use Loki Align to align image to ST.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[84]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[85]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tar_features</span> <span class="o">=</span> <span class="n">get_features</span><span class="p">(</span><span class="n">tar_sample_name</span><span class="p">,</span> <span class="s1">&#39;_txt_features_zs&#39;</span><span class="p">)</span>
@@ -1320,7 +1316,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[85]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[86]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pca_comb_features</span><span class="p">,</span> <span class="n">pca_comb_features_batch</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">get_pca_by_fit</span><span class="p">(</span><span class="n">tar_features</span><span class="p">,</span> <span class="n">src_features</span><span class="p">)</span>
@@ -1329,7 +1325,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[86]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[87]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># loki.plot.plot_alignment_with_img(ad_tar_coor, ad_src_coor, homo_coor, tar_img, src_img, aligned_image, pca_hex_comb, tar_features)</span>
@@ -1337,7 +1333,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[87]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[88]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_alignment</span><span class="p">(</span><span class="n">ad_tar_coor</span><span class="p">,</span> <span class="n">ad_src_coor</span><span class="p">,</span> <span class="n">homo_coor</span><span class="p">,</span> <span class="n">pca_hex_comb</span><span class="p">,</span> <span class="n">tar_features</span><span class="p">)</span>
@@ -1348,16 +1344,14 @@ Comment this line to fine-tune the model on the target small intestine data.
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_111_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_111_0.png" />
+<img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_112_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_112_0.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[88]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[89]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">aligned_image</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">show_image</span><span class="p">(</span><span class="n">aligned_image</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1365,7 +1359,7 @@ Comment this line to fine-tune the model on the target small intestine data.
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_112_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_112_0.png" />
+<img alt="../_images/notebooks_Loki_Align_case_study_8_small_intestine_113_0.png" src="../_images/notebooks_Loki_Align_case_study_8_small_intestine_113_0.png" />
 </div>
 </div>
 <div class="nbinput nblast docutils container">

@@ -23,7 +23,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="loki.align.apply_homography" href="loki.align.apply_homography.html" />
-    <link rel="prev" title="loki.utils.encode_text" href="loki.utils.encode_text.html" /> 
+    <link rel="prev" title="loki.utils.encode_texts" href="loki.utils.encode_texts.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -60,9 +60,8 @@
 <li class="toctree-l3"><a class="reference internal" href="API.html#preprocessing">Preprocessing</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="API.html#utilities">Utilities</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="loki.utils.load_model.html">loki.utils.load_model</a></li>
-<li class="toctree-l4"><a class="reference internal" href="loki.utils.encode_image.html">loki.utils.encode_image</a></li>
-<li class="toctree-l4"><a class="reference internal" href="loki.utils.encode_image_patches.html">loki.utils.encode_image_patches</a></li>
-<li class="toctree-l4"><a class="reference internal" href="loki.utils.encode_text.html">loki.utils.encode_text</a></li>
+<li class="toctree-l4"><a class="reference internal" href="loki.utils.encode_images.html">loki.utils.encode_images</a></li>
+<li class="toctree-l4"><a class="reference internal" href="loki.utils.encode_texts.html">loki.utils.encode_texts</a></li>
 <li class="toctree-l4 current"><a class="current reference internal" href="#">loki.utils.encode_text_df</a></li>
 </ul>
 </li>
@@ -119,26 +118,8 @@
 <h1>loki.utils.encode_text_df<a class="headerlink" href="#loki-utils-encode-text-df" title="Link to this heading"></a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="loki.utils.encode_text_df">
-<span class="sig-prename descclassname"><span class="pre">loki.utils.</span></span><span class="sig-name descname"><span class="pre">encode_text_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenizer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#loki.utils.encode_text_df" title="Link to this definition"></a></dt>
-<dd><p>Encodes text from a specified column in a pandas DataFrame using the given model and tokenizer,
-returning a PyTorch tensor of normalized text embeddings.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>model</strong> (<em>torch.nn.Module</em>) – A model object that provides an <cite>encode_text</cite> method.</p></li>
-<li><p><strong>tokenizer</strong> (<em>callable</em>) – A tokenizer function that converts the input text into a format suitable for <cite>model.encode_text</cite>.</p></li>
-<li><p><strong>df</strong> (<em>pandas.DataFrame</em>) – A pandas DataFrame from which text will be extracted.</p></li>
-<li><p><strong>col_name</strong> (<em>str</em>) – The name of the column in <cite>df</cite> that contains the text to be encoded.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A PyTorch tensor containing the L2-normalized text embeddings,
-where the shape is (number_of_rows, embedding_dim).</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>torch.Tensor</p>
-</dd>
-</dl>
+<span class="sig-prename descclassname"><span class="pre">loki.utils.</span></span><span class="sig-name descname"><span class="pre">encode_text_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Module</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenizer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">device</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="headerlink" href="#loki.utils.encode_text_df" title="Link to this definition"></a></dt>
+<dd><p>Encodes an entire DataFrame column into (N, D) embeddings.</p>
 </dd></dl>
 
 </section>
@@ -147,7 +128,7 @@ where the shape is (number_of_rows, embedding_dim).</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="loki.utils.encode_text.html" class="btn btn-neutral float-left" title="loki.utils.encode_text" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="loki.utils.encode_texts.html" class="btn btn-neutral float-left" title="loki.utils.encode_texts" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="loki.align.apply_homography.html" class="btn btn-neutral float-right" title="loki.align.apply_homography" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

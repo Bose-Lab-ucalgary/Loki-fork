@@ -28,9 +28,8 @@ Utilities
    :toctree: .
    
    load_model
-   encode_image
-   encode_image_patches
-   encode_text
+   encode_images
+   encode_texts
    encode_text_df
 
 

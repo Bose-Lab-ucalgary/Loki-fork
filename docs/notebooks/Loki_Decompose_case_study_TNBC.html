@@ -116,7 +116,7 @@
 <span class="kn">import</span> <span class="nn">scanpy</span> <span class="k">as</span> <span class="nn">sc</span>
 
 <span class="kn">import</span> <span class="nn">loki.decompose</span>
-<span class="n">sc</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">set_figure_params</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
+<span class="c1"># sc.settings.set_figure_params(dpi=, facecolor=&quot;white&quot;)</span>
 </pre></div>
 </div>
 </div>
@@ -188,16 +188,16 @@ Comment this line to fine-tune the model on the TNBC data.
 </pre></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;../data/loki_decompose/TNBC_data/&#39;</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;./data/loki_decompose/TNBC_data/&#39;</span>
 <span class="n">sample_name</span> <span class="o">=</span> <span class="s1">&#39;TNBC&#39;</span>
 </pre></div>
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_deconv_df</span><span class="p">(</span><span class="n">sc_ad</span><span class="p">,</span> <span class="n">st_ad</span><span class="p">):</span>
@@ -218,7 +218,7 @@ Comment this line to fine-tune the model on the TNBC data.
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sc_data_raw</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">read_h5ad</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;scRNA_data&#39;</span><span class="p">,</span> <span class="s1">&#39;TNBC_SC_preprocess.h5ad&#39;</span><span class="p">))</span>
@@ -228,7 +228,7 @@ Comment this line to fine-tune the model on the TNBC data.
 </div>
 <p>Visualize cell type component defined by Xenium data (ground truth data).</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ad_xen_sp</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">read_h5ad</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;pseudo_visium_data&#39;</span><span class="p">,</span> <span class="s1">&#39;TNBC_Xenium_celltype_spot.h5ad&#39;</span><span class="p">))</span>
@@ -240,7 +240,7 @@ Comment this line to fine-tune the model on the TNBC data.
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -340,31 +340,22 @@ Comment this line to fine-tune the model on the TNBC data.
 </div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">spatial</span><span class="p">(</span><span class="n">ad_vis</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">spatial</span><span class="p">(</span><span class="n">ad_vis</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;H&amp;E Image&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-[&lt;Axes: xlabel=&#39;spatial1&#39;, ylabel=&#39;spatial2&#39;&gt;]
-</pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Loki_Decompose_case_study_TNBC_10_1.png" class="no-scaled-link" src="../_images/notebooks_Loki_Decompose_case_study_TNBC_10_1.png" style="width: 177px; height: 169px;" />
+<img alt="../_images/notebooks_Loki_Decompose_case_study_TNBC_10_0.png" src="../_images/notebooks_Loki_Decompose_case_study_TNBC_10_0.png" />
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ad_vis_copy</span> <span class="o">=</span> <span class="n">ad_vis</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -373,7 +364,7 @@ Comment this line to fine-tune the model on the TNBC data.
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">spatial</span><span class="p">(</span><span class="n">ad_vis_copy</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Epithelial&#39;</span><span class="p">,</span> <span class="s1">&#39;Immune&#39;</span><span class="p">,</span> <span class="s1">&#39;Stroma&#39;</span><span class="p">],</span> <span class="n">alpha_img</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">spot_size</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
@@ -384,14 +375,14 @@ Comment this line to fine-tune the model on the TNBC data.
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Loki_Decompose_case_study_TNBC_12_0.png" class="no-scaled-link" src="../_images/notebooks_Loki_Decompose_case_study_TNBC_12_0.png" style="width: 608px; height: 178px;" />
+<img alt="../_images/notebooks_Loki_Decompose_case_study_TNBC_12_0.png" src="../_images/notebooks_Loki_Decompose_case_study_TNBC_12_0.png" />
 </div>
 </div>
 <section id="Loki-Decompose-with-fintuning">
 <h2>Loki Decompose with fintuning<a class="headerlink" href="#Loki-Decompose-with-fintuning" title="Link to this heading"></a></h2>
 <p>Run cell type decomposition using the pseudo Visium data.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">case_name</span> <span class="o">=</span> <span class="s1">&#39;_finetune&#39;</span>
@@ -404,7 +395,7 @@ Comment this line to fine-tune the model on the TNBC data.
 <h3>Decompose ST data<a class="headerlink" href="#Decompose-ST-data" title="Link to this heading"></a></h3>
 <p>Run cell type decomposition using the ST data.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sc_text_feature_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;checkpoint_tnbc&#39;</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_txt_features_sc&#39;</span><span class="o">+</span><span class="n">case_name</span><span class="o">+</span><span class="s1">&#39;.csv&#39;</span><span class="p">)</span>
@@ -416,7 +407,7 @@ Comment this line to fine-tune the model on the TNBC data.
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
@@ -425,7 +416,7 @@ Comment this line to fine-tune the model on the TNBC data.
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">deconv_df</span> <span class="o">=</span> <span class="n">generate_deconv_df</span><span class="p">(</span><span class="n">sc_ad</span><span class="p">,</span> <span class="n">txt_ad</span><span class="p">)</span>
@@ -434,7 +425,7 @@ Comment this line to fine-tune the model on the TNBC data.
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">spatial</span><span class="p">(</span><span class="n">txt_ad</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Epithelial&#39;</span><span class="p">,</span><span class="s1">&#39;Immune&#39;</span><span class="p">,</span><span class="s1">&#39;Stroma&#39;</span><span class="p">],</span> <span class="n">alpha_img</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">spot_size</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
@@ -445,7 +436,7 @@ Comment this line to fine-tune the model on the TNBC data.
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Loki_Decompose_case_study_TNBC_19_0.png" class="no-scaled-link" src="../_images/notebooks_Loki_Decompose_case_study_TNBC_19_0.png" style="width: 608px; height: 178px;" />
+<img alt="../_images/notebooks_Loki_Decompose_case_study_TNBC_19_0.png" src="../_images/notebooks_Loki_Decompose_case_study_TNBC_19_0.png" />
 </div>
 </div>
 </section>
@@ -453,7 +444,7 @@ Comment this line to fine-tune the model on the TNBC data.
 <h3>Decompose image<a class="headerlink" href="#Decompose-image" title="Link to this heading"></a></h3>
 <p>Run cell type decomposition using the image.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_feature_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;checkpoint_tnbc&#39;</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_img_features&#39;</span><span class="o">+</span><span class="n">case_name</span><span class="o">+</span><span class="s1">&#39;.csv&#39;</span><span class="p">)</span>
@@ -463,7 +454,7 @@ Comment this line to fine-tune the model on the TNBC data.
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
@@ -472,7 +463,7 @@ Comment this line to fine-tune the model on the TNBC data.
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">deconv_df</span> <span class="o">=</span> <span class="n">generate_deconv_df</span><span class="p">(</span><span class="n">sc_ad</span><span class="p">,</span> <span class="n">img_ad</span><span class="p">)</span>
@@ -481,7 +472,7 @@ Comment this line to fine-tune the model on the TNBC data.
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">spatial</span><span class="p">(</span><span class="n">img_ad</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Epithelial&#39;</span><span class="p">,</span><span class="s1">&#39;Immune&#39;</span><span class="p">,</span><span class="s1">&#39;Stroma&#39;</span><span class="p">],</span> <span class="n">alpha_img</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">spot_size</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
@@ -492,7 +483,7 @@ Comment this line to fine-tune the model on the TNBC data.
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Loki_Decompose_case_study_TNBC_24_0.png" class="no-scaled-link" src="../_images/notebooks_Loki_Decompose_case_study_TNBC_24_0.png" style="width: 608px; height: 178px;" />
+<img alt="../_images/notebooks_Loki_Decompose_case_study_TNBC_24_0.png" src="../_images/notebooks_Loki_Decompose_case_study_TNBC_24_0.png" />
 </div>
 </div>
 <div class="nbinput nblast docutils container">

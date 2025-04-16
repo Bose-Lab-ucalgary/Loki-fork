@@ -126,9 +126,7 @@
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/basic/lib/python3.9/site-packages/tqdm/auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
-  from .autonotebook import tqdm as notebook_tqdm
-/opt/anaconda3/envs/basic/lib/python3.9/site-packages/timm/models/layers/__init__.py:48: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+/opt/anaconda3/envs/loki/lib/python3.9/site-packages/timm/models/layers/__init__.py:48: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
   warnings.warn(f&#34;Importing from {__name__} is deprecated, please import via timm.layers&#34;, FutureWarning)
 </pre></div></div>
 </div>
@@ -171,7 +169,7 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;../data/loki_annotate/marker_gene_data/&#39;</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;./data/loki_annotate/marker_gene_data/&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -224,7 +222,7 @@
     <span class="n">image_embeddings</span> <span class="o">=</span> <span class="n">all_image_embeddings</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
     <span class="n">dot_similarity</span><span class="p">,</span> <span class="n">pred_class</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">annotate</span><span class="o">.</span><span class="n">annotate_with_marker_genes</span><span class="p">(</span><span class="n">classes</span><span class="p">,</span> <span class="n">image_embeddings</span><span class="p">,</span> <span class="n">all_text_embeddings</span><span class="p">)</span>
 
-    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span><span class="mf">1.5</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span><span class="mf">1.5</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">120</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Predicted class:&quot;</span><span class="p">,</span> <span class="n">pred_class</span><span class="p">))</span>

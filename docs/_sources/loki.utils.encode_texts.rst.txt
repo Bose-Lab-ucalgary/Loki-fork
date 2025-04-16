@@ -1,0 +1,6 @@
+﻿loki.utils.encode\_texts
+========================
+
+.. currentmodule:: loki.utils
+
+.. autofunction:: encode_texts

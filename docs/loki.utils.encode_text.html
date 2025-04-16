@@ -21,9 +21,7 @@
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="loki.utils.encode_text_df" href="loki.utils.encode_text_df.html" />
-    <link rel="prev" title="loki.utils.encode_image_patches" href="loki.utils.encode_image_patches.html" /> 
+    <link rel="search" title="Search" href="search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -54,28 +52,8 @@
 <li class="toctree-l1"><a class="reference internal" href="pretrain.html">Pretrained weights</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Loki</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="API.html">API</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="API.html#toolkit-functions">Toolkit functions</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="API.html#preprocessing">Preprocessing</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="API.html#utilities">Utilities</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="loki.utils.load_model.html">loki.utils.load_model</a></li>
-<li class="toctree-l4"><a class="reference internal" href="loki.utils.encode_image.html">loki.utils.encode_image</a></li>
-<li class="toctree-l4"><a class="reference internal" href="loki.utils.encode_image_patches.html">loki.utils.encode_image_patches</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">loki.utils.encode_text</a></li>
-<li class="toctree-l4"><a class="reference internal" href="loki.utils.encode_text_df.html">loki.utils.encode_text_df</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="API.html#loki-align">Loki Align</a></li>
-<li class="toctree-l3"><a class="reference internal" href="API.html#loki-annotate">Loki Annotate</a></li>
-<li class="toctree-l3"><a class="reference internal" href="API.html#loki-decompose">Loki Decompose</a></li>
-<li class="toctree-l3"><a class="reference internal" href="API.html#loki-retrieve">Loki Retrieve</a></li>
-<li class="toctree-l3"><a class="reference internal" href="API.html#loki-predex">Loki PredEx</a></li>
-<li class="toctree-l3"><a class="reference internal" href="API.html#plotting">Plotting</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="API.html">API</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
 <ul>
@@ -104,7 +82,6 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="API.html">API</a></li>
       <li class="breadcrumb-item active">loki.utils.encode_text</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/loki.utils.encode_text.rst.txt" rel="nofollow"> View page source</a>
@@ -117,37 +94,12 @@
              
   <section id="loki-utils-encode-text">
 <h1>loki.utils.encode_text<a class="headerlink" href="#loki-utils-encode-text" title="Link to this heading"></a></h1>
-<dl class="py function">
-<dt class="sig sig-object py" id="loki.utils.encode_text">
-<span class="sig-prename descclassname"><span class="pre">loki.utils.</span></span><span class="sig-name descname"><span class="pre">encode_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenizer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#loki.utils.encode_text" title="Link to this definition"></a></dt>
-<dd><p>Encodes text into a normalized feature embedding using a specified model and tokenizer.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>model</strong> (<em>torch.nn.Module</em>) – A model object that provides an <cite>encode_text</cite> method.</p></li>
-<li><p><strong>tokenizer</strong> (<em>callable</em>) – A tokenizer function that converts the input text into a format suitable for <cite>model.encode_text</cite>.
-Typically returns token IDs, attention masks, etc. as a torch.Tensor or similar structure.</p></li>
-<li><p><strong>text</strong> (<em>str</em><em> or </em><em>list</em><em>[</em><em>str</em><em>]</em>) – The input text (string or list of strings) to be encoded.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A PyTorch tensor of shape (batch_size, embedding_dim) containing the L2-normalized text embeddings.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>torch.Tensor</p>
-</dd>
-</dl>
-</dd></dl>
-
 </section>
 
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="loki.utils.encode_image_patches.html" class="btn btn-neutral float-left" title="loki.utils.encode_image_patches" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="loki.utils.encode_text_df.html" class="btn btn-neutral float-right" title="loki.utils.encode_text_df" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+          <footer>
 
   <hr/>
 

@@ -141,9 +141,7 @@
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/basic/lib/python3.9/site-packages/tqdm/auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
-  from .autonotebook import tqdm as notebook_tqdm
-/opt/anaconda3/envs/basic/lib/python3.9/site-packages/timm/models/layers/__init__.py:48: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+/opt/anaconda3/envs/loki/lib/python3.9/site-packages/timm/models/layers/__init__.py:48: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
   warnings.warn(f&#34;Importing from {__name__} is deprecated, please import via timm.layers&#34;, FutureWarning)
 </pre></div></div>
 </div>
@@ -201,7 +199,15 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_dir</span> <span class="o">=</span> <span class="s1">&#39;../data/loki_annotate/bulk_RNAseq_data/&#39;</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_dir</span> <span class="o">=</span> <span class="s1">&#39;./data/loki_annotate/bulk_RNAseq_data/&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">case_name</span> <span class="o">=</span> <span class="s1">&#39;_img_features_zeroshot&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -213,11 +219,10 @@
 <p>The TCGA breast cancer slide files can be downloaded from the GDC data portal. We provide the image files downsized by 32 times for visualization.</p>
 <p>The bulk RNA-seq data can be downloaded from cBioportal.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">case_name</span> <span class="o">=</span> <span class="s1">&#39;_img_features_zeroshot&#39;</span>
-<span class="n">sample_type</span> <span class="o">=</span> <span class="s1">&#39;tumor&#39;</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_type</span> <span class="o">=</span> <span class="s1">&#39;tumor&#39;</span>
 <span class="n">slide_dict</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s2">&quot;TCGA-A2-A0CL-01&quot;</span><span class="p">:</span> <span class="s2">&quot;TCGA-A2-A0CL-01Z-00-DX1.5342E971-DCD2-42C4-B4FF-E6942A95829E.svs&quot;</span><span class="p">,</span>
         <span class="s2">&quot;TCGA-A2-A0CW-01&quot;</span><span class="p">:</span> <span class="s2">&quot;TCGA-A2-A0CW-01Z-00-DX1.8E313A22-B0E8-44CF-ADEA-8BF29BA23FFE.svs&quot;</span><span class="p">,</span>
@@ -249,18 +254,13 @@
     <span class="n">heatmap</span><span class="p">,</span> <span class="n">image</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_heatmap</span><span class="p">(</span>
         <span class="n">coor</span><span class="p">,</span>
         <span class="n">weight</span><span class="p">,</span>
-        <span class="n">image_path</span><span class="o">=</span><span class="n">image_path</span><span class="p">,</span>
-        <span class="n">patch_size</span><span class="o">=</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">),</span>
-        <span class="n">save_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">downsize</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
-        <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;turbo&#39;</span><span class="p">,</span>
-        <span class="n">polygons</span><span class="o">=</span><span class="n">polygons</span><span class="p">,</span>
-        <span class="n">polygons_color</span><span class="o">=</span><span class="n">polygons_color</span><span class="p">,</span>
-        <span class="n">polygons_thickness</span><span class="o">=</span><span class="n">polygons_thickness</span><span class="p">,</span>
-        <span class="n">image_alpha</span><span class="o">=</span><span class="mf">0.5</span>
+        <span class="n">image_path</span><span class="p">,</span>
+        <span class="n">polygons</span><span class="p">,</span>
+        <span class="n">polygons_color</span><span class="p">,</span>
+        <span class="n">polygons_thickness</span><span class="p">,</span>
     <span class="p">)</span>
 
-    <span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">show_images_side_by_side</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">heatmap</span><span class="p">,</span> <span class="n">title1</span><span class="o">=</span><span class="s1">&#39;Annotated&#39;</span><span class="p">,</span> <span class="n">title2</span><span class="o">=</span><span class="s1">&#39;Similatrity Heatmap&#39;</span><span class="p">)</span>
+    <span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">show_images_side_by_side</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">heatmap</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -276,7 +276,7 @@ TCGA-A2-A0CL-01
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_8_1.png" src="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_8_1.png" />
+<img alt="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_9_1.png" src="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_9_1.png" />
 </div>
 </div>
 <div class="nboutput docutils container">
@@ -291,7 +291,7 @@ TCGA-A2-A0CW-01
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_8_3.png" src="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_8_3.png" />
+<img alt="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_9_3.png" src="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_9_3.png" />
 </div>
 </div>
 <div class="nboutput docutils container">
@@ -306,7 +306,7 @@ TCGA-AO-A0J5-01
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_8_5.png" src="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_8_5.png" />
+<img alt="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_9_5.png" src="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_9_5.png" />
 </div>
 </div>
 </section>
@@ -315,7 +315,7 @@ TCGA-AO-A0J5-01
 <h2>Loki Annote with bulk RNA-seq data of fibroblast<a class="headerlink" href="#Loki-Annote-with-bulk-RNA-seq-data-of-fibroblast" title="Link to this heading"></a></h2>
 <p>Use Loki Annotate to annotate fibroblast cell enriched regions in 3 H&amp;E images of heart failure tissues.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_type</span> <span class="o">=</span> <span class="s1">&#39;fibroblast&#39;</span>
@@ -330,7 +330,7 @@ TCGA-AO-A0J5-01
 <section id="Heart-failure-sample-1">
 <h3>Heart failure sample 1<a class="headerlink" href="#Heart-failure-sample-1" title="Link to this heading"></a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_name</span> <span class="o">=</span> <span class="s1">&#39;FZ_P20&#39;</span>
@@ -350,16 +350,16 @@ TCGA-AO-A0J5-01
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/basic/lib/python3.9/site-packages/anndata/_core/anndata.py:1756: UserWarning: Variable names are not unique. To make them unique, call `.var_names_make_unique`.
+/opt/anaconda3/envs/loki/lib/python3.9/site-packages/anndata/_core/anndata.py:1756: UserWarning: Variable names are not unique. To make them unique, call `.var_names_make_unique`.
   utils.warn_names_duplicates(&#34;var&#34;)
-/opt/anaconda3/envs/basic/lib/python3.9/site-packages/loki/preprocess.py:282: ImplicitModificationWarning: Trying to modify attribute `.obs` of view, initializing view as actual.
+/opt/anaconda3/envs/loki/lib/python3.9/site-packages/loki/preprocess.py:282: ImplicitModificationWarning: Trying to modify attribute `.obs` of view, initializing view as actual.
   st_ad.obs[[&#34;pixel_y&#34;, &#34;pixel_x&#34;]] = None  # Ensure the columns exist
-/opt/anaconda3/envs/basic/lib/python3.9/site-packages/PIL/Image.py:3368: DecompressionBombWarning: Image size (93006507 pixels) exceeds limit of 89478485 pixels, could be decompression bomb DOS attack.
+/opt/anaconda3/envs/loki/lib/python3.9/site-packages/PIL/Image.py:3368: DecompressionBombWarning: Image size (93006507 pixels) exceeds limit of 89478485 pixels, could be decompression bomb DOS attack.
   warnings.warn(
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_img_with_annotation</span><span class="p">(</span><span class="n">fullres_img</span><span class="p">,</span> <span class="n">roi_polygon</span><span class="p">,</span> <span class="n">linewidth</span><span class="p">,</span> <span class="n">xlim</span><span class="p">,</span> <span class="n">ylim</span><span class="p">)</span>
@@ -369,7 +369,7 @@ TCGA-AO-A0J5-01
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st_ad</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;bulk_simi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">annotate</span><span class="o">.</span><span class="n">annotate_with_bulk</span><span class="p">(</span><span class="n">img_feature</span><span class="p">,</span> <span class="n">bulk_text_feature</span><span class="p">)</span>
@@ -377,7 +377,7 @@ TCGA-AO-A0J5-01
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_annotation_heatmap</span><span class="p">(</span><span class="n">st_ad</span><span class="p">,</span> <span class="n">roi_polygon</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">linewidth</span><span class="p">,</span> <span class="n">xlim</span><span class="p">,</span> <span class="n">ylim</span><span class="p">)</span>
@@ -387,7 +387,7 @@ TCGA-AO-A0J5-01
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_fullres.jpg&#39;</span><span class="p">)</span>
@@ -400,10 +400,10 @@ TCGA-AO-A0J5-01
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">show_images_side_by_side</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">heatmap</span><span class="p">,</span> <span class="n">title1</span><span class="o">=</span><span class="s1">&#39;Annotated&#39;</span><span class="p">,</span> <span class="n">title2</span><span class="o">=</span><span class="s1">&#39;Similatrity Heatmap&#39;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">show_images_side_by_side</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">heatmap</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -411,14 +411,14 @@ TCGA-AO-A0J5-01
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_17_0.png" src="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_17_0.png" />
+<img alt="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_18_0.png" src="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_18_0.png" />
 </div>
 </div>
 </section>
 <section id="Heart-failure-sample-2">
 <h3>Heart failure sample 2<a class="headerlink" href="#Heart-failure-sample-2" title="Link to this heading"></a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_name</span> <span class="o">=</span> <span class="s1">&#39;FZ_P18&#39;</span>
@@ -438,16 +438,16 @@ TCGA-AO-A0J5-01
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/basic/lib/python3.9/site-packages/anndata/_core/anndata.py:1756: UserWarning: Variable names are not unique. To make them unique, call `.var_names_make_unique`.
+/opt/anaconda3/envs/loki/lib/python3.9/site-packages/anndata/_core/anndata.py:1756: UserWarning: Variable names are not unique. To make them unique, call `.var_names_make_unique`.
   utils.warn_names_duplicates(&#34;var&#34;)
-/opt/anaconda3/envs/basic/lib/python3.9/site-packages/loki/preprocess.py:282: ImplicitModificationWarning: Trying to modify attribute `.obs` of view, initializing view as actual.
+/opt/anaconda3/envs/loki/lib/python3.9/site-packages/loki/preprocess.py:282: ImplicitModificationWarning: Trying to modify attribute `.obs` of view, initializing view as actual.
   st_ad.obs[[&#34;pixel_y&#34;, &#34;pixel_x&#34;]] = None  # Ensure the columns exist
-/opt/anaconda3/envs/basic/lib/python3.9/site-packages/PIL/Image.py:3368: DecompressionBombWarning: Image size (96294069 pixels) exceeds limit of 89478485 pixels, could be decompression bomb DOS attack.
+/opt/anaconda3/envs/loki/lib/python3.9/site-packages/PIL/Image.py:3368: DecompressionBombWarning: Image size (96294069 pixels) exceeds limit of 89478485 pixels, could be decompression bomb DOS attack.
   warnings.warn(
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_img_with_annotation</span><span class="p">(</span><span class="n">fullres_img</span><span class="p">,</span> <span class="n">roi_polygon</span><span class="p">,</span> <span class="n">linewidth</span><span class="p">,</span> <span class="n">xlim</span><span class="p">,</span> <span class="n">ylim</span><span class="p">)</span>
@@ -457,7 +457,7 @@ TCGA-AO-A0J5-01
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st_ad</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;bulk_simi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">annotate</span><span class="o">.</span><span class="n">annotate_with_bulk</span><span class="p">(</span><span class="n">img_feature</span><span class="p">,</span> <span class="n">bulk_text_feature</span><span class="p">)</span>
@@ -465,7 +465,7 @@ TCGA-AO-A0J5-01
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_annotation_heatmap</span><span class="p">(</span><span class="n">st_ad</span><span class="p">,</span> <span class="n">roi_polygon</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">linewidth</span><span class="p">,</span> <span class="n">xlim</span><span class="p">,</span> <span class="n">ylim</span><span class="p">)</span>
@@ -475,7 +475,7 @@ TCGA-AO-A0J5-01
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_fullres.jpg&#39;</span><span class="p">)</span>
@@ -488,10 +488,10 @@ TCGA-AO-A0J5-01
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">show_images_side_by_side</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">heatmap</span><span class="p">,</span> <span class="n">title1</span><span class="o">=</span><span class="s1">&#39;Annotated&#39;</span><span class="p">,</span> <span class="n">title2</span><span class="o">=</span><span class="s1">&#39;Similatrity Heatmap&#39;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">show_images_side_by_side</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">heatmap</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -499,14 +499,14 @@ TCGA-AO-A0J5-01
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_24_0.png" src="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_24_0.png" />
+<img alt="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_25_0.png" src="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_25_0.png" />
 </div>
 </div>
 </section>
 <section id="Heart-failure-sample-3">
 <h3>Heart failure sample 3<a class="headerlink" href="#Heart-failure-sample-3" title="Link to this heading"></a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_name</span> <span class="o">=</span> <span class="s1">&#39;FZ_P14&#39;</span>
@@ -526,12 +526,12 @@ TCGA-AO-A0J5-01
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/basic/lib/python3.9/site-packages/PIL/Image.py:3368: DecompressionBombWarning: Image size (94551858 pixels) exceeds limit of 89478485 pixels, could be decompression bomb DOS attack.
+/opt/anaconda3/envs/loki/lib/python3.9/site-packages/PIL/Image.py:3368: DecompressionBombWarning: Image size (94551858 pixels) exceeds limit of 89478485 pixels, could be decompression bomb DOS attack.
   warnings.warn(
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_img_with_annotation</span><span class="p">(</span><span class="n">fullres_img</span><span class="p">,</span> <span class="n">roi_polygon</span><span class="p">,</span> <span class="n">linewidth</span><span class="p">,</span> <span class="n">xlim</span><span class="p">,</span> <span class="n">ylim</span><span class="p">)</span>
@@ -541,7 +541,7 @@ TCGA-AO-A0J5-01
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st_ad</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;bulk_simi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">annotate</span><span class="o">.</span><span class="n">annotate_with_bulk</span><span class="p">(</span><span class="n">img_feature</span><span class="p">,</span> <span class="n">bulk_text_feature</span><span class="p">)</span>
@@ -549,7 +549,7 @@ TCGA-AO-A0J5-01
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_annotation_heatmap</span><span class="p">(</span><span class="n">st_ad</span><span class="p">,</span> <span class="n">roi_polygon</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">linewidth</span><span class="p">,</span> <span class="n">xlim</span><span class="p">,</span> <span class="n">ylim</span><span class="p">)</span>
@@ -559,7 +559,7 @@ TCGA-AO-A0J5-01
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_fullres.jpg&#39;</span><span class="p">)</span>
@@ -572,10 +572,10 @@ TCGA-AO-A0J5-01
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">show_images_side_by_side</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">heatmap</span><span class="p">,</span> <span class="n">title1</span><span class="o">=</span><span class="s1">&#39;Annotated&#39;</span><span class="p">,</span> <span class="n">title2</span><span class="o">=</span><span class="s1">&#39;Similatrity Heatmap&#39;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">show_images_side_by_side</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">heatmap</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -583,7 +583,7 @@ TCGA-AO-A0J5-01
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_31_0.png" src="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_31_0.png" />
+<img alt="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_32_0.png" src="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_32_0.png" />
 </div>
 </div>
 </section>
@@ -592,7 +592,7 @@ TCGA-AO-A0J5-01
 <h2>Loki Annote with bulk RNA-seq data of adipose<a class="headerlink" href="#Loki-Annote-with-bulk-RNA-seq-data-of-adipose" title="Link to this heading"></a></h2>
 <p>Use Loki Annotate to annotate adipose cell enriched regions in 3 H&amp;E images of normal breast tissues.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_type</span> <span class="o">=</span> <span class="s1">&#39;adipose&#39;</span>
@@ -603,7 +603,7 @@ TCGA-AO-A0J5-01
 <section id="Breast-sample-1">
 <h3>Breast sample 1<a class="headerlink" href="#Breast-sample-1" title="Link to this heading"></a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_name</span> <span class="o">=</span> <span class="s1">&#39;samplev02&#39;</span>
@@ -622,12 +622,12 @@ TCGA-AO-A0J5-01
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/basic/lib/python3.9/site-packages/loki/preprocess.py:282: ImplicitModificationWarning: Trying to modify attribute `.obs` of view, initializing view as actual.
+/opt/anaconda3/envs/loki/lib/python3.9/site-packages/loki/preprocess.py:282: ImplicitModificationWarning: Trying to modify attribute `.obs` of view, initializing view as actual.
   st_ad.obs[[&#34;pixel_y&#34;, &#34;pixel_x&#34;]] = None  # Ensure the columns exist
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">=</span><span class="mi">50</span>
@@ -641,7 +641,7 @@ TCGA-AO-A0J5-01
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st_ad</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;bulk_simi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">annotate</span><span class="o">.</span><span class="n">annotate_with_bulk</span><span class="p">(</span><span class="n">img_feature</span><span class="p">,</span> <span class="n">bulk_text_feature</span><span class="p">)</span>
@@ -649,7 +649,7 @@ TCGA-AO-A0J5-01
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_annotation_heatmap</span><span class="p">(</span><span class="n">st_ad</span><span class="p">,</span> <span class="n">roi_polygon</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">linewidth</span><span class="p">,</span> <span class="n">xlim</span><span class="p">,</span> <span class="n">ylim</span><span class="p">)</span>
@@ -659,7 +659,7 @@ TCGA-AO-A0J5-01
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_fullres.jpg&#39;</span><span class="p">)</span>
@@ -672,10 +672,10 @@ TCGA-AO-A0J5-01
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">show_images_side_by_side</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">heatmap</span><span class="p">,</span> <span class="n">title1</span><span class="o">=</span><span class="s1">&#39;Annotated&#39;</span><span class="p">,</span> <span class="n">title2</span><span class="o">=</span><span class="s1">&#39;Similatrity Heatmap&#39;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">show_images_side_by_side</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">heatmap</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -683,14 +683,14 @@ TCGA-AO-A0J5-01
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_40_0.png" src="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_40_0.png" />
+<img alt="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_41_0.png" src="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_41_0.png" />
 </div>
 </div>
 </section>
 <section id="Breast-sample-2">
 <h3>Breast sample 2<a class="headerlink" href="#Breast-sample-2" title="Link to this heading"></a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_name</span> <span class="o">=</span> <span class="s1">&#39;samplev03&#39;</span>
@@ -709,12 +709,12 @@ TCGA-AO-A0J5-01
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/basic/lib/python3.9/site-packages/loki/preprocess.py:282: ImplicitModificationWarning: Trying to modify attribute `.obs` of view, initializing view as actual.
+/opt/anaconda3/envs/loki/lib/python3.9/site-packages/loki/preprocess.py:282: ImplicitModificationWarning: Trying to modify attribute `.obs` of view, initializing view as actual.
   st_ad.obs[[&#34;pixel_y&#34;, &#34;pixel_x&#34;]] = None  # Ensure the columns exist
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">=</span><span class="mi">55</span>
@@ -728,7 +728,7 @@ TCGA-AO-A0J5-01
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st_ad</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;bulk_simi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">annotate</span><span class="o">.</span><span class="n">annotate_with_bulk</span><span class="p">(</span><span class="n">img_feature</span><span class="p">,</span> <span class="n">bulk_text_feature</span><span class="p">)</span>
@@ -736,7 +736,7 @@ TCGA-AO-A0J5-01
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_annotation_heatmap</span><span class="p">(</span><span class="n">st_ad</span><span class="p">,</span> <span class="n">roi_polygon</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">linewidth</span><span class="p">,</span> <span class="n">xlim</span><span class="p">,</span> <span class="n">ylim</span><span class="p">)</span>
@@ -746,7 +746,7 @@ TCGA-AO-A0J5-01
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_fullres.jpg&#39;</span><span class="p">)</span>
@@ -759,10 +759,10 @@ TCGA-AO-A0J5-01
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">show_images_side_by_side</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">heatmap</span><span class="p">,</span> <span class="n">title1</span><span class="o">=</span><span class="s1">&#39;Annotated&#39;</span><span class="p">,</span> <span class="n">title2</span><span class="o">=</span><span class="s1">&#39;Similatrity Heatmap&#39;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">show_images_side_by_side</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">heatmap</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -770,14 +770,14 @@ TCGA-AO-A0J5-01
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_47_0.png" src="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_47_0.png" />
+<img alt="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_48_0.png" src="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_48_0.png" />
 </div>
 </div>
 </section>
 <section id="Breast-sample-3">
 <h3>Breast sample 3<a class="headerlink" href="#Breast-sample-3" title="Link to this heading"></a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_name</span> <span class="o">=</span> <span class="s1">&#39;samplev04&#39;</span>
@@ -796,12 +796,12 @@ TCGA-AO-A0J5-01
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/basic/lib/python3.9/site-packages/loki/preprocess.py:282: ImplicitModificationWarning: Trying to modify attribute `.obs` of view, initializing view as actual.
+/opt/anaconda3/envs/loki/lib/python3.9/site-packages/loki/preprocess.py:282: ImplicitModificationWarning: Trying to modify attribute `.obs` of view, initializing view as actual.
   st_ad.obs[[&#34;pixel_y&#34;, &#34;pixel_x&#34;]] = None  # Ensure the columns exist
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">=</span><span class="mi">55</span>
@@ -815,7 +815,7 @@ TCGA-AO-A0J5-01
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st_ad</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;bulk_simi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">loki</span><span class="o">.</span><span class="n">annotate</span><span class="o">.</span><span class="n">annotate_with_bulk</span><span class="p">(</span><span class="n">img_feature</span><span class="p">,</span> <span class="n">bulk_text_feature</span><span class="p">)</span>
@@ -823,7 +823,7 @@ TCGA-AO-A0J5-01
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_annotation_heatmap</span><span class="p">(</span><span class="n">st_ad</span><span class="p">,</span> <span class="n">roi_polygon</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">linewidth</span><span class="p">,</span> <span class="n">xlim</span><span class="p">,</span> <span class="n">ylim</span><span class="p">)</span>
@@ -833,7 +833,7 @@ TCGA-AO-A0J5-01
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="n">sample_name</span><span class="o">+</span><span class="s1">&#39;_fullres.jpg&#39;</span><span class="p">)</span>
@@ -846,10 +846,10 @@ TCGA-AO-A0J5-01
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[42]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">show_images_side_by_side</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">heatmap</span><span class="p">,</span> <span class="n">title1</span><span class="o">=</span><span class="s1">&#39;Annotated&#39;</span><span class="p">,</span> <span class="n">title2</span><span class="o">=</span><span class="s1">&#39;Similatrity Heatmap&#39;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loki</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">show_images_side_by_side</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">heatmap</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -857,7 +857,7 @@ TCGA-AO-A0J5-01
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_54_0.png" src="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_54_0.png" />
+<img alt="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_55_0.png" src="../_images/notebooks_Loki_Annotate_case_study_bulk_RNAseq_55_0.png" />
 </div>
 </div>
 <div class="nbinput nblast docutils container">

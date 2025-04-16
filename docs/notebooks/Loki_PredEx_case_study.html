@@ -112,7 +112,7 @@
 <span class="kn">import</span> <span class="nn">os</span>
 
 <span class="kn">import</span> <span class="nn">loki.predex</span>
-<span class="n">sc</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">set_figure_params</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">set_figure_params</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -136,7 +136,7 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;../data/loki_predex/&#39;</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;./data/loki_predex/&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -158,7 +158,7 @@
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Loki_PredEx_case_study_4_0.png" class="no-scaled-link" src="../_images/notebooks_Loki_PredEx_case_study_4_0.png" style="width: 331px; height: 347px;" />
+<img alt="../_images/notebooks_Loki_PredEx_case_study_4_0.png" class="no-scaled-link" src="../_images/notebooks_Loki_PredEx_case_study_4_0.png" style="width: 265px; height: 278px;" />
 </div>
 </div>
 <section id="Loki-PredEx-by-H&amp;E-image">
@@ -553,7 +553,7 @@
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/var/folders/f1/0m_1r9dx73dff178jp2t41900000gp/T/ipykernel_27402/3605322198.py:1: ImplicitModificationWarning: Setting element `.layers[&#39;original&#39;]` of view, initializing view as actual.
+/var/folders/f1/0m_1r9dx73dff178jp2t41900000gp/T/ipykernel_85458/3605322198.py:1: ImplicitModificationWarning: Setting element `.layers[&#39;original&#39;]` of view, initializing view as actual.
   ad.layers[&#39;original&#39;] = ad.X
 </pre></div></div>
 </div>
@@ -562,7 +562,7 @@
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ad</span><span class="o">.</span><span class="n">X</span><span class="o">=</span><span class="n">ad</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="s1">&#39;original&#39;</span><span class="p">]</span>
-<span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">spatial</span><span class="p">(</span><span class="n">ad</span><span class="p">,</span> <span class="n">img_key</span><span class="o">=</span><span class="s2">&quot;hires&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;MYH7&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="s1">&#39;p90&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="s1">&#39;p10&#39;</span><span class="p">)</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">spatial</span><span class="p">(</span><span class="n">ad</span><span class="p">,</span> <span class="n">img_key</span><span class="o">=</span><span class="s2">&quot;hires&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;MYH7&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="s1">&#39;p90&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="s1">&#39;p10&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Ground Truth MYH Expression&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -570,7 +570,7 @@
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Loki_PredEx_case_study_9_0.png" class="no-scaled-link" src="../_images/notebooks_Loki_PredEx_case_study_9_0.png" style="width: 377px; height: 365px;" />
+<img alt="../_images/notebooks_Loki_PredEx_case_study_9_0.png" class="no-scaled-link" src="../_images/notebooks_Loki_PredEx_case_study_9_0.png" style="width: 302px; height: 292px;" />
 </div>
 </div>
 <div class="nbinput docutils container">
@@ -578,7 +578,7 @@
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ad</span><span class="o">.</span><span class="n">X</span> <span class="o">=</span> <span class="n">ad</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="s1">&#39;loki&#39;</span><span class="p">]</span>
-<span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">spatial</span><span class="p">(</span><span class="n">ad</span><span class="p">,</span> <span class="n">img_key</span><span class="o">=</span><span class="s2">&quot;hires&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;MYH7&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="s1">&#39;p90&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="s1">&#39;p10&#39;</span><span class="p">)</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">spatial</span><span class="p">(</span><span class="n">ad</span><span class="p">,</span> <span class="n">img_key</span><span class="o">=</span><span class="s2">&quot;hires&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;MYH7&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="s1">&#39;p90&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="s1">&#39;p10&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Loki Predicted MYH Expression&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -586,7 +586,7 @@
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_Loki_PredEx_case_study_10_0.png" class="no-scaled-link" src="../_images/notebooks_Loki_PredEx_case_study_10_0.png" style="width: 388px; height: 365px;" />
+<img alt="../_images/notebooks_Loki_PredEx_case_study_10_0.png" class="no-scaled-link" src="../_images/notebooks_Loki_PredEx_case_study_10_0.png" style="width: 310px; height: 292px;" />
 </div>
 </div>
 <div class="nbinput nblast docutils container">
