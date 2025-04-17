@@ -8,7 +8,10 @@ Loki documentation
 
 
 Building on OmiCLIP, a visual–omics foundation model designed to bridge omics data and hematoxylin and eosin (H&E) images, we developed the Loki platform, which has five key functions: tissue alignment using ST or H&E images, tissue annotation of ST or H&E images based on bulk RNA-seq or marker genes, cell type decomposition of ST or H&E images using scRNA-seq as a reference, histology image–transcriptomics retrieval, and ST gene expression prediction from H&E images.
+
 Please find our preprint `here <https://doi.org/10.21203/rs.3.rs-5183775/v1>`_.
+
+Please find our github `here <https://github.com/GuangyuWangLab2021/Loki>`_.
 
 
 .. image:: images/loki_platform_image1.png
