@@ -43,7 +43,7 @@ Once Loki is installed, you can import it in your Python scripts or notebooks:
 
 
 ## STbank
-The ST-bank database are avaliable from [Google Drive link](https://drive.google.com/drive/folders/1J15cO-pXTwkTjRAR-v-_nQkqXNfcCNn3?usp=sharing).
+The ST-bank database are avaliable from [Google Drive link](https://drive.google.com/drive/folders/1J15cO-pXTwkTjRAR-v-_nQkqXNfcCNn3?usp=share_link).
 
 The links_to_raw_data.xlsx file includes the source paper names, doi links, and download links of the raw data.
 The text.csv file includes the gene sentences with paired image patches.
