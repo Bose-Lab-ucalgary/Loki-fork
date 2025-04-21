@@ -11,3 +11,4 @@ torchvision==0.18.1
 open_clip_torch==2.26.1
 pillow==10.4.0
 ipykernel==6.29.5
+ipywidgets==8.1.6

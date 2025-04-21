@@ -48,35 +48,33 @@ def encode_images(
     Batch–encode a list of image file paths into L2‑normalized embeddings.
     Returns a tensor of shape (N, D).
     """
-    # Load & preprocess all images
-    imgs = [preprocess(Image.open(p)) for p in image_paths]
-    batch = torch.stack(imgs, dim=0).to(device)           # (N, C, H, W)
-    
-    with torch.no_grad():
-        feats = model.encode_image(batch)                 # (N, D)
-    return F.normalize(feats, p=2, dim=-1)                # (N, D)
 
+    # Prepare a list to hold each image's feature embedding
+    image_embeddings = []
 
-    # # Loop through each image name in the provided list
-    # for img_name in img_list:
-    #     # Build the path to the patch image and open it
-    #     image_path = os.path.join(data_dir, 'demo_data', 'patch', img_name)
-    #     image = Image.open(image_path)
+    # Loop through each image name in the provided list
+    for image_path in image_paths:
+        # Build the path to the patch image and open it
+        image = Image.open(image_path)
 
-    #     # Encode the image using the model & preprocess; returns shape (1, embedding_dim)
-    #     image_features = encode_image(model, preprocess, image)
+        # Preprocess the image, then stack to create a batch of size 1
+        image_input = torch.stack([preprocess(image)]).to(device)
 
-    #     # Accumulate the feature embeddings in the list
-    #     image_embeddings.append(image_features)
+        # Generate the image features without gradient tracking
+        with torch.no_grad():
+            image_features = model.encode_image(image_input)
 
-    # # Convert the list of embeddings to a NumPy array, then to a PyTorch tensor
-    # # Resulting shape will be (N, 1, embedding_dim)
-    # image_embeddings = torch.from_numpy(np.array(image_embeddings))
+        # Accumulate the feature embeddings in the list
+        image_embeddings.append(image_features)
 
-    # # Normalize all embeddings across the feature dimension (L2 normalization)
-    # image_embeddings = F.normalize(image_embeddings, p=2, dim=-1)
+    # Convert the list of embeddings to a NumPy array, then to a PyTorch tensor
+    image_embeddings = torch.cat(image_embeddings, dim=0)
 
-    # return image_embeddings
+    # Normalize all embeddings across the feature dimension (L2 normalization)
+    image_embeddings = F.normalize(image_embeddings, p=2, dim=-1)
+
+    return image_embeddings
+
 
 
 # --- Text encoding --------------------------------------------------------
@@ -95,7 +93,7 @@ def encode_texts(
     text_inputs = tokenizer(texts)
     
     with torch.no_grad():
-        feats = model.encode_text(text_inputs)             # (N, D)
+        feats = model.encode_text(text_inputs).to(device)             # (N, D)
     return F.normalize(feats, p=2, dim=-1)                # (N, D)
 
 

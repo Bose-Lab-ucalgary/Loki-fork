@@ -1,4 +1,4 @@
-Metadata-Version: 2.1
+Metadata-Version: 2.2
 Name: loki
 Version: 0.0.1
 Summary: The Loki platform offers 5 core functions: tissue alignment, tissue annotation, cell type decomposition, image-transcriptomics retrieval, and ST gene expression prediction
@@ -22,3 +22,10 @@ Requires-Dist: torchvision==0.18.1
 Requires-Dist: open_clip_torch==2.26.1
 Requires-Dist: pillow==10.4.0
 Requires-Dist: ipykernel==6.29.5
+Requires-Dist: ipywidgets==8.1.6
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
