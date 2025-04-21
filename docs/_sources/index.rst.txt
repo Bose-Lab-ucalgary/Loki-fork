@@ -52,6 +52,7 @@ Please find our github `here <https://github.com/GuangyuWangLab2021/Loki>`_.
    :maxdepth: 2
    :caption: Tutorials
 
+   notebooks/Installation
    notebooks/basic_usage
    notebooks/Loki_Align_case_study_8_small_intestine
    notebooks/Loki_Align_case_study_2_OCS
