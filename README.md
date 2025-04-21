@@ -59,5 +59,8 @@ The pretrained weights are avaliable on [Hugging Face](https://huggingface.co/Wa
 
 
 ## Acknowledgements
-The project was built on top of amazing repositories such as [openclip](https://github.com/mlfoundations/open_clip). We thank the authors and developers for their contribution.
+The project was built on top of the amazing repository [openclip](https://github.com/mlfoundations/open_clip) for model training. We thank the authors and developers for their contribution. 
 
+
+## License and Terms of Use
+ⓒ GuangyuWang Lab. This model and associated code are released under the bsd-3-clause license and may only be used for non-commercial, academic research purposes with proper attribution.
