@@ -1,5 +1,5 @@
 # Loki
-Building on OmiCLIP, a visual–omics foundation model designed to bridge omics data and hematoxylin and eosin (H&E) images, we developed the **Loki** platform, which has five key functions: tissue alignment using ST or H&E images, cell type decomposition of ST or H&E images using scRNA-seq as a reference, tissue annotation of ST or H&E images based on bulk RNA-seq or marker genes, ST gene expression prediction from H&E images, and histology image–transcriptomics retrieval.
+Building on **OmiCLIP**, a visual–omics foundation model designed to bridge omics data and hematoxylin and eosin (H&E) images, we developed the **Loki** platform, which has five key functions: tissue alignment using ST or H&E images, cell type decomposition of ST or H&E images using scRNA-seq as a reference, tissue annotation of ST or H&E images based on bulk RNA-seq or marker genes, ST gene expression prediction from H&E images, and histology image–transcriptomics retrieval.
 
 Please find our preprint [here](https://doi.org/10.21203/rs.3.rs-5183775/v1).
 
@@ -41,7 +41,6 @@ Once Loki is installed, you can import it in your Python scripts or notebooks:
    import loki.predex
    ```
 
-
 ## STbank
 The ST-bank database are avaliable from [Google Drive link](https://drive.google.com/drive/folders/1J15cO-pXTwkTjRAR-v-_nQkqXNfcCNn3?usp=share_link).
 
@@ -55,7 +54,7 @@ The pretrained weights are avaliable on [Hugging Face](https://huggingface.co/Wa
 
 
 ## Reference
-If you find our database useful, please consider citing our [paper](https://doi.org/10.21203/rs.3.rs-5183775/v1):
+If you find our database, pretrained weights, or code useful, please consider citing our [paper](https://doi.org/10.21203/rs.3.rs-5183775/v1):
 
 Chen, W., Zhang, P., Tran, T., Xiao, Y., Li, S., ... & Wang, G. A visual–omics foundation model to bridge histopathology image with transcriptomics. Nature Methods (In Press).
 ```
