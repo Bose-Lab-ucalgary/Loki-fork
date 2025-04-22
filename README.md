@@ -57,7 +57,7 @@ The pretrained weights are avaliable on [Hugging Face](https://huggingface.co/Wa
 ## Reference
 If you find our database useful, please consider citing our [paper](https://doi.org/10.21203/rs.3.rs-5183775/v1):
 
-Weiqing Chen#, Pengzhi Zhang#, Tu N Tran, Yiwei Xiao, Shengyu Li, Vrutant V. Shah, Hao Cheng, Kristopher W. Brannan, Keith Youker, Lai Li, Longhou Fang, Yu Yang, Nhat-Tu Le, Jun-ichi Abe, Shu-Hsia Chen, Qin Ma, Ken Chen, Qianqian Song, John P. Cooke, Guangyu Wang. A visual–omics foundation model to bridge histopathology image with transcriptomics. Nature Methods (In Press).
+Chen, W., Zhang, P., Tran, T., Xiao, Y., Li, S., ... & Wang, G. A visual–omics foundation model to bridge histopathology image with transcriptomics. Nature Methods (In Press).
 ```
 @article{wang2025visual,
   title={A visual--omics foundation model to bridge histopathology image with transcriptomics},
