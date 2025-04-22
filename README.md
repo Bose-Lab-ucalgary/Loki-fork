@@ -49,14 +49,22 @@ The links_to_raw_data.xlsx file includes the source paper names, doi links, and 
 The text.csv file includes the gene sentences with paired image patches.
 The image.tar.gz includes the image patches.
 
-If you find our database useful, please consider citing our [paper](https://doi.org/10.21203/rs.3.rs-5183775/v1):
-
-Weiqing Chen#, Pengzhi Zhang#, Tu N Tran, Yiwei Xiao, Shengyu Li, Vrutant V. Shah, Hao Cheng, Kristopher W. Brannan, Keith Youker, Lai Li, Longhou Fang, Yu Yang, Nhat-Tu Le, Jun-ichi Abe, Shu-Hsia Chen, Qin Ma, Ken Chen, Qianqian Song, John P. Cooke, Guangyu Wang. A visual–omics foundation model to bridge histopathology image with transcriptomics. Nature Methods (In Press).
-
 
 ## Pretrained weights
 The pretrained weights are avaliable on [Hugging Face](https://huggingface.co/WangGuangyuLab/Loki).
 
+
+## Reference
+If you find our database useful, please consider citing our [paper](https://doi.org/10.21203/rs.3.rs-5183775/v1):
+
+Weiqing Chen#, Pengzhi Zhang#, Tu N Tran, Yiwei Xiao, Shengyu Li, Vrutant V. Shah, Hao Cheng, Kristopher W. Brannan, Keith Youker, Lai Li, Longhou Fang, Yu Yang, Nhat-Tu Le, Jun-ichi Abe, Shu-Hsia Chen, Qin Ma, Ken Chen, Qianqian Song, John P. Cooke, Guangyu Wang. A visual–omics foundation model to bridge histopathology image with transcriptomics. Nature Methods (In Press).
+```
+@article{wang2025visual,
+  title={A visual--omics foundation model to bridge histopathology image with transcriptomics},
+  author={Wang, Guangyu and Chen, Weiqing and Zhang, Pengzhi and Tran, Tu and Xiao, Yiwei and Li, Shengyu and Shah, Vrutant and Brannan, Kristopher and Youker, Keith and Lai, Li and others},
+  year={2025}
+}
+```
 
 ## Acknowledgements
 The project was built on top of the amazing repository [openclip](https://github.com/mlfoundations/open_clip) for model training. We thank the authors and developers for their contribution. 
