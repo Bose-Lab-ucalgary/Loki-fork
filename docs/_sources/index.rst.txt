@@ -14,11 +14,11 @@ Please find our Nature Methods paper "A visual–omics foundation model to bridg
 Please find our github `here <https://github.com/GuangyuWangLab2021/Loki>`_.
 
 
-.. image:: images/loki_platform_image1.png
-  :width: 100%
+.. .. image:: images/loki_platform_image1.png
+..   :width: 100%
 
 
-.. image:: images/loki_combined_img.png
+.. image:: images/OmiCLIP_Loki.png
   :width: 100%
 
 
@@ -46,8 +46,8 @@ Please find our github `here <https://github.com/GuangyuWangLab2021/Loki>`_.
 
 
 
-.. image:: images/loki_platform_image2.png
-   :width: 60%
+.. .. image:: images/loki_platform_image2.png
+..    :width: 60%
 
 
 
