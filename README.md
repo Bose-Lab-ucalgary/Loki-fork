@@ -1,7 +1,7 @@
 # Loki
 Building on **OmiCLIP**, a visual–omics foundation model designed to bridge omics data and hematoxylin and eosin (H&E) images, we developed the **Loki** platform, which has five key functions: tissue alignment using ST or H&E images, cell type decomposition of ST or H&E images using scRNA-seq as a reference, tissue annotation of ST or H&E images based on bulk RNA-seq or marker genes, ST gene expression prediction from H&E images, and histology image–transcriptomics retrieval.
 
-Please find our **Nature Methods** paper [here](https://doi.org/10.21203/rs.3.rs-5183775/v1).
+Please find our **Nature Methods** paper "A visual–omics foundation model to bridge histopathology with spatial transcriptomics" [here](https://www.nature.com/articles/s41592-025-02707-1).
 
 
 ## User Manual and Notebooks
@@ -54,14 +54,18 @@ The pretrained weights are avaliable on [Hugging Face](https://huggingface.co/Wa
 
 
 ## Reference
-If you find our database, pretrained weights, or code useful, please consider citing our [paper](https://doi.org/10.21203/rs.3.rs-5183775/v1):
+If you find our database, pretrained weights, or code useful, please consider citing our [paper](https://www.nature.com/articles/s41592-025-02707-1):
 
-Chen, W., Zhang, P., Tran, T., Xiao, Y., Li, S., ... & Wang, G. A visual–omics foundation model to bridge histopathology image with transcriptomics. Nature Methods (In Press).
 ```
-@article{wang2025visual,
-  title={A visual--omics foundation model to bridge histopathology image with transcriptomics},
-  author={Wang, Guangyu and Chen, Weiqing and Zhang, Pengzhi and Tran, Tu and Xiao, Yiwei and Li, Shengyu and Shah, Vrutant and Brannan, Kristopher and Youker, Keith and Lai, Li and others},
-  year={2025}
+@article{RN194,
+   author = {Chen, Weiqing and Zhang, Pengzhi and Tran, Tu N. and Xiao, Yiwei and Li, Shengyu and Shah, Vrutant V. and Cheng, Hao and Brannan, Kristopher W. and Youker, Keith and Lai, Li and Fang, Longhou and Yang, Yu and Le, Nhat-Tu and Abe, Jun-ichi and Chen, Shu-Hsia and Ma, Qin and Chen, Ken and Song, Qianqian and Cooke, John P. and Wang, Guangyu},
+   title = {A visual–omics foundation model to bridge histopathology with spatial transcriptomics},
+   journal = {Nature Methods},
+   ISSN = {1548-7105},
+   DOI = {10.1038/s41592-025-02707-1},
+   url = {https://doi.org/10.1038/s41592-025-02707-1},
+   year = {2025},
+   type = {Journal Article}
 }
 ```
 
