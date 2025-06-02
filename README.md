@@ -1,5 +1,5 @@
 # Loki
-<img src="docs/_images/OmiCLIP_Loki.png" width="250" title="Loki" alt="Loki" align="right" vspace = "50">
+<img src="docs/_images/OmiCLIP_Loki.png" width="350" title="Loki" alt="Loki" align="right" vspace = "50">
 Building on **OmiCLIP**, a visual–omics foundation model designed to bridge omics data and hematoxylin and eosin (H&E) images, we developed the **Loki** platform, which has five key functions: tissue alignment using ST or H&E images, cell type decomposition of ST or H&E images using scRNA-seq as a reference, tissue annotation of ST or H&E images based on bulk RNA-seq or marker genes, ST gene expression prediction from H&E images, and histology image–transcriptomics retrieval.
 
 Please find our **Nature Methods** paper "A visual–omics foundation model to bridge histopathology with spatial transcriptomics" [here](https://www.nature.com/articles/s41592-025-02707-1).
