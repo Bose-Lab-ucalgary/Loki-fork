@@ -15,7 +15,7 @@ This README provides a quick overview of how to set up and use Loki.
 All source code for Loki is contained in the `./src/loki` directory.
 
 
-## Installation (It takes about 5 mins to finish the installation on MacBook Pro)
+## Installation
 
 1. **Create a Conda environment**:
    ```bash
