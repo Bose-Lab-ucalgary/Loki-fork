@@ -59,15 +59,13 @@ The pretrained weights are avaliable on [Hugging Face](https://huggingface.co/Wa
 If you find our database, pretrained weights, or code useful, please consider citing our [paper](https://www.nature.com/articles/s41592-025-02707-1):
 
 ```
-@article{RN194,
-   author = {Chen, Weiqing and Zhang, Pengzhi and Tran, Tu N. and Xiao, Yiwei and Li, Shengyu and Shah, Vrutant V. and Cheng, Hao and Brannan, Kristopher W. and Youker, Keith and Lai, Li and Fang, Longhou and Yang, Yu and Le, Nhat-Tu and Abe, Jun-ichi and Chen, Shu-Hsia and Ma, Qin and Chen, Ken and Song, Qianqian and Cooke, John P. and Wang, Guangyu},
-   title = {A visual–omics foundation model to bridge histopathology with spatial transcriptomics},
-   journal = {Nature Methods},
-   ISSN = {1548-7105},
-   DOI = {10.1038/s41592-025-02707-1},
-   url = {https://doi.org/10.1038/s41592-025-02707-1},
-   year = {2025},
-   type = {Journal Article}
+@article{chen2025visual,
+  title={A visual--omics foundation model to bridge histopathology with spatial transcriptomics},
+  author={Chen, Weiqing and Zhang, Pengzhi and Tran, Tu N and Xiao, Yiwei and Li, Shengyu and Shah, Vrutant V and Cheng, Hao and Brannan, Kristopher W and Youker, Keith and Lai, Li and others},
+  journal={Nature Methods},
+  pages={1--15},
+  year={2025},
+  publisher={Nature Publishing Group}
 }
 ```
 
