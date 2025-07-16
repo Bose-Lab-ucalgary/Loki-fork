@@ -1,4 +1,9 @@
-.png
-.h5ad
+*.h5ad
 .DS_Store
 checkpoint.pt
+*.png
+*.npy
+*.gct
+*.csv
+*.json
+*.tif
